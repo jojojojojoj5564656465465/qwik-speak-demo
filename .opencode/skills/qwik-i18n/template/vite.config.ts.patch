@@ -1,0 +1,15 @@
+import { qwikSpeakInline } from 'qwik-speak/inline';
+import { qwikCity, qwikVite } from '@builder.io/qwik-city';
+
+export default defineConfig(() => ({
+  plugins: [
+    qwikCity(),
+    qwikVite(),
+    qwikSpeakInline({
+      supportedLangs: ['en-US', 'fr-FR', 'it-IT'],
+      defaultLang: 'en-US',
+      assetsPath: 'i18n',
+      autoKeys: true
+    })
+  ]
+}));

@@ -1,0 +1,10 @@
+{
+  "about": {
+    "description": "Ceci est la page à propos. Un petit texte sans importance.",
+    "head": {
+      "description": "Page à propos de notre site multilingue",
+      "title": "À propos"
+    },
+    "title": "À propos"
+  }
+}

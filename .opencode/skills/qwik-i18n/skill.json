@@ -1,0 +1,22 @@
+{
+  "name": "qwik-i18n",
+  "version": "1.0.0",
+  "description": "Automatise l'extraction, la structure et la validation des traductions Qwik avec qwik-speak",
+  "triggers": [
+    "qwik i18n",
+    "traduction qwik",
+    "setup qwik-speak",
+    "extraire traductions"
+  ],
+  "dependencies": ["node>=18", "npm", "qwik-speak"],
+  "entry": "instructions.md",
+  "scripts": {
+    "extract": "node scripts/generate-i18n.js",
+    "validate": "node scripts/validate-i18n.js"
+  },
+  "context": {
+    "framework": "qwik",
+    "i18n-lib": "qwik-speak",
+    "auto-apply": false
+  }
+}

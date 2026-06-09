@@ -6,6 +6,7 @@ import { defineConfig, type UserConfig } from "vite";
 import { qwikVite } from "@builder.io/qwik/optimizer";
 import { qwikCity } from "@builder.io/qwik-city/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
+import { qwikSpeakInline } from "qwik-speak/inline";
 import pkg from "./package.json";
 
 type PkgDep = Record<string, string>;
@@ -21,7 +22,17 @@ errorOnDuplicatesPkgDeps(devDependencies, dependencies);
  */
 export default defineConfig(({ command, mode }): UserConfig => {
   return {
-    plugins: [qwikCity(), qwikVite(), tsconfigPaths({ root: "." })],
+    plugins: [
+      qwikCity(),
+      qwikVite(),
+      tsconfigPaths({ root: "." }),
+    qwikSpeakInline({
+      supportedLangs: ["fr", "en", "es"],
+      defaultLang: "fr",
+      assetsPath: "public/i18n",
+      autoKeys: true,
+    }),
+    ],
     // This tells Vite which dependencies to pre-build in dev mode.
     optimizeDeps: {
       // Put problematic deps that break bundling here, mostly those with binaries.
