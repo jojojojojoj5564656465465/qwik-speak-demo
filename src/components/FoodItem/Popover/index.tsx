@@ -52,7 +52,7 @@ export const PopoverImage = component$<PopoverImageProps>(
 						width={450}
 						height={650}
 						alt="pasta"
-						class="imageThumbnail"
+						
 					/>
 				</div>
 			</>
