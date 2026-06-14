@@ -1,28 +1,38 @@
-import { component$, Slot, useId, useStylesScoped$ } from "@builder.io/qwik";
+import { component$, useId, useStylesScoped$ } from "@builder.io/qwik";
+import { Image } from "@unpic/qwik";
 import styles from "./popover.css?inline";
 
-interface PopoverProps {
-	triggerLabel?: string;
+interface PopoverImageProps {
+	src?: string;
 }
 
-export const Popover = component$<PopoverProps>(
-	({ triggerLabel = "Open Popover" }) => {
+export const PopoverImage = component$<PopoverImageProps>(
+	({
+		src = "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg",
+	}) => {
 		useStylesScoped$(styles);
 
 		// Génère un ID unique et stable entre le serveur (SSR) et le client (Resumability)
 		const id = useId();
 		// Centralisation de l'ID pour correspondre à votre variable de bouton
-		const popoverId = `popover-${id}`;
+		const popoverId = `popover-IMG-${id}`;
 
 		return (
 			<>
 				{/* Bouton qui cible l'identifiant du popover */}
 				<button type="button" popovertarget={popoverId}>
-					{triggerLabel}
+					<Image
+						src={src}
+						layout="constrained"
+						width={80}
+						height={80}
+						alt="pasta"
+						class="menuItemImage"
+					/>
 				</button>
 
 				{/* Conteneur du popover natif HTML */}
-				<div class="wuu" id={popoverId} popover="auto">
+				<div class="max-inline-size-mobile" id={popoverId} popover="auto">
 					{/* Intégration du bouton Fermer juste avant le contenu projeté */}
 					<button
 						type="button"
@@ -36,7 +46,14 @@ export const Popover = component$<PopoverProps>(
 					</button>
 
 					{/* Contenu externe injecté par le parent */}
-					<Slot />
+					<Image
+						src={src}
+						layout="constrained"
+						width={450}
+						height={650}
+						alt="pasta"
+						class="imageThumbnail"
+					/>
 				</div>
 			</>
 		);

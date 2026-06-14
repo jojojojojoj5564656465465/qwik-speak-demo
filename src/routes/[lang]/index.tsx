@@ -1,8 +1,9 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { inlineTranslate } from "qwik-speak";
-import PPP from "~/components/Popover"; // Import du composant Popover
+import  FoodItem from "~/components/FoodItem"; // Import du composant FoodItem
 import { Title } from "~/components/Title";
+
 export default component$(() => {
 	const t = inlineTranslate();
 
@@ -10,8 +11,6 @@ export default component$(() => {
 		<div style={{ padding: "2rem" }}>
 			<Title text={t("home.title@@Bienvenue sur notre site")} />
 			<Title text={t("home.title2@@voyage")} />
-	
-			<PPP />
 
 			<h2>{t("home.subtitle@@Créé avec Qwik et Qwik-Speak")}</h2>
 			<p>

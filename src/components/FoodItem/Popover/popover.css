@@ -1,38 +1,41 @@
+@property --size-image {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 50px;
+}
+
 /* Correctif Mobile : Force le respect de la marge sur les très petits écrans */
 @media (width <= 35em) {
-  .wuu {
+  .max-inline-size-mobile {
     /* Laisse l'espace pour les marges latérales natives sur mobile */
-    max-inline-size: calc(100% - 2rem); 
+    max-inline-size: calc(100% - 2rem);
   }
 }
 
 [popover] {
   /* Indispensable pour positionner le bouton de fermeture en absolu */
-  position: relative; 
-  
+  position: relative;
+
   /* Nettoyage du style par défaut du navigateur */
   border: none;
   /* Un peu plus de padding en haut (2.5rem) pour éviter que le bouton "Fermer" ne chevauche votre texte */
-  padding: 2.5rem 2rem 2rem 2rem; 
+  padding: 2.5rem 2rem 2rem 2rem;
   border-radius: 0.75rem;
 
   /* Intégration de l'image de fond Unsplash */
-  background-image: url("https://plus.unsplash.com/premium_photo-1694819488591-a43907d1c5cc?q=80&w=714&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  
+
+
   /* ==========================================================================
      L'ALCHIMIE DU CLAMP() DYNAMIQUE
      ========================================================================== */
   /* Largeur : Minimum 280px sur mobile, idéalement 85% de l'écran, maximum 550px sur PC */
   inline-size: clamp(280px, 85vw, 550px);
-  
+
   /* Hauteur minimale : Minimum 240px, idéalement 45% de la hauteur de l'écran, maximum 420px sur PC */
   min-block-size: clamp(240px, 45vh, 420px);
-  
+
   /* Assure la lisibilité du texte par-dessus l'image */
-  color: #ffffff; 
+  color: #ffffff;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 
   &:popover-open {
@@ -40,7 +43,7 @@
     gap: 0.5rem;
     box-shadow: 0 10px 25px hsl(0 0 0 / 0.3);
   }
-  
+
   &::backdrop {
     background: hsl(0 0 0 / 0.4);
     backdrop-filter: blur(2px);
@@ -54,28 +57,30 @@
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
-  
+
   /* Style visuel : cercle sombre semi-transparent avec effet flouté (glassmorphism) */
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(4px);
   color: #ffffff;
   border: none;
   border-radius: 50%;
-  
+
   /* Dimensions du bouton */
   inline-size: 2.2rem;
   block-size: 2.2rem;
   font-size: 1.25rem;
   font-weight: bold;
   cursor: pointer;
-  
+
   /* Centrage parfait du symbole "×" ou de l'icône */
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   /* Transition fluide au survol */
-  transition: background 0.2s, transform 0.1s;
+  transition:
+    background 0.2s,
+    transform 0.1s;
   z-index: 10;
 }
 
@@ -86,4 +91,14 @@
 
 .close-btn:active {
   transform: scale(0.95);
+}
+
+.menuItemImage {
+  width: var(--size-image);
+  aspect-ratio: 1 / 1;
+  flex-shrink: 0;
+  object-fit: cover;
+  margin-right: 1.5em;
+  cursor: zoom-in;
+ 
 }

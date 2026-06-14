@@ -1,0 +1,72 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5em;
+}
+
+.menu {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+}
+
+.menu-group-heading {
+  margin: 0;
+  padding-bottom: 1em;
+  border-bottom: 2px solid #ccc;
+}
+
+.menuGroup {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5em;
+  padding: 1.5em 0;
+}
+
+.menuItem {
+  display: flex;
+  gap: 1.5em;
+
+ 
+}
+
+
+
+.menuItemText {
+  flex-grow: 1;
+}
+
+.menuItemHeading {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.menuItemName {
+  margin-right: 1.5em;
+}
+
+.menuItemDescription {
+  line-height: 1.6;
+}
+
+@media screen and (min-width: 992px) {
+  .menu {
+    font-size: 16px;
+  }
+
+  .menuGroup {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .menuItemImage {
+    width: 125px;
+    height: 125px;
+  }
+}
+
+.imageThumbnail {
+  width: 5rem;
+  height: 5rem;
+  object-fit: cover;
+  border-radius: 999rem;
+}
