@@ -19,6 +19,14 @@ export default component$(() => {
 				src="/pizza.jpg"
 				price={45000}
 			/>
+			<FoodItem
+				name={t("pizza")}
+				description={t(
+					"fromage, tomate, olives, champignons, oignons, poivrons et pepperoni.",
+				)}
+				src="/pizza.jpg"
+				price={74000}
+			/>
 			<h2>{t("home.subtitle@@Créé avec Qwik et Qwik-Speak")}</h2>
 			<p>
 				{t(

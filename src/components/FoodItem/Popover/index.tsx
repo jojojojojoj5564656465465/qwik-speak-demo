@@ -49,8 +49,8 @@ export const PopoverImage = component$<PopoverImageProps>(
 					<Image
 						src={src}
 						layout="constrained"
-						width={450}
-						height={650}
+						width={350}
+						height={450}
 						alt="pasta"
 						
 					/>

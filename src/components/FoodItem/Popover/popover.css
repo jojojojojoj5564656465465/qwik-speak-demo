@@ -11,7 +11,14 @@
     max-inline-size: calc(100% - 2rem);
   }
 }
-
+button {
+  background-color: transparent;
+  border: none;
+  cursor: zoom-in;
+  & > img {
+    border-radius: 9999rem;
+  }
+}
 [popover] {
   /* Indispensable pour positionner le bouton de fermeture en absolu */
   position: relative;
@@ -24,7 +31,6 @@
 
   /* Intégration de l'image de fond Unsplash */
 
-
   /* ==========================================================================
      L'ALCHIMIE DU CLAMP() DYNAMIQUE
      ========================================================================== */
@@ -35,7 +41,7 @@
   min-block-size: clamp(240px, 45vh, 420px);
 
   /* Assure la lisibilité du texte par-dessus l'image */
-  color: #ffffff;
+
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 
   &:popover-open {
@@ -99,6 +105,4 @@
   flex-shrink: 0;
   object-fit: cover;
   margin-right: 1.5em;
-  cursor: zoom-in;
- 
 }
