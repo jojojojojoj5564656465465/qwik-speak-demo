@@ -4,6 +4,7 @@
   initial-value: 50px;
 }
 
+
 /* Correctif Mobile : Force le respect de la marge sur les très petits écrans */
 @media (width <= 35em) {
   .max-inline-size-mobile {
@@ -105,4 +106,18 @@ button {
   flex-shrink: 0;
   object-fit: cover;
   margin-right: 1.5em;
+}
+
+
+
+
+@container style(--bg: #333) {
+  p{
+    color: white;
+  }
+}
+@container style(--bg: #fff) {
+  p{
+    color: black;
+  }
 }

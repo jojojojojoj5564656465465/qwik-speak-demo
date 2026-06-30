@@ -1,4 +1,4 @@
-import { component$, useSignal } from "@builder.io/qwik";
+import { component$ } from "@builder.io/qwik";
 import { useFormatNumber } from "qwik-speak";
 import styles from "./main.module.css";
 import { PopoverImage } from "./Popover";
@@ -8,18 +8,21 @@ export interface FoodItemProps {
 	description: string;
 	price: number;
 	src?: string;
+	color?: "green"| "red";
 }
 
 export default component$<FoodItemProps>((props) => {
 	const fn = useFormatNumber();
 	return (
-		<div class={styles.menuGroup}>
+		<div class={[styles.menuGroup, styles.bg_ctr]}>
 			<div class={styles.menuItem}>
 				<PopoverImage src={props.src} />
 				<div class={styles.menuItemText}>
 					<h3 class={styles.menuItemHeading}>
 						<span class={styles.menuItemName}>{props.name}</span>
-						<span class={styles.menuItemPrice}>{fn(props.price, { style: "currency", currency: "COP" }, "es-CO")}</span>
+						<span class={styles.menuItemPrice}>
+							{fn(props.price, { style: "currency", currency: "COP" }, "es-CO")}
+						</span>
 					</h3>
 					<p class={styles.menuItemDescription}>{props.description}</p>
 				</div>

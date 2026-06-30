@@ -3,14 +3,31 @@ import type { DocumentHead } from "@builder.io/qwik-city";
 import { inlineTranslate } from "qwik-speak";
 import FoodItem from "~/components/FoodItem"; // Import du composant FoodItem
 import { Title } from "~/components/Title";
+import menu from "~/data/menu"; // Import du menu
 
 export default component$(() => {
 	const t = inlineTranslate();
+	const responseIa = "1,2,3,4,5,6";
 
+	// 1. Sécuriser matches : si null, on utilise un tableau vide []
+	const matches: string[] = responseIa.match(/\d+/g) ?? [];
+
+	const result = menu.filter((e) => !matches.includes(e.id.toString()));
+
+	// 3. Conversion en nombres
 	return (
 		<div style={{ padding: "2rem" }}>
 			<Title text={t("home.title@@Bienvenue sur notre site")} />
 			<Title text={t("home.title2@@voyage")} />
+			{result.map((item) => (
+				<FoodItem
+					key={item.id}
+					name={t(item.name)}
+					description={t(item.description)}
+					src={item.src}
+					price={item.price}
+				/>
+			))}
 			<FoodItem
 				name={t("Pâtes à la carbonara")}
 				description={t(
@@ -26,6 +43,7 @@ export default component$(() => {
 				)}
 				src="/pizza.jpg"
 				price={74000}
+				color="red"
 			/>
 			<h2>{t("home.subtitle@@Créé avec Qwik et Qwik-Speak")}</h2>
 			<p>

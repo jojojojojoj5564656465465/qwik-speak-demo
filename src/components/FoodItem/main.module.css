@@ -1,7 +1,29 @@
+:root{
+  --col : attr(data-color type(<color>), pink);
+
+}
+@property --bg {
+  inherits: true;
+  syntax: "<color>";
+  initial-value: white;
+}
+
+@property --bg-dark {
+  inherits: true;
+  syntax: "<color>";
+  initial-value: #333;
+}
+
+@property --bg-pink {
+  inherits: true;
+  syntax: "<color>";
+  initial-value: #ffc0cb;
+}
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 1.5em;
+  background-color: var(--col);
 }
 
 .menu {
@@ -14,22 +36,51 @@
   padding-bottom: 1em;
   border-bottom: 2px solid #ccc;
 }
+.bg_ctr {
+  background-color: var(--bg, red);
 
+  container-name: cardd;
+  &:hover {
+    --bg: var(--bg-dark);
+  }
+  &:active {
+    --bg: var(--bg-pink);
+  }
+}
 .menuGroup {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5em;
   padding: 1.5em 0;
+  cursor: pointer;
 }
 
 .menuItem {
-  display: flex;
+  @supports (display: flex) {
+    display: flex;
+  }
   gap: 1.5em;
+  color: #222;
 
- 
+  @container cardd style(--bg: var(--bg-dark)) {
+    color: #f0f0f0;
+  }
+  @container cardd style(--bg: orange) {
+    color: red;
+  }
+  @container cardd style(--bg: var(--bg-pink)) {
+    color: green;
+  }
 }
 
+/* Si le fond du conteneur est sombre (style query sur --bg) */
 
+@container cardd style(--bg: var(--bg-pink)) {
+  .menuItem {
+    color: yellow; /* texte clair */
+    font-weight: bold;
+  }
+}
 
 .menuItemText {
   flex-grow: 1;
