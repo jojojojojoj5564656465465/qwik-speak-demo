@@ -1,11 +1,5 @@
 {
   "home": {
-    "description": "Esta es una página multilingüe. Use el menú para cambiar de idioma.",
-    "head": {
-      "description": "Sitio multilingüe con Qwik",
-      "title": "Bienvenido"
-    },
-    "subtitle": "Creado con Qwik y Qwik-Speak",
     "title": "Bienvenido a nuestro sitio",
     "title2": "viajar"
   }

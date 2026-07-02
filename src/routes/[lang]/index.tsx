@@ -1,75 +1,83 @@
-import { component$ } from "@builder.io/qwik";
-import type { DocumentHead } from "@builder.io/qwik-city";
-import { inlineTranslate } from "qwik-speak";
-import FoodItem from "~/components/FoodItem"; // Import du composant FoodItem
+import { $, component$, useSignal } from "@builder.io/qwik";
+import { server$ } from "@builder.io/qwik-city";
+import { inlineTranslate, type Translation } from "qwik-speak";
+import FoodItem from "~/components/FoodItem";
+import SearchBox from "~/components/SearchBox";
 import { Title } from "~/components/Title";
-import menu from "~/data/menu"; // Import du menu
+import type  Menu  from "~/data/menu";
+import menu from "~/data/menu";
+import promptIa from "~/scripts/openIa";
+
+const serverIa = server$(async (prompt: string) => {
+	const responseIa = await promptIa(prompt);
+	const regex: string[] = (await responseIa.match(/\b\d+\b/g)) ?? [];
+	const matches = menu.filter((e) => regex.includes(e.id.toString()));
+	return matches;
+});
 
 export default component$(() => {
 	const t = inlineTranslate();
-	const responseIa = "1,2,3,4,5,6";
+	const menuTranslations = t<Translation>("menu");
 
-	// 1. Sécuriser matches : si null, on utilise un tableau vide []
-	const matches: string[] = responseIa.match(/\d+/g) ?? [];
+	const filteredMenu = useSignal<Menu[]>(menu);
+	const isLoading = useSignal(false);
+	const lastQuery = useSignal("");
 
-	const result = menu.filter((e) => !matches.includes(e.id.toString()));
+	const menuTranslationsRef = menuTranslations;
 
-	// 3. Conversion en nombres
+	const handleSearch = $(async (query: string) => {
+		isLoading.value = true;
+		lastQuery.value = query;
+
+		try {
+			const result = await serverIa(query);
+			filteredMenu.value = result;
+		} catch (error) {
+			console.error("Erreur lors du filtrage IA:", error);
+		} finally {
+			isLoading.value = false;
+		}
+	});
+
 	return (
 		<div style={{ padding: "2rem" }}>
 			<Title text={t("home.title@@Bienvenue sur notre site")} />
 			<Title text={t("home.title2@@voyage")} />
-			{result.map((item) => (
-				<FoodItem
-					key={item.id}
-					name={t(item.name)}
-					description={t(item.description)}
-					src={item.src}
-					price={item.price}
-				/>
-			))}
-			<FoodItem
-				name={t("Pâtes à la carbonara")}
-				description={t(
-					"Un plat italien classique avec des pâtes, du bacon, des œufs et du fromage.",
-				)}
-				src="/pizza.jpg"
-				price={45000}
-			/>
-			<FoodItem
-				name={t("pizza")}
-				description={t(
-					"fromage, tomate, olives, champignons, oignons, poivrons et pepperoni.",
-				)}
-				src="/pizza.jpg"
-				price={74000}
-				color="red"
-			/>
-			<h2>{t("home.subtitle@@Créé avec Qwik et Qwik-Speak")}</h2>
-			<p>
-				{t(
-					"home.description@@Ceci est une page multilingue. Utilisez le menu pour changer de langue.",
-				)}
-			</p>
+
+			<SearchBox onSearch={handleSearch} isLoading={isLoading.value} />
+
+			{lastQuery.value && (
+				<p style={{ marginBottom: "1rem", color: "#666" }}>
+					{t("search.resultsFor@@Résultats pour")}:{" "}
+					<strong>{lastQuery.value}</strong>
+				</p>
+			)}
+
+			{isLoading.value ? (
+				<p>Chargement des recommandations IA...</p>
+			) : (
+				filteredMenu.value.length > 0 ? (
+						filteredMenu.value.map((item) => {
+							const translation = menuTranslationsRef[item.id] as {
+								name: string;
+								description: string;
+							};
+							return (
+								<FoodItem
+									key={item.id}
+									name={translation?.name || "Nom indisponible"}
+									description={
+										translation?.description || "Description indisponible"
+									}
+									src={item.src}
+									price={item.price}
+								/>
+							);
+						})
+					) : (
+						<p>Aucun plat ne correspond à vos critères.</p>
+					)
+			)}
 		</div>
 	);
 });
-
-export const head: DocumentHead = () => {
-	const t = inlineTranslate();
-	return {
-		title: t("home.head.title@@Bienvenue"),
-		meta: [
-			{
-				name: "description",
-				content: t("home.head.description@@Site multilingue avec Qwik"),
-			},
-		],
-		links: [
-			{ rel: "alternate", hreflang: "fr", href: "/fr/" },
-			{ rel: "alternate", hreflang: "en", href: "/en/" },
-			{ rel: "alternate", hreflang: "es", href: "/es/" },
-			{ rel: "alternate", hreflang: "x-default", href: "/fr/" },
-		],
-	};
-};
