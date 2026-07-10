@@ -1,28 +1,28 @@
 {
   "menu": {
     "1": {
-      "name": "Tacos Al Pastor",
-      "description": "Tortillas de maíz rellenas de cerdo marinado, piña, cebolla y cilantro fresco."
+      "description": "Tortillas de maíz rellenas de cerdo marinado, piña, cebolla y cilantro fresco.",
+      "name": "Tacos Al Pastor"
     },
     "2": {
-      "name": "Burrito Supreme",
-      "description": "Gran tortilla de harina rellena de carne molida, arroz, frijoles negros, queso, crema agria y guacamole."
+      "description": "Gran tortilla de harina rellena de carne molida, arroz, frijoles negros, queso, crema agria y guacamole.",
+      "name": "Burrito Supreme"
     },
     "3": {
-      "name": "Enchiladas Verdes",
-      "description": "Tortillas de maíz rellenas de pollo, cubiertas con salsa verde de tomatillo y gratinadas con queso."
+      "description": "Tortillas de maíz rellenas de pollo, cubiertas con salsa verde de tomatillo y gratinadas con queso.",
+      "name": "Enchiladas Verdes"
     },
     "4": {
-      "name": "Quesadillas",
-      "description": "Tortilla doblada rellena de queso derretido, con opción de pollo o carne, servida con salsa."
+      "description": "Tortilla doblada rellena de queso derretido, con opción de pollo o carne, servida con salsa.",
+      "name": "Quesadillas"
     },
     "5": {
-      "name": "Guacamole & Chips",
-      "description": "Aguacates frescos machacados con cebolla, tomates, jalapeños y lima, servidos con totopos crujientes."
+      "description": "Aguacates frescos machacados con cebolla, tomates, jalapeños y lima, servidos con totopos crujientes.",
+      "name": "Guacamole & Chips"
     },
     "6": {
-      "name": "Churros con Chocolate",
-      "description": "Buñuelos fritos espolvoreados con azúcar y canela, acompañados de una rica salsa de chocolate caliente."
+      "description": "Buñuelos fritos espolvoreados con azúcar y canela, acompañados de una rica salsa de chocolate caliente.",
+      "name": "Churros con Chocolate"
     }
   }
 }

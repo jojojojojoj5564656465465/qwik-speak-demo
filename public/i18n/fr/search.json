@@ -1,0 +1,8 @@
+{
+  "search": {
+    "loading": "Recherche...",
+    "placeholder": "Décrivez vos envies...",
+    "resultsFor": "Résultats pour",
+    "submit": "Trouver mon plat"
+  }
+}

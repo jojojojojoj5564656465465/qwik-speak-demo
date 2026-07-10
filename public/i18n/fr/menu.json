@@ -1,28 +1,28 @@
 {
   "menu": {
     "1": {
-      "name": "Tacos Al Pastor",
-      "description": "Tortillas de maïs garnies de porc mariné, d'ananas, d'oignons et de coriandre fraîche."
+      "description": "Tortillas de maïs garnies de porc mariné, d'ananas, d'oignons et de coriandre fraîche.",
+      "name": "Tacos Al Pastor"
     },
     "2": {
-      "name": "Burrito Supreme",
-      "description": "Grand tortilla de blé remplie de bœuf haché, riz, haricots noirs, fromage, crème sure et guacamole."
+      "description": "Grand tortilla de blé remplie de bœuf haché, riz, haricots noirs, fromage, crème sure et guacamole.",
+      "name": "Burrito Supreme"
     },
     "3": {
-      "name": "Enchiladas Verdes",
-      "description": "Tortillas de maïs farcies au poulet, nappées de sauce verte tomatillo et gratinées au fromage."
+      "description": "Tortillas de maïs farcies au poulet, nappées de sauce verte tomatillo et gratinées au fromage.",
+      "name": "Enchiladas Verdes"
     },
     "4": {
-      "name": "Quesadillas",
-      "description": "Tortilla pliée garnie de fromage fondu, avec une option de poulet ou de bœuf, servie avec salsa."
+      "description": "Tortilla pliée garnie de fromage fondu, avec une option de poulet ou de bœuf, servie avec salsa.",
+      "name": "Quesadillas"
     },
     "5": {
-      "name": "Guacamole & Chips",
-      "description": "Avocats frais écrasés avec oignons, tomates, jalapeños et citron vert, servis avec des chips de maïs croustillantes."
+      "description": "Avocats frais écrasés avec oignons, tomates, jalapeños et citron vert, servis avec des chips de maïs croustillantes.",
+      "name": "Guacamole & Chips"
     },
     "6": {
-      "name": "Churros au Chocolat",
-      "description": "Beignets frits saupoudrés de sucre et de cannelle, accompagnés d'une sauce chocolat chaud riche."
+      "description": "Beignets frits saupoudrés de sucre et de cannelle, accompagnés d'une sauce chocolat chaud riche.",
+      "name": "Churros au Chocolat"
     }
   }
 }

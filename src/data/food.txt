@@ -1,0 +1,13 @@
+restaurant: Le Bon Gourmet
+menu:
+  entrees[2]{id,nom,description,prix,allergenes,vegetarien}:
+    1,Salade de chèvre chaud,"Salade verte, toast de chèvre, miel, noix",12.5,gluten|lactose,true
+    2,Velouté de potiron,Soupe onctueuse aux graines de courge torréfiées,9,lactose,true
+  plats[2]{id,nom,description,prix,allergenes,vegetarien}:
+    3,Magret de canard,"Magret de canard, sauce aux figues, purée maison",24,lactose,false
+    4,Risotto aux champignons,Risotto crémeux aux cèpes et parmesan,19.5,lactose,true
+  desserts[2]{id,nom,description,prix,allergenes,vegetarien}:
+    5,Fondant au chocolat,"Cœur coulant au chocolat noir, glace vanille",8.5,gluten|lactose|oeuf,true
+    6,Tarte tatin,"Tarte aux pommes caramélisées, crème fraîche",7.5,gluten|lactose,true
+  boissons[1]{id,nom,description,prix,allergenes,vegetarien}:
+    7,Vin rouge (verre),Bordeaux Supérieur,6,sulfites,true

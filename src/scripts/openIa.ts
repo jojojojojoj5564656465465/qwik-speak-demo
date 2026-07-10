@@ -1,4 +1,6 @@
 import OpenAI from "openai";
+import data from "../data/food.txt";
+
 
 if (!process.env.NVIDIA_API_KEY) {
 	console.error(
@@ -24,7 +26,7 @@ export default async (x: string): Promise<string> => {
 		const completetionStart = performance.now();
 
 		const response = await openai.chat.completions.create({
-			model: "moonshotai/kimi-k2.6",
+			model: "z-ai/glm-5.2",
 			max_tokens: 100,
 			temperature: 0.3,
 			//seed: 42,
@@ -42,13 +44,30 @@ RÈGLES STRICTES :
 4. Respecte les régimes alimentaires mentionnés (végétarien, sans gluten, etc.)
 5. Priorise les plats qui contiennent TOUS les ingrédients demandés
 
-Voici le menu (formats: "ID: Nom | Description | Ingrédients | Allergènes"):
-1: Tacos Al Pastor | Porc mariné, ananas | Porc, ananas, oignons, coriandre | Aucun
-2: Burrito Supreme | Bœuf, riz, haricots | Bœuf, riz, haricots, fromage, crème | Gluten, Lait
-3: Enchiladas Verdes | Poulet, sauce verte | Poulet, tomatillos, fromage | Lait
-4: Quesadillas | Fromage fondu | Fromage, option poulet/bœuf | Gluten (optionnel), Lait
-5: Guacamole & Chips | Avocat frais | Avocat, tomates, oignons, jalapeños | Aucun
-6: Churros au Chocolat | Beignets frits | Farine, sucre, cannelle, chocolat | Gluten, Lait`,
+${data}
+
+Voici les id à concerver si l'utilisateur à ces demandes  :
+"Enfant (sans allergie particulière)"[6]: 1,2,3,4,5,6
+"Diabétique (sucre, glucides)"[2]: 1,5
+"Allergie au gluten"[2]: 1,5
+"Allergie au lait / produits laitiers"[2]: 1,5
+"Allergie à l’arachide"[6]: 1,2,3,4,5,6
+"Allergie aux fruits à coque"[6]: 1,2,3,4,5,6
+"Allergie au soja"[6]: 1,2,3,4,5,6
+"Allergie au poisson"[6]: 1,2,3,4,5,6
+"Allergie aux crustacés"[6]: 1,2,3,4,5,6
+"Allergie à la moutarde"[6]: 1,2,3,4,5,6
+"Allergie au sésame"[6]: 1,2,3,4,5,6
+"Allergie aux sulfites"[6]: 1,2,3,4,5,6
+"Végétarien (sans viande)"[3]: 4,5,6
+"Végétalien (sans produit animal)"[1]: 5
+"Sans œuf"[6]: 1,2,3,4,5,6
+"Sans porc"[5]: 2,3,4,5,6
+"Sans bœuf"[5]: 1,3,4,5,6
+"Sans poulet"[5]: 1,2,4,5,6
+"Sans ananas"[5]: 2,3,4,5,6
+"Sans jalapeños"[5]: 1,2,3,4,6
+`,
 				},
 
 				{

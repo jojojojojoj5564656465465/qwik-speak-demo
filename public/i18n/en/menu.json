@@ -1,28 +1,28 @@
 {
   "menu": {
     "1": {
-      "name": "Tacos Al Pastor",
-      "description": "Corn tortillas filled with marinated pork, pineapple, onions and fresh cilantro."
+      "description": "Corn tortillas filled with marinated pork, pineapple, onions and fresh cilantro.",
+      "name": "Tacos Al Pastor"
     },
     "2": {
-      "name": "Burrito Supreme",
-      "description": "Large flour tortilla filled with ground beef, rice, black beans, cheese, sour cream and guacamole."
+      "description": "Large flour tortilla filled with ground beef, rice, black beans, cheese, sour cream and guacamole.",
+      "name": "Burrito Supreme"
     },
     "3": {
-      "name": "Enchiladas Verdes",
-      "description": "Corn tortillas stuffed with chicken, topped with green tomatillo sauce and baked with cheese."
+      "description": "Corn tortillas stuffed with chicken, topped with green tomatillo sauce and baked with cheese.",
+      "name": "Enchiladas Verdes"
     },
     "4": {
-      "name": "Quesadillas",
-      "description": "Folded tortilla filled with melted cheese, with chicken or beef option, served with salsa."
+      "description": "Folded tortilla filled with melted cheese, with chicken or beef option, served with salsa.",
+      "name": "Quesadillas"
     },
     "5": {
-      "name": "Guacamole & Chips",
-      "description": "Fresh mashed avocados with onions, tomatoes, jalapeños and lime, served with crispy corn chips."
+      "description": "Fresh mashed avocados with onions, tomatoes, jalapeños and lime, served with crispy corn chips.",
+      "name": "Guacamole & Chips"
     },
     "6": {
-      "name": "Chocolate Churros",
-      "description": "Fried doughnuts sprinkled with sugar and cinnamon, accompanied by a rich hot chocolate sauce."
+      "description": "Fried doughnuts sprinkled with sugar and cinnamon, accompanied by a rich hot chocolate sauce.",
+      "name": "Chocolate Churros"
     }
   }
 }
