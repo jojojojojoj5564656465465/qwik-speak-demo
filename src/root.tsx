@@ -1,15 +1,29 @@
-import { component$, isDev } from "@builder.io/qwik";
+import {
+	component$,
+	createContextId,
+	isDev,
+	type Signal,
+	useContext,
+	useContextProvider,
+	useSignal,
+    useStore,
+} from "@builder.io/qwik";
 import { QwikCityProvider, RouterOutlet } from "@builder.io/qwik-city";
-import { RouterHead } from "./components/router-head/router-head";
 import { useQwikSpeak } from "qwik-speak";
+import { RouterHead } from "./components/router-head/router-head";
 import { config } from "./speak-config";
 import { translationFn } from "./speak-functions";
 
 import "./global.css";
 
+export const UserContextId = createContextId<{
+	InputBox: string;
+	filter: string[];
+}>("User-parameters");
+
 export default component$(() => {
 	useQwikSpeak({ config, translationFn });
-
+	
 	return (
 		<QwikCityProvider>
 			<head>

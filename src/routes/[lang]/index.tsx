@@ -1,9 +1,11 @@
 import {
 	$,
 	component$,
+	Resource,
+	useContextProvider,
 	useResource$,
 	useSignal,
-	Resource,
+	useStore,
 } from "@builder.io/qwik";
 import { server$ } from "@builder.io/qwik-city";
 import { inlineTranslate, type Translation } from "qwik-speak";
@@ -12,6 +14,7 @@ import SearchBox from "~/components/SearchBox";
 import { Title } from "~/components/Title";
 
 import menu from "~/data/menu";
+import { UserContextId } from "~/root";
 import promptIa from "~/scripts/openIa";
 
 // Fonction serveur qui appelle l'IA et filtre le menu local
@@ -26,8 +29,11 @@ export default component$(() => {
 	const t = inlineTranslate();
 	const menuTranslations = t<Translation>("menu");
 
+	const search = useStore({ InputBox: "", filter: [""] });
+	useContextProvider(UserContextId, search);
 	// Le signal de recherche devient notre unique source de vérité réactive
-	const lastQuery = useSignal<string>("");
+	
+	//const lastQuery = useSignal<string>("");
 
 	// Hook useResource$ : il se déclenche automatiquement dès que sa dépendance trackée change
 	const menuResource = useResource$<typeof menu>(async ({ track }) => {
@@ -44,7 +50,7 @@ export default component$(() => {
 			return await serverIa(query);
 		} catch (error) {
 			console.error("Erreur lors du filtrage IA:", error);
-			throw error; 
+			throw error;
 		}
 	});
 
@@ -54,7 +60,8 @@ export default component$(() => {
 	// La fonction de recherche n'a plus besoin de faire d'appel API impératif,
 	// elle met simplement à jour le signal, ce qui réveille automatiquement `useResource$`.
 	const handleSearch = $(async (query: string) => {
-		lastQuery.value = query.trim();
+		//lastQuery.value = query.trim();
+		search.InputBox = query.trim();
 	});
 
 	return (
@@ -65,10 +72,10 @@ export default component$(() => {
 			{/* menuResource.loading passe à true automatiquement pendant les appels asynchrones */}
 			<SearchBox onSearch={handleSearch} isLoading={menuResource.loading} />
 
-			{lastQuery.value && (
+			{search.InputBox && (
 				<p style={{ marginBottom: "1rem", color: "#666" }}>
 					{t("search.resultsFor@@Résultats pour")}:{" "}
-					<strong>{lastQuery.value}</strong>
+					<strong>{search.InputBox}</strong>
 				</p>
 			)}
 

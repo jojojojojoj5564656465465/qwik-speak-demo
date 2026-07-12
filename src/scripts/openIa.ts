@@ -44,6 +44,7 @@ RÈGLES STRICTES :
 4. Respecte les régimes alimentaires mentionnés (végétarien, sans gluten, etc.)
 5. Priorise les plats qui contiennent TOUS les ingrédients demandés
 
+voici le menu au format Toon:
 ${data}
 
 Voici les id à concerver si l'utilisateur à ces demandes  :
@@ -93,7 +94,7 @@ Voici les id à concerver si l'utilisateur à ces demandes  :
 
 		// 📊 Affichage des données d'usage ET de temps sous forme de tableau
 		if (response.usage) {
-			console.log("\n📊 Rapport de consommation & Performance :");
+			console.log("\n📊 Rapport de consommation & Performance :");~
 
 			console.table({
 				"Tokens d'entrée (Prompt)": response.usage.prompt_tokens,
