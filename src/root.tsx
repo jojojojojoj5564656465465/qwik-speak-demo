@@ -1,29 +1,25 @@
 import {
 	component$,
-	createContextId,
 	isDev,
-	type Signal,
-	useContext,
-	useContextProvider,
 	useSignal,
-    useStore,
+	useContextProvider,
 } from "@builder.io/qwik";
 import { QwikCityProvider, RouterOutlet } from "@builder.io/qwik-city";
 import { useQwikSpeak } from "qwik-speak";
 import { RouterHead } from "./components/router-head/router-head";
+import { AllergiesContext } from "./contexts/allergies-context";
+import type { Allergie } from "./data/newmenu";
 import { config } from "./speak-config";
 import { translationFn } from "./speak-functions";
-
 import "./global.css";
-
-export const UserContextId = createContextId<{
-	InputBox: string;
-	filter: string[];
-}>("User-parameters");
 
 export default component$(() => {
 	useQwikSpeak({ config, translationFn });
-	
+
+	const allergies = useSignal<Allergie[]>([]);
+
+	useContextProvider(AllergiesContext, allergies);
+
 	return (
 		<QwikCityProvider>
 			<head>

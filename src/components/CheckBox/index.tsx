@@ -1,61 +1,22 @@
-import {
-	$,
-	component$,
-	createContextId,
-	type Signal,
-	useComputed$,
-	useContext,
-	useContextProvider,
-	useSignal,
-	useTask$,
-} from "@builder.io/qwik";
+import { $, component$, useContext } from "@builder.io/qwik";
+import { AllergiesContext } from "~/contexts/allergies-context";
+import type { Allergie } from "~/data/newmenu";
 
-interface Item {
+interface AllergieItem {
 	label: string;
+	value: Allergie;
 }
 
-// 1. CRÉATION DU CONTEXTE
-export const DietaryPreferencesContext = createContextId<Signal<string[]>>(
-	"dietary-preferences-context",
-);
-
-// --- COMPOSANT PARENT ---
 export default component$(() => {
-	const selectedLabels = useSignal<string[]>([]);
-
-	// Charger les préférences depuis localStorage au montage
-	useTask$(() => {
-		const saved = localStorage.getItem("dietary-preferences");
-		if (saved) {
-			try {
-				selectedLabels.value = JSON.parse(saved);
-			} catch {
-				// En cas d'erreur de parsing, ignorer
-			}
-		}
-	});
-
-	// Sauvegarder automatiquement quand le signal change
-	useTask$(({ track }) => {
-		track(() => selectedLabels.value);
-		localStorage.setItem(
-			"dietary-preferences",
-			JSON.stringify(selectedLabels.value),
-		);
-	});
-
-	useContextProvider(DietaryPreferencesContext, selectedLabels);
+	const search = useContext(AllergiesContext);
 
 	const handleReset = $(() => {
-		selectedLabels.value = [];
-		localStorage.removeItem("dietary-preferences");
+		search.value = [];
 	});
 
 	return (
 		<div class="p-6 max-w-md mx-auto space-y-8">
 			<DietaryForm />
-			<DishChecker />
-
 			<button
 				type="button"
 				onClick$={handleReset}
@@ -67,49 +28,47 @@ export default component$(() => {
 	);
 });
 
-// --- COMPOSANT ENFANT 1 : Le formulaire de sélection ---
 export const DietaryForm = component$(() => {
-	const selectedLabels = useContext(DietaryPreferencesContext);
+	const search = useContext(AllergiesContext);
 
-	const items: Item[] = [
-		{ label: "Végétarien" },
-		{ label: "Sans porc" },
-		{ label: "Sans lactose" },
-		{ label: "Sans crustacés" },
-		{ label: "Sans lait ni dérivés" },
-		{ label: "Sans œufs" },
-		{ label: "Sans arachides ni fruits à coque" },
-		{ label: "Sans fruits de mer" },
-		{ label: "Sans gluten" },
-		{ label: "Sans soja, sésame ni lupin" },
+	const items: AllergieItem[] = [
+		{ label: "Gluten", value: "gluten" },
+		{ label: "Lactose", value: "lactose" },
+		{ label: "Arachide", value: "arachide" },
+		{ label: "Fruits à coque", value: "fruits à coque" },
+		{ label: "Soja", value: "soja" },
+		{ label: "Poisson", value: "poisson" },
+		{ label: "Crustacés", value: "crustacés" },
+		{ label: "Moutarde", value: "moutarde" },
+		{ label: "Sésame", value: "sésame" },
+		{ label: "Sulfites", value: "sulfites" },
 	];
 
-	// CORRECTION : toggleLabel doit être un QRL
-	const toggleLabel = $((label: string, isChecked: boolean) => {
+	const toggleAllergie = $((value: Allergie, isChecked: boolean) => {
 		if (isChecked) {
-			if (!selectedLabels.value.includes(label)) {
-				selectedLabels.value = [...selectedLabels.value, label];
+			if (!search.value.includes(value)) {
+				search.value = [...search.value, value];
 			}
 		} else {
-			selectedLabels.value = selectedLabels.value.filter((l) => l !== label);
+			search.value = search.value.filter((v) => v !== value);
 		}
 	});
 
 	return (
 		<div>
-			<h2 class="text-xl font-bold mb-4">Interdits Alimentaires</h2>
+			<h2 class="text-xl font-bold mb-4">Allergènes à exclure</h2>
 			<div class="space-y-2">
 				{items.map((item) => (
 					<label
-						key={item.label}
+						key={item.value}
 						class="flex items-center space-x-2 cursor-pointer"
 					>
 						<input
 							type="checkbox"
-							value={item.label}
-							checked={selectedLabels.value.includes(item.label)}
+							value={item.value}
+							checked={search.value.includes(item.value)}
 							onChange$={(_, currentTarget) => {
-								toggleLabel(item.label, currentTarget.checked);
+								toggleAllergie(item.value, currentTarget.checked);
 							}}
 							class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
 						/>
@@ -119,53 +78,11 @@ export const DietaryForm = component$(() => {
 			</div>
 
 			<div class="mt-6 p-4 bg-gray-100 rounded">
-				<p class="font-medium">Interdits sélectionnés :</p>
+				<p class="font-medium">Allergènes exclus :</p>
 				<p class="text-sm text-gray-700">
-					{selectedLabels.value.length > 0
-						? selectedLabels.value.join(", ")
-						: "Aucun"}
+					{search.value.length > 0 ? search.value.join(", ") : "Aucun"}
 				</p>
 			</div>
-		</div>
-	);
-});
-
-// --- COMPOSANT ENFANT 2 : La vérification du plat ---
-export const DishChecker = component$(() => {
-	const selectedLabels = useContext(DietaryPreferencesContext);
-
-	const epinardCremeAllowedLabels = new Set<string>([
-		"Végétarien",
-		"Sans porc",
-		"Sans crustacés",
-		"Sans lait ni dérivés",
-		"Sans œufs",
-		"Sans arachides ni fruits à coque",
-		"Sans fruits de mer",
-		"Sans gluten",
-		"Sans soja, sésame ni lupin",
-	]);
-
-	const isCompatibleWithEpinard = useComputed$(() => {
-		if (selectedLabels.value.length === 0) return true;
-
-		return selectedLabels.value.every((label) =>
-			epinardCremeAllowedLabels.has(label),
-		);
-	});
-
-	return (
-		<div
-			class={`p-4 rounded ${
-				isCompatibleWithEpinard.value ? "bg-green-100" : "bg-red-100"
-			}`}
-		>
-			<p class="font-medium">Plat épinard crème :</p>
-			<p class="text-sm font-bold">
-				{isCompatibleWithEpinard.value
-					? "✅ Compatible avec vos critères"
-					: "❌ Non compatible (contient un ingrédient interdit)"}
-			</p>
 		</div>
 	);
 });

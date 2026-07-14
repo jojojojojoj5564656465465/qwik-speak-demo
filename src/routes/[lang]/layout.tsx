@@ -1,9 +1,9 @@
 import { component$, Slot } from "@builder.io/qwik";
 import type { RequestHandler } from "@builder.io/qwik-city";
 import { inlineTranslate, useSpeakLocale } from "qwik-speak";
-import { config } from "../../speak-config";
+import CheckBox from "~/components/CheckBox";
 import { LanguageSelector } from "~/components/language-selector";
-
+import { config } from "../../speak-config";
 export const onRequest: RequestHandler = async ({ params, redirect }) => {
 	if (!config.supportedLocales.find((l) => l.lang === params.lang)) {
 		throw redirect(302, `/${config.defaultLocale.lang}/`);
@@ -44,6 +44,7 @@ export default component$(() => {
 				</div>
 				<LanguageSelector />
 			</nav>
+			<CheckBox/>
 			<Slot />
 		</>
 	);

@@ -1,4 +1,4 @@
-type Allergie =
+export type Allergie =
 	| "gluten"
 	| "lactose"
 	| "arachide"
@@ -10,13 +10,12 @@ type Allergie =
 	| "sésame"
 	| "sulfites";
 
-type Item = {
+export type Item = {
 	id: number;
 	nom: string;
 	description: string;
 	prix: number;
 	allergenes?: Allergie[];
-	vegetarien?: boolean;
 	src?: string;
 };
 
@@ -24,6 +23,7 @@ type Menu = {
 	entrees?: Item[];
 	plats?: Item[];
 	desserts?: Item[];
+	boissons?: Omit<Item, "allergenes" | "src">[];
 };
 
 export const menu: Menu = {
@@ -34,7 +34,6 @@ export const menu: Menu = {
 			description: "Salade verte, toast de chèvre, miel, noix",
 			prix: 12.5,
 			allergenes: ["gluten", "lactose"],
-			vegetarien: true,
 			src: "/salade-chevre.jpg",
 		},
 		{
@@ -43,7 +42,6 @@ export const menu: Menu = {
 			description: "Soupe onctueuse aux graines de courge torréfiées",
 			prix: 9.0,
 			allergenes: ["lactose"],
-			vegetarien: true,
 			src: "/veloute-potiron.jpg",
 		},
 	],
@@ -54,7 +52,6 @@ export const menu: Menu = {
 			description: "Magret de canard, sauce aux figues, purée maison",
 			prix: 24.0,
 			allergenes: ["lactose"],
-			vegetarien: false,
 			src: "/magret-canard.jpg",
 		},
 		{
@@ -63,7 +60,6 @@ export const menu: Menu = {
 			description: "Risotto crémeux aux cèpes et parmesan",
 			prix: 19.5,
 			allergenes: ["lactose"],
-			vegetarien: true,
 			src: "/risotto-champignons.jpg",
 		},
 	],
@@ -74,7 +70,6 @@ export const menu: Menu = {
 			description: "Cœur coulant au chocolat noir, glace vanille",
 			prix: 8.5,
 			allergenes: ["gluten", "lactose"],
-			vegetarien: true,
 			src: "/fondant-chocolat.jpg",
 		},
 		{
@@ -83,7 +78,6 @@ export const menu: Menu = {
 			description: "Tarte aux pommes caramélisées, crème fraîche",
 			prix: 7.5,
 			allergenes: ["gluten", "lactose"],
-			vegetarien: true,
 			src: "/tarte-tatin.jpg",
 		},
 	]

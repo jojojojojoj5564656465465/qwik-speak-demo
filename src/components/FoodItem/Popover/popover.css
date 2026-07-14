@@ -49,6 +49,13 @@ button {
     display: grid;
     gap: 0.5rem;
     box-shadow: 0 10px 25px hsl(0 0 0 / 0.3);
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.2s ease-in-out, transform 0.2s;
+    @starting-style{
+      opacity: 0;
+      transform: scale(0.9);
+    }
   }
 
   &::backdrop {

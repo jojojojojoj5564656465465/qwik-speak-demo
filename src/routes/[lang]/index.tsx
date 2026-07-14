@@ -2,7 +2,7 @@ import {
 	$,
 	component$,
 	Resource,
-	useContextProvider,
+	useContext,
 	useResource$,
 	useSignal,
 	useStore,
@@ -12,16 +12,21 @@ import { inlineTranslate, type Translation } from "qwik-speak";
 import FoodItem from "~/components/FoodItem";
 import SearchBox from "~/components/SearchBox";
 import { Title } from "~/components/Title";
-
-import menu from "~/data/menu";
-import { UserContextId } from "~/root";
+import { AllergiesContext } from "~/contexts/allergies-context";
+import { menu, type Item } from "~/data/newmenu";
 import promptIa from "~/scripts/openIa";
 
-// Fonction serveur qui appelle l'IA et filtre le menu local
+// Flatten the { entrees, plats, desserts } sub-arrays into a single Item[] for search/display.
+const flatMenu: Item[] = [
+	...(menu.entrees ?? []),
+	...(menu.plats ?? []),
+	...(menu.desserts ?? []),
+];
+
 const serverIa = server$(async (prompt: string) => {
 	const responseIa = await promptIa(prompt);
 	const regex: string[] = (await responseIa.match(/\b\d+\b/g)) ?? [];
-	const matches = menu.filter((e) => regex.includes(e.id.toString()));
+	const matches = flatMenu.filter((e) => regex.includes(e.id.toString()));
 	return matches;
 });
 
@@ -29,38 +34,42 @@ export default component$(() => {
 	const t = inlineTranslate();
 	const menuTranslations = t<Translation>("menu");
 
-	const search = useStore({ InputBox: "", filter: [""] });
-	useContextProvider(UserContextId, search);
-	// Le signal de recherche devient notre unique source de vérité réactive
-	
-	//const lastQuery = useSignal<string>("");
+	const search = useStore({ InputBox: "" });
+	// allergiesContext is typed Signal<Allergie[]>, so .value is Allergie[] (fixes TS2551).
+	const allergiesContext = useContext(AllergiesContext);
+	const lastQuery = useSignal<string>("");
 
-	// Hook useResource$ : il se déclenche automatiquement dès que sa dépendance trackée change
-	const menuResource = useResource$<typeof menu>(async ({ track }) => {
-		// On demande à Qwik de surveiller les changements de lastQuery
+	const menuResource = useResource$<Item[]>(async ({ track }) => {
 		const query = track(() => lastQuery.value);
+		const selectedAllergies = track(() => allergiesContext.value);
 
-		// Comportement par défaut : si la barre de recherche est vide, on renvoie tout le menu
+		let results: Item[];
 		if (!query.trim()) {
-			return menu;
+			results = flatMenu;
+		} else {
+			try {
+				results = await serverIa(query);
+			} catch (error) {
+				console.error("Erreur lors du filtrage IA:", error);
+				throw error;
+			}
 		}
 
-		try {
-			// Appel de la fonction serveur avec le prompt utilisateur
-			return await serverIa(query);
-		} catch (error) {
-			console.error("Erreur lors du filtrage IA:", error);
-			throw error;
+		// Exclude dishes whose allergenes array intersects the selected allergies.
+		if (selectedAllergies.length > 0) {
+			results = results.filter((item) => {
+				const itemAllergenes = item.allergenes ?? [];
+				return !itemAllergenes.some((a) => selectedAllergies.includes(a));
+			});
 		}
+
+		return results;
 	});
 
-	// Sauvegarde de la référence de traduction pour éviter les problèmes de portée
 	const menuTranslationsRef = menuTranslations;
 
-	// La fonction de recherche n'a plus besoin de faire d'appel API impératif,
-	// elle met simplement à jour le signal, ce qui réveille automatiquement `useResource$`.
 	const handleSearch = $(async (query: string) => {
-		//lastQuery.value = query.trim();
+		lastQuery.value = query.trim();
 		search.InputBox = query.trim();
 	});
 
@@ -68,8 +77,11 @@ export default component$(() => {
 		<div style={{ padding: "2rem" }}>
 			<Title text={t("home.title@@Bienvenue sur notre site")} />
 			<Title text={t("home.title2@@voyage")} />
-
-			{/* menuResource.loading passe à true automatiquement pendant les appels asynchrones */}
+			<h4>
+				{allergiesContext.value.length > 0
+					? allergiesContext.value.join(", ")
+					: "Aucune allergie sélectionnée"}
+			</h4>
 			<SearchBox onSearch={handleSearch} isLoading={menuResource.loading} />
 
 			{search.InputBox && (
@@ -79,7 +91,6 @@ export default component$(() => {
 				</p>
 			)}
 
-			{/* Gestionnaire d'état asynchrone déclaratif de Qwik */}
 			<Resource
 				value={menuResource}
 				onPending={() => <p>Chargement des recommandations IA...</p>}
@@ -106,12 +117,12 @@ export default component$(() => {
 								return (
 									<FoodItem
 										key={item.id}
-										name={translation?.name || "Nom indisponible"}
+										name={translation?.name || item.nom}
 										description={
-											translation?.description || "Description indisponible"
+											translation?.description || item.description
 										}
 										src={item.src}
-										price={item.price}
+										price={item.prix}
 									/>
 								);
 							})}
