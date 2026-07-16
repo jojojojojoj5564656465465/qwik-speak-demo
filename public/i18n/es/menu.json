@@ -1,28 +1,366 @@
 {
-  "menu": {
-    "1": {
-      "description": "Tortillas de maíz rellenas de cerdo marinado, piña, cebolla y cilantro fresco.",
-      "name": "Tacos Al Pastor"
-    },
-    "2": {
-      "description": "Gran tortilla de harina rellena de carne molida, arroz, frijoles negros, queso, crema agria y guacamole.",
-      "name": "Burrito Supreme"
-    },
-    "3": {
-      "description": "Tortillas de maíz rellenas de pollo, cubiertas con salsa verde de tomatillo y gratinadas con queso.",
-      "name": "Enchiladas Verdes"
-    },
-    "4": {
-      "description": "Tortilla doblada rellena de queso derretido, con opción de pollo o carne, servida con salsa.",
-      "name": "Quesadillas"
-    },
-    "5": {
-      "description": "Aguacates frescos machacados con cebolla, tomates, jalapeños y lima, servidos con totopos crujientes.",
-      "name": "Guacamole & Chips"
-    },
-    "6": {
-      "description": "Buñuelos fritos espolvoreados con azúcar y canela, acompañados de una rica salsa de chocolate caliente.",
-      "name": "Churros con Chocolate"
-    }
+  "1": {
+    "nom": "Ensalada de crudités",
+    "description": "Zanahorias ralladas, remolacha, vinagreta casera"
+  },
+  "2": {
+    "nom": "Sopa de verduras del sol",
+    "description": "Calabacín, pimientos, tomates, albahaca fresca"
+  },
+  "3": {
+    "nom": "Carpaccio de calabacín",
+    "description": "Calabacín crudo en láminas finas, limón, aceite de oliva"
+  },
+  "4": {
+    "nom": "Gazpacho andaluz",
+    "description": "Sopa fría de tomate, pepinos, pimientos"
+  },
+  "5": {
+    "nom": "Ensalada de quinoa con hierbas",
+    "description": "Quinoa, perejil, menta, lima"
+  },
+  "6": {
+    "nom": "Bruschetta de tomate y albahaca",
+    "description": "Pan tostado con ajo, tomates frescos, albahaca"
+  },
+  "7": {
+    "nom": "Rollitos de primavera de cerdo",
+    "description": "Láminas de arroz, cerdo picado, verduras crujientes"
+  },
+  "8": {
+    "nom": "Ensalada de queso de cabra caliente",
+    "description": "Ensalada verde, tosta de queso de cabra, miel, nueces"
+  },
+  "9": {
+    "nom": "Crema de calabaza",
+    "description": "Sopa cremosa con semillas de calabaza tostadas"
+  },
+  "10": {
+    "nom": "Tartar de salmón con nata",
+    "description": "Salmón fresco, nata, cebollino"
+  },
+  "11": {
+    "nom": "Ensalada tailandesa de pollo",
+    "description": "Pollo a la plancha, verduras crujientes, salsa de cacahuete"
+  },
+  "12": {
+    "nom": "Bocaditos de gambas con salsa de cacahuete",
+    "description": "Gambas crujientes, salsa satay"
+  },
+  "13": {
+    "nom": "Ensalada con nueces y roquefort",
+    "description": "Ensalada, nueces, roquefort, vinagreta de miel"
+  },
+  "14": {
+    "nom": "Tostada de aguacate y almendras",
+    "description": "Pan integral, aguacate, almendras laminadas"
+  },
+  "15": {
+    "nom": "Edamames con flor de sal",
+    "description": "Habas de soja al vapor, flor de sal"
+  },
+  "16": {
+    "nom": "Rollitos de primavera de tofu",
+    "description": "Láminas de arroz, tofu, verduras, salsa de soja"
+  },
+  "17": {
+    "nom": "Tartar de salmón",
+    "description": "Salmón fresco, limón, eneldo, alcaparras"
+  },
+  "18": {
+    "nom": "Rillettes de atún",
+    "description": "Atún desmenuzado, limón, aceite de oliva"
+  },
+  "19": {
+    "nom": "Cóctel de gambas",
+    "description": "Gambas rosas, salsa cóctel, limón"
+  },
+  "20": {
+    "nom": "Sopa de mariscos",
+    "description": "Bisque de gambas, mariscos variados, picatostes"
+  },
+  "21": {
+    "nom": "Ensalada de patatas con jamón",
+    "description": "Patatas, jamón, vinagreta de mostaza"
+  },
+  "22": {
+    "nom": "Blinis con salmón ahumado",
+    "description": "Blinis, salmón ahumado, crema de mostaza"
+  },
+  "23": {
+    "nom": "Albóndigas de carne con sésamo",
+    "description": "Carne picada de ternera, semillas de sésamo, salsa dulce"
+  },
+  "24": {
+    "nom": "Ensalada de pepino con sésamo",
+    "description": "Pepino, vinagre de arroz, semillas de sésamo"
+  },
+  "25": {
+    "nom": "Tabla de embutidos",
+    "description": "Jamón serrano, salchichón, coppa"
+  },
+  "26": {
+    "nom": "Vinagre balsámico añejo",
+    "description": "Surrido de panes y vinagre balsámico añejo"
+  },
+  "27": {
+    "nom": "Ensalada completa de salmón",
+    "description": "Salmón, aguacate, nueces, salsa de mostaza"
+  },
+  "28": {
+    "nom": "Wok de pollo con cacahuetes",
+    "description": "Pollo, verduras, cacahuetes, soja, sésamo"
+  },
+  "29": {
+    "nom": "Paté en croûte casero",
+    "description": "Cerdo, ave, pistachos, huevos"
+  },
+  "30": {
+    "nom": "Hojaldre de mariscos",
+    "description": "Masa de hojaldre, gambas, pescado, bechamel"
+  },
+  "31": {
+    "nom": "Pollo asado con hierbas",
+    "description": "Pollo de corral, hierbas provenzales, jugo de tomillo"
+  },
+  "32": {
+    "nom": "Steak frites",
+    "description": "Filete de ternera, patatas fritas caseras, ensalada verde"
+  },
+  "33": {
+    "nom": "Filete de lubina en costra de sal",
+    "description": "Filete de lubina, sal gruesa, verduras a la plancha"
+  },
+  "34": {
+    "nom": "Arroz salteado con verduras",
+    "description": "Arroz basmati, verduras variadas, especias suaves"
+  },
+  "35": {
+    "nom": "Gratinado de calabacín con parmesano",
+    "description": "Calabacín, parmesano, pan rallado"
+  },
+  "36": {
+    "nom": "Pasta carbonara",
+    "description": "Espaguetis, panceta, nata, parmesano"
+  },
+  "37": {
+    "nom": "Hamburguesa casera",
+    "description": "Pan de brioche, filete de ternera, cheddar, lechuga, tomate"
+  },
+  "38": {
+    "nom": "Pizza margherita",
+    "description": "Salsa de tomate, mozzarella, albahaca"
+  },
+  "39": {
+    "nom": "Magret de pato",
+    "description": "Pechuga de pato, salsa de higos, puré casero"
+  },
+  "40": {
+    "nom": "Risotto de setas",
+    "description": "Risotto cremoso con boletus y parmesano"
+  },
+  "41": {
+    "nom": "Gratin dauphinois",
+    "description": "Patatas, nata, ajo, nuez moscada"
+  },
+  "42": {
+    "nom": "Pollo satay",
+    "description": "Brochetas de pollo, salsa de cacahuete, arroz"
+  },
+  "43": {
+    "nom": "Curry tailandés de ternera",
+    "description": "Ternera, leche de coco, cacahuetes, verduras"
+  },
+  "44": {
+    "nom": "Pato con nueces y miel",
+    "description": "Pechuga de pato, nueces, miel, salsa agridulce"
+  },
+  "45": {
+    "nom": "Salmón en costra de pistachos",
+    "description": "Filete de salmón, pistachos, espinacas"
+  },
+  "46": {
+    "nom": "Tofu a la plancha con salsa teriyaki",
+    "description": "Tofu firme, salsa de soja, arroz, verduras"
+  },
+  "47": {
+    "nom": "Ternera salteada con soja",
+    "description": "Ternera, brócoli, zanahorias, salsa de soja"
+  },
+  "48": {
+    "nom": "Filete de salmón a la plancha",
+    "description": "Salmón del Atlántico, mantequilla de limón, espárragos"
+  },
+  "49": {
+    "nom": "Rape con beurre blanc",
+    "description": "Cola de rape, beurre blanc, arroz pilaf"
+  },
+  "50": {
+    "nom": "Risotto de mariscos",
+    "description": "Risotto, gambas, mejillones, calamares"
+  },
+  "51": {
+    "nom": "Bogavante a la plancha",
+    "description": "Bogavante bretón, mantequilla de ajo, patatas salteadas"
+  },
+  "52": {
+    "nom": "Cerdo a la mostaza",
+    "description": "Solomillo de cerdo, salsa de mostaza a la antigua, puré"
+  },
+  "53": {
+    "nom": "Asado de ternera con salsa de mostaza",
+    "description": "Asado de ternera, salsa de mostaza y pimienta, verduras"
+  },
+  "54": {
+    "nom": "Pollo al sésamo",
+    "description": "Pollo lacado, semillas de sésamo, arroz cantonés"
+  },
+  "55": {
+    "nom": "Buddha bowl de sésamo",
+    "description": "Quinoa, verduras, tofu, semillas de sésamo"
+  },
+  "56": {
+    "nom": "Chuletas de cordero a la plancha",
+    "description": "Chuletas de cordero, romero, verduras a la plancha"
+  },
+  "57": {
+    "nom": "Cassoulet toulousain",
+    "description": "Alubias blancas, salchicha, confit de pato"
+  },
+  "58": {
+    "nom": "Pollo con almendras y soja",
+    "description": "Pollo, almendras, salsa de soja, arroz"
+  },
+  "59": {
+    "nom": "Pasta con mariscos",
+    "description": "Linguine, gambas, mejillones, salsa de nata"
+  },
+  "60": {
+    "nom": "Pato lacado con cacahuetes",
+    "description": "Pechuga de pato, salsa de cacahuete, sésamo"
+  },
+  "61": {
+    "nom": "Hamburguesa de salmón ahumado",
+    "description": "Pan de brioche, salmón ahumado, queso fresco"
+  },
+  "62": {
+    "nom": "Pizza de mariscos",
+    "description": "Masa de pizza, gambas, calamares, mozzarella"
+  },
+  "63": {
+    "nom": "Sorbete de limón",
+    "description": "Sorbete refrescante de limón fresco"
+  },
+  "64": {
+    "nom": "Macedonia de frutas frescas",
+    "description": "Frutas de temporada cortadas en dados"
+  },
+  "65": {
+    "nom": "Mousse de chocolate negro",
+    "description": "Chocolate negro 70%, huevos, azúcar"
+  },
+  "66": {
+    "nom": "Melocotón Melba",
+    "description": "Melocotón, sorbete de frambuesa, coulis"
+  },
+  "67": {
+    "nom": "Piña asada",
+    "description": "Piña, vainilla, azúcar de caña"
+  },
+  "68": {
+    "nom": "Fondant de chocolate",
+    "description": "Corazón fundente de chocolate negro, helado de vainilla"
+  },
+  "69": {
+    "nom": "Tarta tatin",
+    "description": "Tarta de manzana caramelizada, nata"
+  },
+  "70": {
+    "nom": "Crema catalana",
+    "description": "Crema de vainilla, caramelo crujiente"
+  },
+  "71": {
+    "nom": "Isla flotante",
+    "description": "Merengue escalfado, crema inglesa, caramelo"
+  },
+  "72": {
+    "nom": "Tiramisú clásico",
+    "description": "Mascarpone, café, cacao, bizcochos"
+  },
+  "73": {
+    "nom": "Panna cotta",
+    "description": "Crema de vainilla, coulis de frutos rojos"
+  },
+  "74": {
+    "nom": "Helado de cacahuete",
+    "description": "Helado artesanal con cacahuetes tostados"
+  },
+  "75": {
+    "nom": "Brownie de cacahuete",
+    "description": "Brownie de chocolate con cacahuetes caramelizados"
+  },
+  "76": {
+    "nom": "Tarta de nueces pecanas",
+    "description": "Nueces pecanas caramelizadas, masa quebrada"
+  },
+  "77": {
+    "nom": "Parfait de almendras",
+    "description": "Almendras tostadas, miel, yogur"
+  },
+  "78": {
+    "nom": "Tarta de avellanas",
+    "description": "Tarta esponjosa con avellanas tostadas"
+  },
+  "79": {
+    "nom": "Crema de postre de soja",
+    "description": "Crema vegetal de soja, vainilla"
+  },
+  "80": {
+    "nom": "Mousse de tofu sedoso",
+    "description": "Tofu sedoso, chocolate, azúcar"
+  },
+  "81": {
+    "nom": "Terrina de pescado en gelatina",
+    "description": "Terrina de salmón, gelatina de aspic"
+  },
+  "82": {
+    "nom": "Galleta de gambas",
+    "description": "Galleta salada-dulce con gambas secas"
+  },
+  "83": {
+    "nom": "Pan de especias con mostaza",
+    "description": "Pan de especias, mostaza suave, miel"
+  },
+  "84": {
+    "nom": "Halva de sésamo",
+    "description": "Pasta de sésamo, miel, pistachos"
+  },
+  "85": {
+    "nom": "Galleta de sésamo",
+    "description": "Galleta crujiente, semillas de sésamo negro"
+  },
+  "86": {
+    "nom": "Albaricoques secos caramelizados",
+    "description": "Albaricoques secos, azúcar, vainilla"
+  },
+  "87": {
+    "nom": "Tarta de frutas confitadas",
+    "description": "Frutas confitadas, ron, masa quebrada"
+  },
+  "88": {
+    "nom": "Tarta de almendras y chocolate",
+    "description": "Masa quebrada, crema de almendras, chocolate"
+  },
+  "89": {
+    "nom": "Helado de cacahuete y soja",
+    "description": "Helado de soja, cacahuetes, caramelo"
+  },
+  "90": {
+    "nom": "Baklava",
+    "description": "Masa filo, nueces, miel, mantequilla"
+  },
+  "91": {
+    "nom": "Muffin de nueces y chocolate",
+    "description": "Muffin, nueces, pepitas de chocolate"
   }
 }

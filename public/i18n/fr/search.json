@@ -1,5 +1,6 @@
 {
   "search": {
+    "excludedAllergies": "<fallback>",
     "loading": "Recherche...",
     "placeholder": "Décrivez vos envies...",
     "resultsFor": "Résultats pour",

@@ -1,14 +1,96 @@
 ```toon
-menu:
-  entrees[2]{id,nom,description,prix,allergenes,vegetarien}:
-    1,Salade de chèvre chaud,"Salade verte, toast de chèvre, miel, noix",12.5,gluten|lactose,true
-    2,Velouté de potiron,Soupe onctueuse aux graines de courge torréfiées,9,lactose,true
-  plats[2]{id,nom,description,prix,allergenes,vegetarien}:
-    3,Magret de canard,"Magret de canard, sauce aux figues, purée maison",24,lactose,false
-    4,Risotto aux champignons,Risotto crémeux aux cèpes et parmesan,19.5,lactose,true
-  desserts[2]{id,nom,description,prix,allergenes,vegetarien}:
-    5,Fondant au chocolat,"Cœur coulant au chocolat noir, glace vanille",8.5,gluten|lactose|oeuf,true
-    6,Tarte tatin,"Tarte aux pommes caramélisées, crème fraîche",7.5,gluten|lactose,true
-  boissons[1]{id,nom,description,prix,allergenes,vegetarien}:
-    7,Vin rouge (verre),Bordeaux Supérieur,6,sulfites,true
+entrees[30]{id,nom,description,prix,allergenes}:
+  1,Salade de crudités,"Carottes râpées, betteraves, vinaigrette maison",8.5,""
+  2,Soupe de légumes du soleil,"Courgettes, poivrons, tomates, basilic frais",7.5,""
+  3,Carpaccio de courgettes,"Courgettes crues en fines tranches, citron, huile d'olive",9,""
+  4,Gaspacho andalou,"Soupe froide de tomates, concombres, poivrons",7,""
+  5,Salade de quinoa aux herbes,"Quinoa, persil, menthe, citron vert",10,""
+  6,Bruschetta tomates basilic,"Pain grillé à l'ail, tomates fraîches, basilic",9.5,gluten
+  7,Nems au porc,"Galettes de riz, porc haché, légumes croquants",8,gluten
+  8,Salade de chèvre chaud,"Salade verte, toast de chèvre, miel, noix",12.5,lactose
+  9,Velouté de potiron,Soupe onctueuse aux graines de courge torréfiées,9,lactose
+  10,Tartare de saumon à la crème,"Saumon frais, crème fraîche, ciboulette",14,lactose
+  11,Salade thaï au poulet,"Poulet grillé, légumes croquants, sauce cacahuète",11,arachide
+  12,Bouchées de crevettes sauce arachide,"Crevettes croustillantes, sauce satay",12,arachide
+  13,Salade aux noix et roquefort,"Salade, noix, roquefort, vinaigrette au miel",11.5,fruits à coque
+  14,Tartine avocat et amandes,"Pain complet, avocat, effiloché d'amandes",10.5,fruits à coque
+  15,Edamams à la fleur de sel,"Fèves de soja vapeur, fleur de sel",7,soja
+  16,Rouleaux de printemps au tofu,"Galettes de riz, tofu, légumes, sauce soja",9,soja
+  17,Tartare de saumon,"Saumon frais, citron, aneth, câpres",14.5,poisson
+  18,Rillettes de thon,"Thon émietté, citron, huile d'olive",9,poisson
+  19,Cocktail de crevettes,"Crevettes roses, sauce cocktail, citron",13,crustacés
+  20,Soupe de crustacés,"Bisque de crevettes, crustacés variés, croûtons",14,crustacés
+  21,Salade de pommes de terre au jambon,"Pommes de terre, jambon, vinaigrette moutardée",10,moutarde
+  22,Blinis au saumon fumé,"Blinis, saumon fumé, crème moutardée",12,moutarde
+  23,Boulettes de viande au sésame,"Bœuf haché, graines de sésame, sauce sucrée",11,sésame
+  24,Salade de concombre au sésame,"Concombre, vinaigre de riz, graines de sésame",8,sésame
+  25,Assiette de charcuterie,"Jambon cru, saucisson, coppa",13.5,sulfites
+  26,Vinaigre balsamique vieilli,Assortiment de pains et vinaigre balsamique,6,sulfites
+  27,Salade complète au saumon,"Saumon, avocat, noix, sauce moutarde",15,poisson|fruits à coque|moutarde
+  28,Wok de poulet aux cacahuètes,"Poulet, légumes, arachide, soja, sésame",13,arachide|soja|sésame
+  29,Pâté en croûte maison,"Porc, volaille, pistaches, œufs",11,gluten|fruits à coque
+  30,Feuilleté aux fruits de mer,"Pâte feuilletée, crevettes, poisson, béchamel",16,gluten|crustacés|poisson|lactose
+plats[32]{id,nom,description,prix,allergenes}:
+  31,Poulet rôti aux herbes,"Poulet fermier, herbes de Provence, jus au thym",18,""
+  32,Steak frites,"Steak de bœuf, frites maison, salade verte",22,""
+  33,Filet de bar en croûte de sel,"Filet de bar, gros sel, légumes grillés",28,""
+  34,Riz sauté aux légumes,"Riz basmati, légumes variés, épices douces",15,""
+  35,Gratin de courgettes au parmesan,"Courgettes, parmesan, chapelure",16,""
+  36,Pâtes carbonara,"Spaghetti, lardons, crème, parmesan",17,gluten
+  37,Burger maison,"Pain brioché, steak, cheddar, salade, tomate",19,gluten
+  38,Pizza margherita,"Sauce tomate, mozzarella, basilic",15,gluten
+  39,Magret de canard,"Magret de canard, sauce aux figues, purée maison",24,lactose
+  40,Risotto aux champignons,Risotto crémeux aux cèpes et parmesan,19.5,lactose
+  41,Gratin dauphinois,"Pommes de terre, crème, ail, noix de muscade",16,lactose
+  42,Poulet satay,"Brochettes de poulet, sauce cacahuète, riz",18,arachide
+  43,Curry thaï au bœuf,"Bœuf, lait de coco, arachide, légumes",20,arachide
+  44,Canard aux noix et miel,"Magret de canard, noix, miel, sauce aigre-douce",25,fruits à coque
+  45,Saumon en croûte de pistaches,"Filet de saumon, pistaches, épinards",27,fruits à coque
+  46,Tofu grillé sauce teriyaki,"Tofu ferme, sauce soja, riz, légumes",16,soja
+  47,Bœuf sauté au soja,"Bœuf, brocolis, carottes, sauce soja",21,soja
+  48,Filet de saumon grillé,"Saumon atlantique, beurre citronné, asperges",26,poisson
+  49,Lotte au beurre blanc,"Queue de lotte, beurre blanc, riz pilaf",29,poisson
+  50,Risotto aux fruits de mer,"Risotto, crevettes, moules, calamars",28,crustacés
+  51,Homard grillé,"Homard breton, beurre à l'ail, pommes sautées",45,crustacés
+  52,Porc à la moutarde,"Filet mignon, sauce moutarde à l'ancienne, purée",22,moutarde
+  53,Rôti de bœuf sauce moutarde,"Rôti de bœuf, sauce moutarde au poivre, légumes",24,moutarde
+  54,Poulet au sésame,"Poulet laqué, graines de sésame, riz cantonais",19,sésame
+  55,Buddha bowl au sésame,"Quinoa, légumes, tofu, graines de sésame",17,sésame
+  56,Côtes d'agneau grillées,"Côtes d'agneau, romarin, légumes grillés",26,sulfites
+  57,Cassoulet toulousain,"Haricots blancs, saucisse, confit de canard",22,sulfites
+  58,Poulet aux amandes et soja,"Poulet, amandes, sauce soja, riz",20,fruits à coque|soja
+  59,Pâtes aux fruits de mer,"Linguine, crevettes, moules, sauce crème",27,gluten|crustacés|lactose
+  60,Canard laqué aux cacahuètes,"Magret de canard, sauce cacahuète, sésame",26,arachide|sésame
+  61,Burger au saumon fumé,"Pain brioché, saumon fumé, fromage frais",21,gluten|poisson|lactose
+  62,Pizza aux fruits de mer,"Pâte à pizza, crevettes, calamars, mozzarella",22,gluten|crustacés|lactose
+desserts[29]{id,nom,description,prix,allergenes}:
+  63,Sorbet citron,Sorbet rafraîchissant au citron frais,6,""
+  64,Salade de fruits frais,Fruits de saison coupés en dés,7,""
+  65,Mousse au chocolat noir,"Chocolat noir 70%, œufs, sucre",8,""
+  66,Pêche Melba,"Pêche, sorbet framboise, coulis",9,""
+  67,Ananas rôti,"Ananas, vanille, sucre de canne",7.5,""
+  68,Fondant au chocolat,"Cœur coulant au chocolat noir, glace vanille",8.5,gluten
+  69,Tarte tatin,"Tarte aux pommes caramélisées, crème fraîche",7.5,gluten
+  70,Crème brûlée,"Crème vanille, caramel croustillant",7,gluten
+  71,Île flottante,"Meringue pochée, crème anglaise, caramel",8,lactose
+  72,Tiramisu classique,"Mascarpone, café, cacao, biscuits",9,lactose
+  73,Panna cotta,"Crème vanille, coulis de fruits rouges",7.5,lactose
+  74,Glace à la cacahuète,Glace artisanale à la cacahuète grillée,6.5,arachide
+  75,Brownie aux cacahuètes,"Brownie au chocolat, cacahuètes caramélisées",8,arachide
+  76,Tarte aux noix de pécan,"Noix de pécan caramélisées, pâte sablée",8.5,fruits à coque
+  77,Parfait aux amandes,"Amandes grillées, miel, yaourt",7,fruits à coque
+  78,Gâteau aux noisettes,Gâteau moelleux aux noisettes torréfiées,7.5,fruits à coque
+  79,Crème dessert au soja,"Crème végétale au soja, vanille",5.5,soja
+  80,Mousse au tofu soyeux,"Tofu soyeux, chocolat, sucre",7,soja
+  81,Terrine de poisson en gelée,"Terrine de saumon, gelée d'aspic",10,poisson
+  82,Biscuit aux crevettes,Biscuit salé-sucré aux crevettes séchées,6,crustacés
+  83,Pain d'épices à la moutarde,"Pain d'épices, moutarde douce, miel",6.5,moutarde
+  84,Halva au sésame,"Pâte de sésame, miel, pistaches",7,sésame
+  85,Cookie au sésame,"Cookie croustillant, graines de sésame noir",5,sésame
+  86,Abricots secs caramélisés,"Abricots secs, sucre, vanille",6,sulfites
+  87,Gâteau aux fruits confits,"Fruits confits, rhum, pâte sablée",8,sulfites
+  88,Tarte aux amandes et chocolat,"Pâte sablée, crème d'amandes, chocolat",9,gluten|fruits à coque|lactose
+  89,Crème glacée aux cacahuètes et soja,"Glace soja, cacahuètes, caramel",7.5,arachide|soja
+  90,Baklava,"Pâte filo, noix, miel, beurre",8.5,gluten|fruits à coque|lactose
+  91,Muffin aux noix et chocolat,"Muffin, noix, pépites de chocolat",6.5,gluten|fruits à coque|lactose
 ```
