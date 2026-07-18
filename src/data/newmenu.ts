@@ -21,7 +21,7 @@ export type Allergie = (typeof ALLERGIES)[number];
 // `readonly` empêche toute mutation accidentelle des objets et tableaux
 // (ex: `item.prix = 0` ou `items.push(...)` deviennent des erreurs de compilation).
 export interface Item {
-	readonly id: number;
+	readonly id: string;
 	readonly nom: string;
 	readonly description: string;
 	readonly prix: number;
@@ -39,42 +39,42 @@ export interface Menu {
 }
 
 // `satisfies` (au lieu de `: Menu`) valide la structure contre le type Menu
-// TOUT en conservant les types littéraux précis (ex: id: 1 plutôt que number).
-// Avantage concret : si tu fais `menu.entrees![0].id`, TS sait que c'est `1`,
+// TOUT en conservant les types littéraux précis (ex: id: "1" plutôt que number).
+// Avantage concret : si tu fais `menu.entrees![0].id`, TS sait que c'est `"1"`,
 // et toute faute de frappe sur un allergène ("glutten") est détectée à la compilation.
 export const menu = {
 	entrees: [
 		// --- Sans aucun allergène ---
 		{
-			id: 1,
+			id: "1",
 			nom: "Salade de crudités",
 			description: "Carottes râpées, betteraves, vinaigrette maison",
 			prix: 8.5,
 			src: "/salade-crudites.jpg",
 		},
 		{
-			id: 2,
+			id: "2",
 			nom: "Soupe de légumes du soleil",
 			description: "Courgettes, poivrons, tomates, basilic frais",
 			prix: 7.5,
 			src: "/soupe-legumes-soleil.jpg",
 		},
 		{
-			id: 3,
+			id: "3",
 			nom: "Carpaccio de courgettes",
 			description: "Courgettes crues en fines tranches, citron, huile d'olive",
 			prix: 9.0,
 			src: "/carpaccio-courgettes.jpg",
 		},
 		{
-			id: 4,
+			id: "4",
 			nom: "Gaspacho andalou",
 			description: "Soupe froide de tomates, concombres, poivrons",
 			prix: 7.0,
 			src: "/gaspacho.jpg",
 		},
 		{
-			id: 5,
+			id: "5",
 			nom: "Salade de quinoa aux herbes",
 			description: "Quinoa, persil, menthe, citron vert",
 			prix: 10.0,
@@ -83,7 +83,7 @@ export const menu = {
 
 		// --- Avec gluten ---
 		{
-			id: 6,
+			id: "6",
 			nom: "Bruschetta tomates basilic",
 			description: "Pain grillé à l'ail, tomates fraîches, basilic",
 			prix: 9.5,
@@ -91,7 +91,7 @@ export const menu = {
 			src: "/bruschetta.jpg",
 		},
 		{
-			id: 7,
+			id: "7",
 			nom: "Nems au porc",
 			description: "Galettes de riz, porc haché, légumes croquants",
 			prix: 8.0,
@@ -101,7 +101,7 @@ export const menu = {
 
 		// --- Avec lactose ---
 		{
-			id: 8,
+			id: "8",
 			nom: "Salade de chèvre chaud",
 			description: "Salade verte, toast de chèvre, miel, noix",
 			prix: 12.5,
@@ -109,7 +109,7 @@ export const menu = {
 			src: "/salade-chevre.jpg",
 		},
 		{
-			id: 9,
+			id: "9",
 			nom: "Velouté de potiron",
 			description: "Soupe onctueuse aux graines de courge torréfiées",
 			prix: 9.0,
@@ -117,7 +117,7 @@ export const menu = {
 			src: "/veloute-potiron.jpg",
 		},
 		{
-			id: 10,
+			id: "10",
 			nom: "Tartare de saumon à la crème",
 			description: "Saumon frais, crème fraîche, ciboulette",
 			prix: 14.0,
@@ -127,7 +127,7 @@ export const menu = {
 
 		// --- Avec arachide ---
 		{
-			id: 11,
+			id: "11",
 			nom: "Salade thaï au poulet",
 			description: "Poulet grillé, légumes croquants, sauce cacahuète",
 			prix: 11.0,
@@ -135,7 +135,7 @@ export const menu = {
 			src: "/salade-thai.jpg",
 		},
 		{
-			id: 12,
+			id: "12",
 			nom: "Bouchées de crevettes sauce arachide",
 			description: "Crevettes croustillantes, sauce satay",
 			prix: 12.0,
@@ -145,7 +145,7 @@ export const menu = {
 
 		// --- Avec fruits à coque ---
 		{
-			id: 13,
+			id: "13",
 			nom: "Salade aux noix et roquefort",
 			description: "Salade, noix, roquefort, vinaigrette au miel",
 			prix: 11.5,
@@ -153,7 +153,7 @@ export const menu = {
 			src: "/salade-noix-roquefort.jpg",
 		},
 		{
-			id: 14,
+			id: "14",
 			nom: "Tartine avocat et amandes",
 			description: "Pain complet, avocat, effiloché d'amandes",
 			prix: 10.5,
@@ -163,7 +163,7 @@ export const menu = {
 
 		// --- Avec soja ---
 		{
-			id: 15,
+			id: "15",
 			nom: "Edamams à la fleur de sel",
 			description: "Fèves de soja vapeur, fleur de sel",
 			prix: 7.0,
@@ -171,7 +171,7 @@ export const menu = {
 			src: "/edamams.jpg",
 		},
 		{
-			id: 16,
+			id: "16",
 			nom: "Rouleaux de printemps au tofu",
 			description: "Galettes de riz, tofu, légumes, sauce soja",
 			prix: 9.0,
@@ -181,7 +181,7 @@ export const menu = {
 
 		// --- Avec poisson ---
 		{
-			id: 17,
+			id: "17",
 			nom: "Tartare de saumon",
 			description: "Saumon frais, citron, aneth, câpres",
 			prix: 14.5,
@@ -189,7 +189,7 @@ export const menu = {
 			src: "/tartare-saumon-pur.jpg",
 		},
 		{
-			id: 18,
+			id: "18",
 			nom: "Rillettes de thon",
 			description: "Thon émietté, citron, huile d'olive",
 			prix: 9.0,
@@ -199,7 +199,7 @@ export const menu = {
 
 		// --- Avec crustacés ---
 		{
-			id: 19,
+			id: "19",
 			nom: "Cocktail de crevettes",
 			description: "Crevettes roses, sauce cocktail, citron",
 			prix: 13.0,
@@ -207,7 +207,7 @@ export const menu = {
 			src: "/cocktail-crevettes.jpg",
 		},
 		{
-			id: 20,
+			id: "20",
 			nom: "Soupe de crustacés",
 			description: "Bisque de crevettes, crustacés variés, croûtons",
 			prix: 14.0,
@@ -217,7 +217,7 @@ export const menu = {
 
 		// --- Avec moutarde ---
 		{
-			id: 21,
+			id: "21",
 			nom: "Salade de pommes de terre au jambon",
 			description: "Pommes de terre, jambon, vinaigrette moutardée",
 			prix: 10.0,
@@ -225,7 +225,7 @@ export const menu = {
 			src: "/salade-pdt-jambon.jpg",
 		},
 		{
-			id: 22,
+			id: "22",
 			nom: "Blinis au saumon fumé",
 			description: "Blinis, saumon fumé, crème moutardée",
 			prix: 12.0,
@@ -235,7 +235,7 @@ export const menu = {
 
 		// --- Avec sésame ---
 		{
-			id: 23,
+			id: "23",
 			nom: "Boulettes de viande au sésame",
 			description: "Bœuf haché, graines de sésame, sauce sucrée",
 			prix: 11.0,
@@ -243,7 +243,7 @@ export const menu = {
 			src: "/boulettes-viande-sesame.jpg",
 		},
 		{
-			id: 24,
+			id: "24",
 			nom: "Salade de concombre au sésame",
 			description: "Concombre, vinaigre de riz, graines de sésame",
 			prix: 8.0,
@@ -253,7 +253,7 @@ export const menu = {
 
 		// --- Avec sulfites ---
 		{
-			id: 25,
+			id: "25",
 			nom: "Assiette de charcuterie",
 			description: "Jambon cru, saucisson, coppa",
 			prix: 13.5,
@@ -261,7 +261,7 @@ export const menu = {
 			src: "/assiette-charcuterie.jpg",
 		},
 		{
-			id: 26,
+			id: "26",
 			nom: "Vinaigre balsamique vieilli",
 			description: "Assortiment de pains et vinaigre balsamique",
 			prix: 6.0,
@@ -271,7 +271,7 @@ export const menu = {
 
 		// --- Combinaisons d'allergènes ---
 		{
-			id: 27,
+			id: "27",
 			nom: "Salade complète au saumon",
 			description: "Saumon, avocat, noix, sauce moutarde",
 			prix: 15.0,
@@ -279,7 +279,7 @@ export const menu = {
 			src: "/salade-complete-saumon.jpg",
 		},
 		{
-			id: 28,
+			id: "28",
 			nom: "Wok de poulet aux cacahuètes",
 			description: "Poulet, légumes, arachide, soja, sésame",
 			prix: 13.0,
@@ -287,7 +287,7 @@ export const menu = {
 			src: "/wok-poulet-cacahuetes.jpg",
 		},
 		{
-			id: 29,
+			id: "29",
 			nom: "Pâté en croûte maison",
 			description: "Porc, volaille, pistaches, œufs",
 			prix: 11.0,
@@ -295,7 +295,7 @@ export const menu = {
 			src: "/pate-en-croute.jpg",
 		},
 		{
-			id: 30,
+			id: "30",
 			nom: "Feuilleté aux fruits de mer",
 			description: "Pâte feuilletée, crevettes, poisson, béchamel",
 			prix: 16.0,
@@ -307,35 +307,35 @@ export const menu = {
 	plats: [
 		// --- Sans aucun allergène ---
 		{
-			id: 31,
+			id: "31",
 			nom: "Poulet rôti aux herbes",
 			description: "Poulet fermier, herbes de Provence, jus au thym",
 			prix: 18.0,
 			src: "/poulet-roti.jpg",
 		},
 		{
-			id: 32,
+			id: "32",
 			nom: "Steak frites",
 			description: "Steak de bœuf, frites maison, salade verte",
 			prix: 22.0,
 			src: "/steak-frites.jpg",
 		},
 		{
-			id: 33,
+			id: "33",
 			nom: "Filet de bar en croûte de sel",
 			description: "Filet de bar, gros sel, légumes grillés",
 			prix: 28.0,
 			src: "/filet-bar-sel.jpg",
 		},
 		{
-			id: 34,
+			id: "34",
 			nom: "Riz sauté aux légumes",
 			description: "Riz basmati, légumes variés, épices douces",
 			prix: 15.0,
 			src: "/riz-saute-legumes.jpg",
 		},
 		{
-			id: 35,
+			id: "35",
 			nom: "Gratin de courgettes au parmesan",
 			description: "Courgettes, parmesan, chapelure",
 			prix: 16.0,
@@ -344,7 +344,7 @@ export const menu = {
 
 		// --- Avec gluten ---
 		{
-			id: 36,
+			id: "36",
 			nom: "Pâtes carbonara",
 			description: "Spaghetti, lardons, crème, parmesan",
 			prix: 17.0,
@@ -352,7 +352,7 @@ export const menu = {
 			src: "/pates-carbonara.jpg",
 		},
 		{
-			id: 37,
+			id: "37",
 			nom: "Burger maison",
 			description: "Pain brioché, steak, cheddar, salade, tomate",
 			prix: 19.0,
@@ -360,7 +360,7 @@ export const menu = {
 			src: "/burger-maison.jpg",
 		},
 		{
-			id: 38,
+			id: "38",
 			nom: "Pizza margherita",
 			description: "Sauce tomate, mozzarella, basilic",
 			prix: 15.0,
@@ -370,7 +370,7 @@ export const menu = {
 
 		// --- Avec lactose ---
 		{
-			id: 39,
+			id: "39",
 			nom: "Magret de canard",
 			description: "Magret de canard, sauce aux figues, purée maison",
 			prix: 24.0,
@@ -378,7 +378,7 @@ export const menu = {
 			src: "/magret-canard.jpg",
 		},
 		{
-			id: 40,
+			id: "40",
 			nom: "Risotto aux champignons",
 			description: "Risotto crémeux aux cèpes et parmesan",
 			prix: 19.5,
@@ -386,7 +386,7 @@ export const menu = {
 			src: "/risotto-champignons.jpg",
 		},
 		{
-			id: 41,
+			id: "41",
 			nom: "Gratin dauphinois",
 			description: "Pommes de terre, crème, ail, noix de muscade",
 			prix: 16.0,
@@ -396,7 +396,7 @@ export const menu = {
 
 		// --- Avec arachide ---
 		{
-			id: 42,
+			id: "42",
 			nom: "Poulet satay",
 			description: "Brochettes de poulet, sauce cacahuète, riz",
 			prix: 18.0,
@@ -404,7 +404,7 @@ export const menu = {
 			src: "/poulet-satay.jpg",
 		},
 		{
-			id: 43,
+			id: "43",
 			nom: "Curry thaï au bœuf",
 			description: "Bœuf, lait de coco, arachide, légumes",
 			prix: 20.0,
@@ -414,7 +414,7 @@ export const menu = {
 
 		// --- Avec fruits à coque ---
 		{
-			id: 44,
+			id: "44",
 			nom: "Canard aux noix et miel",
 			description: "Magret de canard, noix, miel, sauce aigre-douce",
 			prix: 25.0,
@@ -422,7 +422,7 @@ export const menu = {
 			src: "/canard-noix-miel.jpg",
 		},
 		{
-			id: 45,
+			id: "45",
 			nom: "Saumon en croûte de pistaches",
 			description: "Filet de saumon, pistaches, épinards",
 			prix: 27.0,
@@ -432,7 +432,7 @@ export const menu = {
 
 		// --- Avec soja ---
 		{
-			id: 46,
+			id: "46",
 			nom: "Tofu grillé sauce teriyaki",
 			description: "Tofu ferme, sauce soja, riz, légumes",
 			prix: 16.0,
@@ -440,7 +440,7 @@ export const menu = {
 			src: "/tofu-teriyaki.jpg",
 		},
 		{
-			id: 47,
+			id: "47",
 			nom: "Bœuf sauté au soja",
 			description: "Bœuf, brocolis, carottes, sauce soja",
 			prix: 21.0,
@@ -450,7 +450,7 @@ export const menu = {
 
 		// --- Avec poisson ---
 		{
-			id: 48,
+			id: "48",
 			nom: "Filet de saumon grillé",
 			description: "Saumon atlantique, beurre citronné, asperges",
 			prix: 26.0,
@@ -458,7 +458,7 @@ export const menu = {
 			src: "/filet-saumon-grille.jpg",
 		},
 		{
-			id: 49,
+			id: "49",
 			nom: "Lotte au beurre blanc",
 			description: "Queue de lotte, beurre blanc, riz pilaf",
 			prix: 29.0,
@@ -468,7 +468,7 @@ export const menu = {
 
 		// --- Avec crustacés ---
 		{
-			id: 50,
+			id: "50",
 			nom: "Risotto aux fruits de mer",
 			description: "Risotto, crevettes, moules, calamars",
 			prix: 28.0,
@@ -476,7 +476,7 @@ export const menu = {
 			src: "/risotto-fruits-de-mer.jpg",
 		},
 		{
-			id: 51,
+			id: "51",
 			nom: "Homard grillé",
 			description: "Homard breton, beurre à l'ail, pommes sautées",
 			prix: 45.0,
@@ -486,7 +486,7 @@ export const menu = {
 
 		// --- Avec moutarde ---
 		{
-			id: 52,
+			id: "52",
 			nom: "Porc à la moutarde",
 			description: "Filet mignon, sauce moutarde à l'ancienne, purée",
 			prix: 22.0,
@@ -494,7 +494,7 @@ export const menu = {
 			src: "/porc-moutarde.jpg",
 		},
 		{
-			id: 53,
+			id: "53",
 			nom: "Rôti de bœuf sauce moutarde",
 			description: "Rôti de bœuf, sauce moutarde au poivre, légumes",
 			prix: 24.0,
@@ -504,7 +504,7 @@ export const menu = {
 
 		// --- Avec sésame ---
 		{
-			id: 54,
+			id: "54",
 			nom: "Poulet au sésame",
 			description: "Poulet laqué, graines de sésame, riz cantonais",
 			prix: 19.0,
@@ -512,7 +512,7 @@ export const menu = {
 			src: "/poulet-sesame.jpg",
 		},
 		{
-			id: 55,
+			id: "55",
 			nom: "Buddha bowl au sésame",
 			description: "Quinoa, légumes, tofu, graines de sésame",
 			prix: 17.0,
@@ -522,7 +522,7 @@ export const menu = {
 
 		// --- Avec sulfites ---
 		{
-			id: 56,
+			id: "56",
 			nom: "Côtes d'agneau grillées",
 			description: "Côtes d'agneau, romarin, légumes grillés",
 			prix: 26.0,
@@ -530,7 +530,7 @@ export const menu = {
 			src: "/cotes-agneau.jpg",
 		},
 		{
-			id: 57,
+			id: "57",
 			nom: "Cassoulet toulousain",
 			description: "Haricots blancs, saucisse, confit de canard",
 			prix: 22.0,
@@ -540,7 +540,7 @@ export const menu = {
 
 		// --- Combinaisons d'allergènes ---
 		{
-			id: 58,
+			id: "58",
 			nom: "Poulet aux amandes et soja",
 			description: "Poulet, amandes, sauce soja, riz",
 			prix: 20.0,
@@ -548,7 +548,7 @@ export const menu = {
 			src: "/poulet-amandes-soja.jpg",
 		},
 		{
-			id: 59,
+			id: "59",
 			nom: "Pâtes aux fruits de mer",
 			description: "Linguine, crevettes, moules, sauce crème",
 			prix: 27.0,
@@ -556,7 +556,7 @@ export const menu = {
 			src: "/pates-fruits-de-mer.jpg",
 		},
 		{
-			id: 60,
+			id: "60",
 			nom: "Canard laqué aux cacahuètes",
 			description: "Magret de canard, sauce cacahuète, sésame",
 			prix: 26.0,
@@ -564,7 +564,7 @@ export const menu = {
 			src: "/canard-laque-cacahuetes.jpg",
 		},
 		{
-			id: 61,
+			id: "61",
 			nom: "Burger au saumon fumé",
 			description: "Pain brioché, saumon fumé, fromage frais",
 			prix: 21.0,
@@ -572,7 +572,7 @@ export const menu = {
 			src: "/burger-saumon-fume.jpg",
 		},
 		{
-			id: 62,
+			id: "62",
 			nom: "Pizza aux fruits de mer",
 			description: "Pâte à pizza, crevettes, calamars, mozzarella",
 			prix: 22.0,
@@ -584,35 +584,35 @@ export const menu = {
 	desserts: [
 		// --- Sans aucun allergène ---
 		{
-			id: 63,
+			id: "63",
 			nom: "Sorbet citron",
 			description: "Sorbet rafraîchissant au citron frais",
 			prix: 6.0,
 			src: "/sorbet-citron.jpg",
 		},
 		{
-			id: 64,
+			id: "64",
 			nom: "Salade de fruits frais",
 			description: "Fruits de saison coupés en dés",
 			prix: 7.0,
 			src: "/salade-fruits-frais.jpg",
 		},
 		{
-			id: 65,
+			id: "65",
 			nom: "Mousse au chocolat noir",
 			description: "Chocolat noir 70%, œufs, sucre",
 			prix: 8.0,
 			src: "/mousse-chocolat-noir.jpg",
 		},
 		{
-			id: 66,
+			id: "66",
 			nom: "Pêche Melba",
 			description: "Pêche, sorbet framboise, coulis",
 			prix: 9.0,
 			src: "/peche-melba.jpg",
 		},
 		{
-			id: 67,
+			id: "67",
 			nom: "Ananas rôti",
 			description: "Ananas, vanille, sucre de canne",
 			prix: 7.5,
@@ -621,7 +621,7 @@ export const menu = {
 
 		// --- Avec gluten ---
 		{
-			id: 68,
+			id: "68",
 			nom: "Fondant au chocolat",
 			description: "Cœur coulant au chocolat noir, glace vanille",
 			prix: 8.5,
@@ -629,7 +629,7 @@ export const menu = {
 			src: "/fondant-chocolat.jpg",
 		},
 		{
-			id: 69,
+			id: "69",
 			nom: "Tarte tatin",
 			description: "Tarte aux pommes caramélisées, crème fraîche",
 			prix: 7.5,
@@ -637,7 +637,7 @@ export const menu = {
 			src: "/tarte-tatin.jpg",
 		},
 		{
-			id: 70,
+			id: "70",
 			nom: "Crème brûlée",
 			description: "Crème vanille, caramel croustillant",
 			prix: 7.0,
@@ -647,7 +647,7 @@ export const menu = {
 
 		// --- Avec lactose ---
 		{
-			id: 71,
+			id: "71",
 			nom: "Île flottante",
 			description: "Meringue pochée, crème anglaise, caramel",
 			prix: 8.0,
@@ -655,7 +655,7 @@ export const menu = {
 			src: "/ile-flottante.jpg",
 		},
 		{
-			id: 72,
+			id: "72",
 			nom: "Tiramisu classique",
 			description: "Mascarpone, café, cacao, biscuits",
 			prix: 9.0,
@@ -663,7 +663,7 @@ export const menu = {
 			src: "/tiramisu.jpg",
 		},
 		{
-			id: 73,
+			id: "73",
 			nom: "Panna cotta",
 			description: "Crème vanille, coulis de fruits rouges",
 			prix: 7.5,
@@ -673,7 +673,7 @@ export const menu = {
 
 		// --- Avec arachide ---
 		{
-			id: 74,
+			id: "74",
 			nom: "Glace à la cacahuète",
 			description: "Glace artisanale à la cacahuète grillée",
 			prix: 6.5,
@@ -681,7 +681,7 @@ export const menu = {
 			src: "/glace-cacahuete.jpg",
 		},
 		{
-			id: 75,
+			id: "75",
 			nom: "Brownie aux cacahuètes",
 			description: "Brownie au chocolat, cacahuètes caramélisées",
 			prix: 8.0,
@@ -691,7 +691,7 @@ export const menu = {
 
 		// --- Avec fruits à coque ---
 		{
-			id: 76,
+			id: "76",
 			nom: "Tarte aux noix de pécan",
 			description: "Noix de pécan caramélisées, pâte sablée",
 			prix: 8.5,
@@ -699,7 +699,7 @@ export const menu = {
 			src: "/tarte-noix-pecan.jpg",
 		},
 		{
-			id: 77,
+			id: "77",
 			nom: "Parfait aux amandes",
 			description: "Amandes grillées, miel, yaourt",
 			prix: 7.0,
@@ -707,7 +707,7 @@ export const menu = {
 			src: "/parfait-amandes.jpg",
 		},
 		{
-			id: 78,
+			id: "78",
 			nom: "Gâteau aux noisettes",
 			description: "Gâteau moelleux aux noisettes torréfiées",
 			prix: 7.5,
@@ -717,7 +717,7 @@ export const menu = {
 
 		// --- Avec soja ---
 		{
-			id: 79,
+			id: "79",
 			nom: "Crème dessert au soja",
 			description: "Crème végétale au soja, vanille",
 			prix: 5.5,
@@ -725,7 +725,7 @@ export const menu = {
 			src: "/creme-dessert-soja.jpg",
 		},
 		{
-			id: 80,
+			id: "80",
 			nom: "Mousse au tofu soyeux",
 			description: "Tofu soyeux, chocolat, sucre",
 			prix: 7.0,
@@ -735,7 +735,7 @@ export const menu = {
 
 		// --- Avec poisson (rare mais possible) ---
 		{
-			id: 81,
+			id: "81",
 			nom: "Terrine de poisson en gelée",
 			description: "Terrine de saumon, gelée d'aspic",
 			prix: 10.0,
@@ -745,7 +745,7 @@ export const menu = {
 
 		// --- Avec crustacés (rare mais possible) ---
 		{
-			id: 82,
+			id: "82",
 			nom: "Biscuit aux crevettes",
 			description: "Biscuit salé-sucré aux crevettes séchées",
 			prix: 6.0,
@@ -755,7 +755,7 @@ export const menu = {
 
 		// --- Avec moutarde (rare mais possible) ---
 		{
-			id: 83,
+			id: "83",
 			nom: "Pain d'épices à la moutarde",
 			description: "Pain d'épices, moutarde douce, miel",
 			prix: 6.5,
@@ -765,7 +765,7 @@ export const menu = {
 
 		// --- Avec sésame ---
 		{
-			id: 84,
+			id: "84",
 			nom: "Halva au sésame",
 			description: "Pâte de sésame, miel, pistaches",
 			prix: 7.0,
@@ -773,7 +773,7 @@ export const menu = {
 			src: "/halva-sesame.jpg",
 		},
 		{
-			id: 85,
+			id: "85",
 			nom: "Cookie au sésame",
 			description: "Cookie croustillant, graines de sésame noir",
 			prix: 5.0,
@@ -783,7 +783,7 @@ export const menu = {
 
 		// --- Avec sulfites ---
 		{
-			id: 86,
+			id: "86",
 			nom: "Abricots secs caramélisés",
 			description: "Abricots secs, sucre, vanille",
 			prix: 6.0,
@@ -791,7 +791,7 @@ export const menu = {
 			src: "/abricots-secs.jpg",
 		},
 		{
-			id: 87,
+			id: "87",
 			nom: "Gâteau aux fruits confits",
 			description: "Fruits confits, rhum, pâte sablée",
 			prix: 8.0,
@@ -801,7 +801,7 @@ export const menu = {
 
 		// --- Combinaisons d'allergènes ---
 		{
-			id: 88,
+			id: "88",
 			nom: "Tarte aux amandes et chocolat",
 			description: "Pâte sablée, crème d'amandes, chocolat",
 			prix: 9.0,
@@ -809,7 +809,7 @@ export const menu = {
 			src: "/tarte-amandes-chocolat.jpg",
 		},
 		{
-			id: 89,
+			id: "89",
 			nom: "Crème glacée aux cacahuètes et soja",
 			description: "Glace soja, cacahuètes, caramel",
 			prix: 7.5,
@@ -817,7 +817,7 @@ export const menu = {
 			src: "/glace-cacahuetes-soja.jpg",
 		},
 		{
-			id: 90,
+			id: "90",
 			nom: "Baklava",
 			description: "Pâte filo, noix, miel, beurre",
 			prix: 8.5,
@@ -825,7 +825,7 @@ export const menu = {
 			src: "/baklava.jpg",
 		},
 		{
-			id: 91,
+			id: "91",
 			nom: "Muffin aux noix et chocolat",
 			description: "Muffin, noix, pépites de chocolat",
 			prix: 6.5,
@@ -837,55 +837,55 @@ export const menu = {
 	boissons: [
 		// --- Eaux et softs ---
 		{
-			id: 92,
+			id: "92",
 			nom: "Eau minérale plate",
 			description: "Eau minérale naturelle 50cl",
 			prix: 3.5,
 		},
 		{
-			id: 93,
+			id: "93",
 			nom: "Eau minérale gazeuse",
 			description: "Eau minérale pétillante 50cl",
 			prix: 3.5,
 		},
 		{
-			id: 94,
+			id: "94",
 			nom: "Coca-Cola",
 			description: "Coca-Cola original 33cl",
 			prix: 4.0,
 		},
 		{
-			id: 95,
+			id: "95",
 			nom: "Coca-Cola Zéro",
 			description: "Coca-Cola sans sucre 33cl",
 			prix: 4.0,
 		},
 		{
-			id: 96,
+			id: "96",
 			nom: "Ice Tea Pêche",
 			description: "Ice Tea à la pêche 33cl",
 			prix: 4.0,
 		},
 		{
-			id: 97,
+			id: "97",
 			nom: "Limonade maison",
 			description: "Limonade au citron frais, sucre de canne",
 			prix: 5.0,
 		},
 		{
-			id: 98,
+			id: "98",
 			nom: "Jus d'orange pressé",
 			description: "Oranges fraîchement pressées",
 			prix: 5.5,
 		},
 		{
-			id: 99,
+			id: "99",
 			nom: "Jus de pomme artisanal",
 			description: "Pommes locales pressées",
 			prix: 5.0,
 		},
 		{
-			id: 100,
+			id: "100",
 			nom: "Sirop de menthe",
 			description: "Sirop de menthe frais, eau plate",
 			prix: 4.0,
@@ -893,49 +893,49 @@ export const menu = {
 
 		// --- Boissons chaudes ---
 		{
-			id: 101,
+			id: "101",
 			nom: "Espresso",
 			description: "Café espresso arabica",
 			prix: 2.5,
 		},
 		{
-			id: 102,
+			id: "102",
 			nom: "Café allongé",
 			description: "Café allongé arabica",
 			prix: 2.5,
 		},
 		{
-			id: 103,
+			id: "103",
 			nom: "Cappuccino",
 			description: "Espresso, lait mousseux, cacao",
 			prix: 4.5,
 		},
 		{
-			id: 104,
+			id: "104",
 			nom: "Chocolat chaud",
 			description: "Chocolat noir fondu, lait, crème",
 			prix: 5.0,
 		},
 		{
-			id: 105,
+			id: "105",
 			nom: "Thé vert",
 			description: "Thé vert jasmin",
 			prix: 4.0,
 		},
 		{
-			id: 106,
+			id: "106",
 			nom: "Thé noir Earl Grey",
 			description: "Thé noir bergamote",
 			prix: 4.0,
 		},
 		{
-			id: 107,
+			id: "107",
 			nom: "Infusion camomille",
 			description: "Fleurs de camomille bio",
 			prix: 4.0,
 		},
 		{
-			id: 108,
+			id: "108",
 			nom: "Infusion verveine",
 			description: "Feuilles de verveine citronnée",
 			prix: 4.0,
@@ -943,73 +943,73 @@ export const menu = {
 
 		// --- Boissons alcoolisées ---
 		{
-			id: 109,
+			id: "109",
 			nom: "Verre de vin rouge",
 			description: "Verre de vin rouge 15cl",
 			prix: 7.0,
 		},
 		{
-			id: 110,
+			id: "110",
 			nom: "Verre de vin blanc",
 			description: "Verre de vin blanc 15cl",
 			prix: 7.0,
 		},
 		{
-			id: 111,
+			id: "111",
 			nom: "Verre de vin rosé",
 			description: "Verre de vin rosé 15cl",
 			prix: 7.0,
 		},
 		{
-			id: 112,
+			id: "112",
 			nom: "Demi-bière",
 			description: "Demi-bière pression 25cl",
 			prix: 4.5,
 		},
 		{
-			id: 113,
+			id: "113",
 			nom: "Pinte de bière",
 			description: "Pinte de bière pression 50cl",
 			prix: 8.0,
 		},
 		{
-			id: 114,
+			id: "114",
 			nom: "Kir royal",
 			description: "Crémant, crème de cassis",
 			prix: 9.0,
 		},
 		{
-			id: 115,
+			id: "115",
 			nom: "Mojito",
 			description: "Rhum blanc, menthe, citron vert, sucre",
 			prix: 10.0,
 		},
 		{
-			id: 116,
+			id: "116",
 			nom: "Mojito sans alcool",
 			description: "Menthe, citron vert, sucre, eau gazeuse",
 			prix: 7.0,
 		},
 		{
-			id: 117,
+			id: "117",
 			nom: "Spritz",
 			description: "Prosecco, Aperol, eau gazeuse",
 			prix: 10.0,
 		},
 		{
-			id: 118,
+			id: "118",
 			nom: "Whisky Coca",
 			description: "Whisky, Coca-Cola, glaçons",
 			prix: 11.0,
 		},
 		{
-			id: 119,
+			id: "119",
 			nom: "Coupe de champagne",
 			description: "Champagne brut 12cl",
 			prix: 12.0,
 		},
 		{
-			id: 120,
+			id: "120",
 			nom: "Limoncello",
 			description: "Limoncello italien maison",
 			prix: 8.0,
@@ -1017,31 +1017,31 @@ export const menu = {
 
 		// --- Cocktails sans alcool ---
 		{
-			id: 121,
+			id: "121",
 			nom: "Virgin Mojito",
 			description: "Menthe, citron vert, sucre, eau gazeuse",
 			prix: 7.0,
 		},
 		{
-			id: 122,
+			id: "122",
 			nom: "Smoothie tropical",
 			description: "Mangue, ananas, banane, lait de coco",
 			prix: 8.0,
 		},
 		{
-			id: 123,
+			id: "123",
 			nom: "Lait de coco frais",
 			description: "Lait de coco naturel",
 			prix: 5.0,
 		},
 		{
-			id: 124,
+			id: "124",
 			nom: "Citronnade maison",
 			description: "Citron, sucre, eau, menthe",
 			prix: 5.5,
 		},
 		{
-			id: 125,
+			id: "125",
 			nom: "Milk-shake à la vanille",
 			description: "Glace vanille, lait, crème fouettée",
 			prix: 7.0,

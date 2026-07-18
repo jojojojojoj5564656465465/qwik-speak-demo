@@ -119,7 +119,7 @@ export default component$(() => {
 	// ATTENTION BUG : les fichiers en/menu.json et es/menu.json existent
 	// mais contiennent DU FRANÇAIS (copié-collé non traduit). À corriger.
 	const menuTranslations = t<Translation>("menu");
-
+console.log("menuTranslations", menuTranslations);
 	// useStore : regroupe plusieurs champs d'état non-réactifs-à-l'item-près.
 	// Ici on stocke juste la dernière requête brute affichée (feedback utilisateur).
 	const search = useStore({ inputBox: "" });
@@ -245,7 +245,7 @@ export default component$(() => {
 								// ".description". C'est un BUG : les fichiers en/es
 								// contiennent du français non traduit.
 								const translation = menuTranslations[item.id] as
-									| { name: string; description: string }
+									| { nom: string; description: string }
 									| undefined;
 
 								// Fallback si la traduction manque : on affiche le `nom`
@@ -257,7 +257,7 @@ export default component$(() => {
 								return (
 									<FoodItem
 										key={item.id}
-										name={translation?.name || item.nom}
+										name={translation?.nom || item.nom}
 										description={translation?.description || item.description}
 										src={item.src}
 										price={item.prix}

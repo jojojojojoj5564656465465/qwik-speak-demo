@@ -1,8 +1,8 @@
 import {
 	component$,
 	isDev,
-	useSignal,
 	useContextProvider,
+	useSignal,
 } from "@builder.io/qwik";
 import { QwikCityProvider, RouterOutlet } from "@builder.io/qwik-city";
 import { useQwikSpeak } from "qwik-speak";

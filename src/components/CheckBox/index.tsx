@@ -78,7 +78,7 @@ export const DietaryForm = component$(() => {
 		{ label: "Moutarde", value: "moutarde" },
 		{ label: "Sésame", value: "sésame" },
 		{ label: "Sulfites", value: "sulfites" },
-	];
+	] as const;
 
 	/**
 	 * Toggle réactif d'un allergène.

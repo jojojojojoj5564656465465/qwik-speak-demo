@@ -1,5 +1,6 @@
 {
   "search": {
+    "error": "An error occurred during the search:",
     "excludedAllergies": "<fallback>",
     "loading": "Buscando...",
     "placeholder": "Describe tus deseos...",
