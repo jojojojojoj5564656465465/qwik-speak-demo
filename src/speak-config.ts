@@ -20,13 +20,35 @@
 import type { SpeakConfig } from "qwik-speak";
 
 export const config: SpeakConfig = {
-  defaultLocale: { lang: "fr" },
-  supportedLocales: [{ lang: "fr" }, { lang: "en" }, { lang: "es" }],
-  // Assets chargées à chaque navigation de locale. Chaque entrée correspond à un
-  // fichier JSON dans public/i18n/<lang>/<asset>.json. Les ajouter ici est
-  // nécessaire MAIS il faut aussi que les fichiers existent réellement (cf. fr/).
-  assets: ["app", "home", "about", "menu"],
-  // runtime_assets contiennent des chaînes "runtime" (format monétaire, dates, etc.)
-  // chargées séparément pour ne pas alourdir le bundle client initial.
-  runtimeAssets: ["runtime"],
+	defaultLocale: { lang: "fr-FR" , currency: "EUR", timeZone: "Europe/Paris", units: { length: "kilometer" }, dir: "ltr" },
+	supportedLocales: [
+		{
+			lang: "en-US",
+			currency: "USD",
+			timeZone: "America/Los_Angeles",
+			units: { length: "kilometer" },
+			dir: "ltr",
+		},
+		{
+			lang: "fr-FR",
+			currency: "EUR",
+			timeZone: "Europe/Paris",
+			units: { length: "kilometer" },
+			dir: "ltr",
+		},
+		{
+			lang: "es-CO",
+			currency: "COP",
+			timeZone: "America/Bogota",
+			units: { length: "kilometer" },
+			dir: "ltr",
+		},
+	],
+	// Assets chargées à chaque navigation de locale. Chaque entrée correspond à un
+	// fichier JSON dans public/i18n/<lang>/<asset>.json. Les ajouter ici est
+	// nécessaire MAIS il faut aussi que les fichiers existent réellement (cf. fr/).
+	assets: ["app", "home", "about", "menu", "allergies"],
+	// runtime_assets contiennent des chaînes "runtime" (format monétaire, dates, etc.)
+	// chargées séparément pour ne pas alourdir le bundle client initial.
+	runtimeAssets: ["runtime"],
 };

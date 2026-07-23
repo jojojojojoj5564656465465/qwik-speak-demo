@@ -21,7 +21,7 @@
     "preview": "qwik build preview && vite previe~w --open",
     "start": "vite --open --mode ssr",
     "qwik": "qwik",
-    "qwik-speak-extract": "qwik-speak-extract --supportedLangs=fr,en,es --assetsPath=public/i18n --autoKeys=true --unusedKeys=true --runtimeAssets=runtime"
+    "qwik-speak-extract": "qwik-speak-extract --supportedLangs=fr-FR,en-US,es-CO --assetsPath=public/i18n --autoKeys=true --unusedKeys=true --runtimeAssets=runtime"
   },
   "devDependencies": {
     "@builder.io/qwik": "^1.20.0",
@@ -38,7 +38,7 @@
     "typescript": "5.4.5",
     "typescript-eslint": "8.38.0",
     "typescript-plugin-css-modules": "latest",
-    "undici": "^8.7.0",
+    "undici": "^8.8.0",
     "vite": "7.3.1",
     "vite-tsconfig-paths": "^4.3.2"
   },

@@ -1,10 +1,11 @@
 import { $, component$, useContext } from "@builder.io/qwik";
+import { inlineTranslate, type Translation } from "qwik-speak";
 import { AllergiesContext } from "~/contexts/allergies-context";
 import type { Allergie } from "~/data/newmenu";
 
 /**
  * Item d'un allergène pour la liste déroulante de checkboxes.
- * `label`  : texte affiché à l'utilisateur (TODO: devrait passer par t() qwik-speak).
+ * `label`  : texte affiché à l'utilisateur (traduit via qwik-speak).
  * `value`  : identifiant stable d'allergène (structuellement typé par Allergie).
  */
 interface AllergieItem {
@@ -33,6 +34,7 @@ export default component$(() => {
 	// Récupère le Signal global créé dans root.tsx. ANTIPATTERN Qwik : ne jamais
 	// appeler useSignal() ici — on partagerait alors un nouvel état distinct.
 	const search = useContext(AllergiesContext);
+	const t = inlineTranslate();
 
 	// "Réinitialiser" = muter le signal vers []. Comme le Signal est réactif,
 	// la route [lang]/index.tsx re-exécutera automatiquement son useResource$.
@@ -50,7 +52,7 @@ export default component$(() => {
 				onClick$={handleReset}
 				class="w-full py-2 px-4 bg-red-500 hover:bg-red-600 text-white font-medium rounded transition-colors"
 			>
-				Réinitialiser les préférences
+				{t("allergies.resetButton")}
 			</button>
 		</div>
 	);
@@ -58,50 +60,39 @@ export default component$(() => {
 
 /**
  * <DietaryForm/> — sous-composant qui énumère les 10 allergènes supportés
- * sous forme de checkboxes. La liste est en dur côté UI (les labels ne sont
- * PAS encore i18n-mutualisés dans public/i18n/<lang>/*.json — TODO).
+ * sous forme de checkboxes. Les labels sont traduits via qwik-speak.
  */
 export const DietaryForm = component$(() => {
+	const t = inlineTranslate();
 	const search = useContext(AllergiesContext);
 
-	// Liste des allergènes proposés à l'utilisateur. L'ordre importe peu mais
-	// doit rester IDENTIQUE entre locales (sinon la position "click-remembering"
-	// des utilisateurs bascule d'une langue à l'autre).
+	// Liste des allergènes proposés à l'utilisateur.
 	const items: AllergieItem[] = [
-		{ label: "Sans Gluten", value: "gluten" },
-		{ label: "Lactose", value: "lactose" },
-		{ label: "Arachide", value: "arachide" },
-		{ label: "Fruits à coque", value: "fruits à coque" },
-		{ label: "Soja", value: "soja" },
-		{ label: "Poisson", value: "poisson" },
-		{ label: "Crustacés", value: "crustacés" },
-		{ label: "Moutarde", value: "moutarde" },
-		{ label: "Sésame", value: "sésame" },
-		{ label: "Sulfites", value: "sulfites" },
+		{ label: "allergies.gluten", value: "gluten" },
+		{ label: "allergies.lactose", value: "lactose" },
+		{ label: "allergies.arachide", value: "arachide" },
+		{ label: "allergies.fruitsÀCoque", value: "fruits à coque" },
+		{ label: "allergies.soja", value: "soja" },
+		{ label: "allergies.poisson", value: "poisson" },
+		{ label: "allergies.crustacés", value: "crustacés" },
+		{ label: "allergies.moutarde", value: "moutarde" },
+		{ label: "allergies.sésame", value: "sésame" },
+		{ label: "allergies.sulfites", value: "sulfites" },
 	] as const;
 
-	/**
-	 * Toggle réactif d'un allergène.
-	 * Immutabilité : on recrée un NOUVEAU tableau au lieu de pousser dans
-	 * l'ancien (search.value = [...search.value, value]). Qwik compare les
-	 * références du signal pour décider des re-exécutions → muter in-place
-	 * avec push() ne déclencherait PAS le useResource$ consommateur.
-	 */
 	const toggleAllergie = $((value: Allergie, isChecked: boolean) => {
 		if (isChecked) {
 			if (!search.value.includes(value)) {
-				// ← nouveau tableau (ref change) → Qwik détecte la mutation.
 				search.value = [...search.value, value];
 			}
 		} else {
-			// filter() retourne aussi un nouveau tableau → mutation détectée.
 			search.value = search.value.filter((v) => v !== value);
 		}
 	});
 
 	return (
 		<div>
-			<h2 class="text-xl font-bold mb-4">Allergènes à exclure</h2>
+			<h2 class="text-xl font-bold mb-4">{t("allergies.title")}</h2>
 			<div class="space-y-2">
 				{items.map((item) => (
 					<label
@@ -112,28 +103,26 @@ export const DietaryForm = component$(() => {
 							type="checkbox"
 							value={item.value}
 							checked={search.value.includes(item.value)}
-							// onChange$ reçoit l'événement + le currentTarget typé.
-							// On lit `currentTarget.checked` (DOM booléen) plutôt que de
-							// retenir un state intermédiaire — pattern Qwik idiomatique.
 							onChange$={(_, currentTarget) => {
 								toggleAllergie(item.value, currentTarget.checked);
 							}}
 							class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
 						/>
-						<span>{item.label}</span>
+						<span>{t(item.label)}</span>
 					</label>
 				))}
 			</div>
 
-			{/* Aperçu live de la sélection. Utile pour le debug utilisateur et
-			    pour donner un feedback immédiat (le signal est réactif, donc ce
-			    paragraphe se mets à jour instantanément sans logique supplémentaire). */}
 			<div class="mt-6 p-4 bg-gray-100 rounded">
-				<p class="font-medium">Allergènes exclus :</p>
+				<p class="font-medium">{t("allergies.excludedTitle")}</p>
 				<p class="text-sm text-gray-700">
-					{search.value.length > 0 ? search.value.join(", ") : "Aucun"}
+					{search.value.length > 0 
+						? search.value.map(v => t(`allergies.${v}`)).join(", ")
+						: t("allergies.none")
+					}
 				</p>
 			</div>
-		</div>
-	);
-});
+		</div>)
+	});
+
+

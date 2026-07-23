@@ -1,130 +1,175 @@
-@property --size-image {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 50px;
-}
-
-
-/* Correctif Mobile : Force le respect de la marge sur les très petits écrans */
-@media (width <= 35em) {
-  .max-inline-size-mobile {
-    /* Laisse l'espace pour les marges latérales natives sur mobile */
-    max-inline-size: calc(100% - 2rem);
-  }
-}
-button {
-  background-color: transparent;
+/* ============================================================
+   BOUTON DÉCLENCHEUR (thumbnail rond)
+   ============================================================ */
+.popover-trigger {
+  background: transparent;
   border: none;
+  padding: 0;
   cursor: zoom-in;
-  & > img {
-    border-radius: 9999rem;
-  }
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 3rem;
+  min-block-size: 3rem;
+  -webkit-tap-highlight-color: transparent;
 }
-[popover] {
-  /* Indispensable pour positionner le bouton de fermeture en absolu */
-  position: relative;
 
-  /* Nettoyage du style par défaut du navigateur */
+.popover-trigger__img {
+  inline-size: 4rem;
+  block-size: 4rem;
+  object-fit: cover;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.popover-trigger:active .popover-trigger__img {
+  transform: scale(0.93);
+}
+
+/* ============================================================
+   POPOVER — s'adapte au ratio réel de l'image (portrait/paysage)
+   ============================================================ */
+.popover-modal {
   border: none;
-  /* Un peu plus de padding en haut (2.5rem) pour éviter que le bouton "Fermer" ne chevauche votre texte */
-  padding: 2.5rem 2rem 2rem 2rem;
+  padding: 0;
   border-radius: 0.75rem;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 0 10px 40px hsl(0 0% 0% / 0.3);
 
-  /* Intégration de l'image de fond Unsplash */
+  /* La modale s'adapte à la taille de l'image, dans ces limites */
+  inline-size: fit-content;
+  max-inline-size: min(92vw, 550px);
+  max-block-size: min(85dvh, 700px);
 
-  /* ==========================================================================
-     L'ALCHIMIE DU CLAMP() DYNAMIQUE
-     ========================================================================== */
-  /* Largeur : Minimum 280px sur mobile, idéalement 85% de l'écran, maximum 550px sur PC */
-  inline-size: clamp(280px, 85vw, 550px);
+  margin: auto; /* centrage horizontal + vertical natif */
 
-  /* Hauteur minimale : Minimum 240px, idéalement 45% de la hauteur de l'écran, maximum 420px sur PC */
-  min-block-size: clamp(240px, 45vh, 420px);
+  /* ⚠️ IMPORTANT : ne PAS mettre `display` ici en dehors de
+     &:popover-open. Le navigateur applique `display: none` par
+     défaut tant que le popover est fermé — si on le redéfinit
+     globalement, l'élément reste "fantôme" dans le DOM même
+     fermé, et peut intercepter les clics/taps des éléments situés
+     en dessous (bug rencontré avec plusieurs FoodItem empilés). */
 
-  /* Assure la lisibilité du texte par-dessus l'image */
-
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transform: scale(0.9);
+  transition:
+    opacity 0.2s ease-in-out,
+    transform 0.2s ease-in-out,
+    overlay 0.2s ease-in-out allow-discrete,
+    display 0.2s ease-in-out allow-discrete;
 
   &:popover-open {
     display: grid;
-    gap: 0.5rem;
-    box-shadow: 0 10px 25px hsl(0 0 0 / 0.3);
+    place-items: center;
     opacity: 1;
     transform: scale(1);
-    transition: opacity 0.2s ease-in-out, transform 0.2s;
-    @starting-style{
+
+    @starting-style {
       opacity: 0;
       transform: scale(0.9);
     }
   }
 
   &::backdrop {
-    background: hsl(0 0 0 / 0.4);
+    background: hsl(0 0% 0% / 0.45);
     backdrop-filter: blur(2px);
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  &:popover-open::backdrop {
+    opacity: 1;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  &:popover-open {
+    overscroll-behavior: contain;
   }
 }
 
-/* ==========================================================================
-   STYLE DU BOUTON DE FERMETURE
-   ========================================================================== */
-.close-btn {
+/* ============================================================
+   BOUTON FERMER — flotte sur l'image, jamais hors cadre
+   ============================================================ */
+.popover-modal__close {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 10;
 
-  /* Style visuel : cercle sombre semi-transparent avec effet flouté (glassmorphism) */
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(4px);
-  color: #ffffff;
-  border: none;
-  border-radius: 50%;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
 
-  /* Dimensions du bouton */
-  inline-size: 2.2rem;
-  block-size: 2.2rem;
-  font-size: 1.25rem;
-  font-weight: bold;
-  cursor: pointer;
-
-  /* Centrage parfait du symbole "×" ou de l'icône */
   display: flex;
   align-items: center;
   justify-content: center;
 
-  /* Transition fluide au survol */
-  transition:
-    background 0.2s,
-    transform 0.1s;
-  z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  font-weight: bold;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  transition: background 0.15s ease, transform 0.1s ease;
 }
 
-.close-btn:hover {
-  background: rgba(0, 0, 0, 0.7);
-  transform: scale(1.05);
+.popover-modal__close:hover {
+  background: rgba(0, 0, 0, 0.75);
 }
 
-.close-btn:active {
-  transform: scale(0.95);
+.popover-modal__close:active {
+  transform: scale(0.92);
 }
 
-.menuItemImage {
-  width: var(--size-image);
-  aspect-ratio: 1 / 1;
-  flex-shrink: 0;
-  object-fit: cover;
-  margin-right: 1.5em;
+/* ============================================================
+   IMAGE — garde son ratio réel (portrait OU paysage)
+   ============================================================ */
+.popover-modal__img-wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  line-height: 0; /* évite l'espace fantôme sous l'img inline */
 }
 
+.popover-modal__img {
+  display: block;
+  inline-size: auto;
+  block-size: auto;
 
+  /* Les deux contraintes ensemble => jamais de débordement,
+     quel que soit le ratio (portrait ou paysage) */
+  max-inline-size: min(92vw, 550px);
+  max-block-size: min(85dvh, 700px);
 
+  object-fit: contain;
+}
 
-@container style(--bg: #333) {
-  p{
-    color: white;
+/* ============================================================
+   PETITS ÉCRANS (≤ 35em / 560px) — image raisonnable
+   ============================================================ */
+@media (max-width: 35em) {
+  .popover-modal {
+    max-inline-size: calc(100vw - 2rem);
+    max-block-size: 70dvh;
   }
-}
-@container style(--bg: #fff) {
-  p{
-    color: black;
+
+  .popover-modal__img {
+    max-inline-size: calc(100vw - 2rem);
+    /* Plafond volontairement bas pour ne pas noyer le contenu
+       sous l'image sur un petit écran, même en portrait */
+    max-block-size: 50dvh;
+  }
+
+  .popover-modal__close {
+    top: 0.4rem;
+    right: 0.4rem;
   }
 }

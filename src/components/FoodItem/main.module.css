@@ -116,8 +116,16 @@
 }
 
 .imageThumbnail {
-  width: 5rem;
-  height: 5rem;
+  inline-size: 4rem;
+  block-size: 4rem;
   object-fit: cover;
-  border-radius: 999rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+@media (min-width: 992px) {
+  .imageThumbnail {
+    inline-size: 7.5rem;
+    block-size: 7.5rem;
+  }
 }

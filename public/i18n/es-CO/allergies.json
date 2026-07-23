@@ -1,0 +1,18 @@
+{
+  "allergies": {
+    "title": "Alérgenos a excluir",
+    "resetButton": "Restablecer preferencias",
+    "excludedTitle": "Alérgenos excluidos:",
+    "none": "Ninguno",
+    "gluten": "Sin Gluten",
+    "lactose": "Sin Lactosa",
+    "arachide": "Cacahuete",
+    "fruitsÀCoque": "Frutos de cáscara",
+    "soja": "Soja",
+    "poisson": "Pescado",
+    "crustacés": "Crustáceos",
+    "moutarde": "Mostaza",
+    "sésame": "Sésamo",
+    "sulfites": "Sulfitos"
+  }
+}

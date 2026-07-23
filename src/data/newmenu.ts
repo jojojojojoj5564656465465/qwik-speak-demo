@@ -3,20 +3,17 @@
  * `Allergie` est dérivé de ce tableau : si on ajoute/retire un allergène ici,
  * le type suit automatiquement (plus besoin de maintenir deux listes en synchro).
  */
-const ALLERGIES = [
-	"gluten",
-	"lactose",
-	"arachide",
-	"fruits à coque",
-	"soja",
-	"poisson",
-	"crustacés",
-	"moutarde",
-	"sésame",
-	"sulfites",
-] as const;
-
-export type Allergie = (typeof ALLERGIES)[number];
+export type Allergie =
+	| "gluten"
+	| "lactose"
+	| "arachide"
+	| "fruits à coque"
+	| "soja"
+	| "poisson"
+	| "crustacés"
+	| "moutarde"
+	| "sésame"
+	| "sulfites";
 
 // `readonly` empêche toute mutation accidentelle des objets et tableaux
 // (ex: `item.prix = 0` ou `items.push(...)` deviennent des erreurs de compilation).
@@ -50,7 +47,7 @@ export const menu = {
 			nom: "Salade de crudités",
 			description: "Carottes râpées, betteraves, vinaigrette maison",
 			prix: 8.5,
-			src: "/salade-crudites.jpg",
+			src: "/pasta.jpg",
 		},
 		{
 			id: "2",

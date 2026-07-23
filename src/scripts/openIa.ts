@@ -254,7 +254,7 @@ Brunch[16]: 5,6,8,10,14,17,22,36,37,68,69,70,71,72,88,91
 		// 📊 Affichage des données d'usage ET de temps sous forme de tableau
 		if (response.usage) {
 			console.log("\n📊 Rapport de consommation & Performance :");
-			~console.table({
+			console.table({
 				"Tokens d'entrée (Prompt)": response.usage.prompt_tokens,
 				"Tokens de sortie (Completion)": response.usage.completion_tokens,
 				"Total des Tokens": response.usage.total_tokens,

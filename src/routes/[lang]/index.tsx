@@ -119,7 +119,7 @@ export default component$(() => {
 	// ATTENTION BUG : les fichiers en/menu.json et es/menu.json existent
 	// mais contiennent DU FRANÇAIS (copié-collé non traduit). À corriger.
 	const menuTranslations = t<Translation>("menu");
-console.log("menuTranslations", menuTranslations);
+
 	// useStore : regroupe plusieurs champs d'état non-réactifs-à-l'item-près.
 	// Ici on stocke juste la dernière requête brute affichée (feedback utilisateur).
 	const search = useStore({ inputBox: "" });

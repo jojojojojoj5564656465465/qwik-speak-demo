@@ -1,0 +1,18 @@
+{
+  "allergies": {
+    "title": "Allergènes à exclure",
+    "resetButton": "Réinitialiser les préférences",
+    "excludedTitle": "Allergènes exclus :",
+    "none": "Aucun",
+    "gluten": "Sans Gluten",
+    "lactose": "Sans Lactose",
+    "arachide": "Arachide",
+    "fruitsÀCoque": "Fruits à coque",
+    "soja": "Soja",
+    "poisson": "Poisson",
+    "crustacés": "Crustacés",
+    "moutarde": "Moutarde",
+    "sésame": "Sésame",
+    "sulfites": "Sulfites"
+  }
+}
