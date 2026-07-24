@@ -1,7 +1,5 @@
 import OpenAI from "openai";
 
-//import data from "../data/food.txt";
-
 if (!process.env.NVIDIA_API_KEY) {
 	console.error(
 		"❌ Erreur : La variable NVIDIA_API_KEY n'est pas détectée dans votre .env",
@@ -34,15 +32,13 @@ export default async (x: string): Promise<string> => {
 			messages: [
 				{
 					role: "system",
-					content: `Tu es un assistant qui aide à filtrer un menu de restaurant. 
-Tu reçois une requête utilisateur et tu dois retourner UNIQUEMENT la liste des IDs des plats qui CORRESPONDENT à cette requête, séparés par des virgules.
-
-RÈGLES STRICTES :
-1. Réponds UNIQUEMENT avec des nombres séparés par des virgules (ex: "1,3,5")
-2. Si AUCUN plat ne correspond, retourne "0"
-3. Ne retourne JAMAIS de texte explicatif
-4. Respecte les régimes alimentaires mentionnés (végétarien, sans gluten, etc.)
-5. Priorise les plats qui contiennent TOUS les ingrédients demandés
+					content: `Assistant filtre menu. Requête → IDs plats correspondants, virgules.
+Règles :
+1. Réponse : nombres séparés virgules (ex: "1,3,5")
+2. Aucun plat → "0"
+3. Jamais texte explicatif
+4. Respect régimes (végétarien, sans gluten...)
+5. Priorité plats contiennent TOUS ingrédients demandés
 
 voici le menu au format Toon:
 

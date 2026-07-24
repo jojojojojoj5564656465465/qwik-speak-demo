@@ -1,0 +1,7 @@
+# Cloudflare Pages configuration for Qwik application
+name = "speek"
+compatibility_flags = [ "nodejs_compat" ]
+compatibility_date = "2025-12-26"
+
+# Cloudflare Pages specific configuration
+pages_build_output_dir = "./dist"

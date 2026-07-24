@@ -1,0 +1,8 @@
+{
+  "checkbox": {
+    "excludedTitle": "Éléments exclus de la liste",
+    "none": "Aucun Element",
+    "resetButton": "Effacer les filtres",
+    "title": "Filtrer par allergènes"
+  }
+}

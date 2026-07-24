@@ -1,18 +1,34 @@
 {
   "allergies": {
-    "title": "Allergènes à exclure",
-    "resetButton": "Réinitialiser les préférences",
-    "excludedTitle": "Allergènes exclus :",
-    "none": "Aucun",
-    "gluten": "Sans Gluten",
-    "lactose": "Sans Lactose",
-    "arachide": "Arachide",
-    "fruitsÀCoque": "Fruits à coque",
-    "soja": "Soja",
-    "poisson": "Poisson",
-    "crustacés": "Crustacés",
-    "moutarde": "Moutarde",
-    "sésame": "Sésame",
-    "sulfites": "Sulfites"
+    "1": {
+      "value": "gluten"
+    },
+    "2": {
+      "value": "lactose"
+    },
+    "3": {
+      "value": "arachide"
+    },
+    "4": {
+      "value": "fruitsÀCoque"
+    },
+    "5": {
+      "value": "soja"
+    },
+    "6": {
+      "value": "poisson"
+    },
+    "7": {
+      "value": "crustacés"
+    },
+    "8": {
+      "value": "moutarde"
+    },
+    "9": {
+      "value": "sésame"
+    },
+    "10": {
+      "value": "sulfites"
+    }
   }
 }

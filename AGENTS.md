@@ -1,89 +1,64 @@
 # PROJECT KNOWLEDGE BASE
 
-**Generated:** 2026-05-21
-**Commit:** f5e38af
-**Branch:** main
+**Generated:** 2026-07-24
+**Commit:** $(git rev-parse --short HEAD)
+**Branch:** $(git branch --show-current)
 
 ## OVERVIEW
-Qwik City starter app. SSR framework with resumability (no hydration overhead). File-based routing.
+Qwik City SSR application with **i18n (fr-FR/en-US/es-CO)** and **resumability**. Uses `qwik-speak` for translations and `AllergiesContext` for global state management.
 
 ## STRUCTURE
 ```
 speek/
 ├── src/
-│   ├── components/     # Reusable UI components
-│   │   └── router-head/   # <head> management via DocumentHead
-│   ├── routes/        # File-based routing (index.tsx = /)
-│   │   └── index.tsx
-│   ├── entry.ssr.tsx  # SSR entry point
-│   ├── entry.dev.tsx  # Dev entry
-│   ├── entry.preview.tsx
-│   ├── root.tsx       # Root component with QwikCityProvider
-│   └── global.css
-├── public/            # Static assets
-├── vite.config.ts     # Qwik + QwikCity plugins
-└── package.json
+│   ├── components/     # Reusable UI (CheckBox, FoodItem, language-selector)
+│   │   └── FoodItem/   # Nested components (Popover)
+│   ├── routes/         # File-based routing (index.tsx = `/`)
+│   │   └── [lang]/     # Dynamic locale routes (fr/, en/, es/)
+│   ├── entry.ssr.tsx   # SSR entry (locale-scoped builds)
+│   ├── root.tsx        # Root component (i18n + global state)
+│   ├── speak-config.ts # i18n configuration
+│   └── contexts/       # Global state (allergies)
+├── public/             # Static assets (i18n JSON files)
+└── vite.config.ts      # Qwik + qwik-speak + Tailwind
 ```
 
 ## WHERE TO LOOK
-| Task | Location | Notes |
-|------|----------|-------|
-| Add route | `src/routes/` | Create `new-route/index.tsx` |
-| Add component | `src/components/` | `component$()` syntax |
-| Modify `<head>` | `src/routes/*/index.tsx` | Export `head: DocumentHead` |
-| Routing config | `vite.config.ts` | qwikCity() plugin |
+| Task                     | Location                          | Notes                                  |
+|--------------------------|-----------------------------------|----------------------------------------|
+| Add route                | `src/routes/[lang]/new-page/`     | Create `index.tsx` + `layout.tsx`      |
+| Modify i18n              | `src/speak-config.ts`             | Add locales/translations               |
+| Add component            | `src/components/`                 | Use `component$()` syntax              |
+| Modify `<head>`          | `src/components/router-head/`     | Update `RouterHead`                    |
+| Global state             | `src/contexts/allergies-context.ts` | `useSignal` + `useContextProvider`    |
 
 ## CONVENTIONS
-
-### Qwik Component Syntax
-```tsx
-import { component$ } from "@builder.io/qwik";
-
-export const MyComponent = component$(() => {
-  return <div>...</div>;
-});
-```
-
-### Routing
-- `src/routes/index.tsx` = `/`
-- `src/routes/about/index.tsx` = `/about`
-- `src/routes/layout.tsx` = shared layout for nested routes
-- Export `head: DocumentHead` for `<title>` and `<meta>`
-
-### Path Aliases
-```tsx
-import "~/*";  // maps to ./src/*
-```
-
-### CSS Modules
-Supported. Use `*.module.css`. Remove `typescript-plugin-css-modules` from tsconfig.json if unused.
+- **i18n**: `t()` for translations, `runtimeAssets` for dynamic content.
+- **Path aliases**: `~/*` → `./src/*` (tsconfig.json).
+- **Build**: Locale-scoped chunks (`/build/<locale>` in production).
+- **Qwik syntax**: `component$()` for components, `$()` for lazy-loaded functions.
 
 ## ANTI-PATTERNS (THIS PROJECT)
-- **DO NOT** remove `<head>` or `<body>` from `root.tsx` - QwikCityProvider requires them
-- **DO NOT** put qwik packages in `dependencies` - must be in `devDependencies`
-- **DO NOT** use `console.log` in production - Vite strips in build
+- **DO NOT** remove `<html lang="...">` from `root.tsx` (required for i18n + a11y).
+- **DO NOT** use `console.log` in production (Vite strips in build).
+- **DO NOT** modify `entry.ssr.tsx` without updating `vite.config.ts`.
+- **DO NOT** remove `useQwikSpeak` from `root.tsx` (breaks i18n).
 
 ## UNIQUE STYLES
-
-### Resumability
-Qwik serializes state to HTML, resumes on interaction. No full hydration.
-- Use `useSignal()`, `useStore()` for reactivity
-- `$()` suffix for lazy-loaded functions
-
-### DocumentHead
-Export `head` from route components for `<title>`, `<meta>`, `<link>` injection via `RouterHead`.
+- **Resumability**: State serialized to HTML (no hydration overhead).
+- **Locale scoping**: `/build/<locale>` for isolated client bundles.
+- **Global state**: `AllergiesContext` shared via Qwik context API.
 
 ## COMMANDS
 ```bash
-bun dev        # SSR dev server (Vite)
-bun build      # Client + server build + type check
-bun preview    # Preview production build
-bun fmt        # Prettier format
-bun lint       # ESLint check
+bun dev                     # SSR dev server (Vite)
+bun build                   # Client + server build + type check
+bun preview                 # Preview production build
+bun qwik-speak-extract      # Extract i18n keys
 ```
 
 ## NOTES
-- No tests configured yet
-- No CI/CD pipelines
-- `entry.ssr.tsx` is the server entry - other entry files for dev/preview
-- Manifest.json auto-generated in production (`!isDev` in root.tsx)
+- **i18n assets**: Stored in `public/i18n/` (auto-generated by `qwik-speak-extract`).
+- **No tests**: Configure `vitest` if needed.
+- **CI/CD**: None configured.
+- **Dynamic locale routes**: `/fr/`, `/en/`, `/es/` (see `src/routes/[lang]/`).

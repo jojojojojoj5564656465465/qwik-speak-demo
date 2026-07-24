@@ -3,6 +3,7 @@
     "error": "An error occurred during the search:",
     "excludedAllergies": "<fallback>",
     "loading": "Buscando...",
+    "noResults": "Ningun plato coincide con tus criterios.",
     "placeholder": "Describe tus deseos...",
     "resultsFor": "Resultados para",
     "submit": "Encontrar mi plato"

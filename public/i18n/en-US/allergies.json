@@ -1,18 +1,34 @@
 {
   "allergies": {
-    "title": "Allergens to exclude",
-    "resetButton": "Reset preferences",
-    "excludedTitle": "Excluded allergens:",
-    "none": "None",
-    "gluten": "Gluten Free",
-    "lactose": "Lactose Free",
-    "arachide": "Peanut",
-    "fruitsÀCoque": "Tree Nuts",
-    "soja": "Soy",
-    "poisson": "Fish",
-    "crustacés": "Crustaceans",
-    "moutarde": "Mustard",
-    "sésame": "Sesame",
-    "sulfites": "Sulfites"
+    "1": {
+      "value": "gluten"
+    },
+    "2": {
+      "value": "lactose"
+    },
+    "3": {
+      "value": "peanut"
+    },
+    "4": {
+      "value": "nuts"
+    },
+    "5": {
+      "value": "soy"
+    },
+    "6": {
+      "value": "fish"
+    },
+    "7": {
+      "value": "shellfish"
+    },
+    "8": {
+      "value": "mustard"
+    },
+    "9": {
+      "value": "sesame"
+    },
+    "10": {
+      "value": "sulfites"
+    }
   }
 }

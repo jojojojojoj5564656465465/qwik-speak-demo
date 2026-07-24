@@ -8,6 +8,11 @@ import {
 } from "qwik-speak";
 import styles from "./language-selector.module.css";
 
+const Language: Record<string, string> = {
+"en-US" : "English",
+"fr-FR" : "Français",
+"es-CO" : "Español",
+}
 export const LanguageSelector = component$(() => {
 	const t = inlineTranslate();
 	const locale = useSpeakLocale();
@@ -35,7 +40,7 @@ export const LanguageSelector = component$(() => {
 							handleLanguageChange(loc.lang);
 						}}
 					>
-						{t(`lang.${loc.lang}@@${loc.lang}`)}
+						{Language[loc.lang] || loc.lang}
 					</a>
 				</>
 			))}
