@@ -20,9 +20,9 @@ import type { LoadTranslationFn, TranslationFn } from "qwik-speak";
  * n'est donc jamais fait côté client.
  */
 const translationData = import.meta.glob<string>("/public/i18n/**/*.json", {
-	query: "?raw",
-	import: "default",
-	eager: true,
+  query: "?raw",
+  import: "default",
+  eager: true,
 });
 
 /**
@@ -36,10 +36,10 @@ const translationData = import.meta.glob<string>("/public/i18n/**/*.json", {
  * code de parsing ni accès au filesystem n'est inclus dans le bundle client.
  */
 const loadTranslation$: LoadTranslationFn = server$(
-	(lang: string, asset: string) =>
-		JSON.parse(translationData[`/public/i18n/${lang}/${asset}.json`]),
+  (lang: string, asset: string) =>
+    JSON.parse(translationData[`/public/i18n/${lang}/${asset}.json`]),
 );
 
 export const translationFn: TranslationFn = {
-	loadTranslation$: loadTranslation$,
+  loadTranslation$: loadTranslation$,
 };

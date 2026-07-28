@@ -1,6 +1,5 @@
-:root{
-  --col : attr(data-color type(<color>), pink);
-
+:root {
+  --col: attr(data-color type(<color>), pink);
 }
 @property --bg {
   inherits: true;

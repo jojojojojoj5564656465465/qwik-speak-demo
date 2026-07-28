@@ -16,11 +16,11 @@ import { PopoverImage } from "./Popover";
  * (réservé pour une future indication visuelle vert/rouge par allergène).
  */
 export interface FoodItemProps {
-	name: string;
-	description: string;
-	price: number;
-	src?: string;
-	color?: "green" | "red";
+  name: string;
+  description: string;
+  price: number;
+  src?: string;
+  color?: "green" | "red";
 }
 
 /**
@@ -37,27 +37,27 @@ export interface FoodItemProps {
  * `useSpeakLocale()` pour respecter la locale utilisateur.
  */
 export default component$<FoodItemProps>((props) => {
-	// `fn` est un QRL (fonction réactive): elle ne s'exécute que lors du rendu.
-	const fn = useFormatNumber();
-	return (
-		<div class={[styles.menuGroup, styles.bg_ctr]}>
-			<div class={styles.menuItem}>
-				<PopoverImage src={props.src} />
-				<div class={styles.menuItemText}>
-					<h3 class={styles.menuItemHeading}>
-						<span class={styles.menuItemName}>{props.name}</span>
-						<span class={styles.menuItemPrice}>
-							{/* Intl.NumberFormat via qwik-speak. Options:
+  // `fn` est un QRL (fonction réactive): elle ne s'exécute que lors du rendu.
+  const fn = useFormatNumber();
+  return (
+    <div class={[styles.menuGroup, styles.bg_ctr]}>
+      <div class={styles.menuItem}>
+        <PopoverImage src={props.src} />
+        <div class={styles.menuItemText}>
+          <h3 class={styles.menuItemHeading}>
+            <span class={styles.menuItemName}>{props.name}</span>
+            <span class={styles.menuItemPrice}>
+              {/* Intl.NumberFormat via qwik-speak. Options:
 							    - style: "currency" → 12.50 €
 							    - currency: "COP"          → pesos colombiens (devrait dépendre de la locale)
 							    - "es-CO" en 3e argument    → force UNE locale de formatage (VOIR BUG ci-dessus)
 							    Ref: https://qwik-speak-docs.tools-aoa.com/internationalization/use-format-number/ */}
-							{fn(props.price, { style: "currency", currency: "COP" }, "es-CO")}
-						</span>
-					</h3>
-					<p class={styles.menuItemDescription}>{props.description}</p>
-				</div>
-			</div>
-		</div>
-	);
+              {fn(props.price, { style: "currency", currency: "COP" }, "es-CO")}
+            </span>
+          </h3>
+          <p class={styles.menuItemDescription}>{props.description}</p>
+        </div>
+      </div>
+    </div>
+  );
 });

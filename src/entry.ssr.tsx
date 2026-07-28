@@ -1,7 +1,7 @@
 import {
-	renderToStream,
-	type RenderToStreamOptions,
-	type RenderOptions,
+  renderToStream,
+  type RenderToStreamOptions,
+  type RenderOptions,
 } from "@builder.io/qwik/server";
 import { isDev } from "@builder.io/qwik/build";
 import Root from "./root";
@@ -18,11 +18,11 @@ import { config } from "./speak-config";
  * d'être dynamique et cohérent avec l'URL.
  */
 export function extractBase({ serverData }: RenderOptions): string {
-	if (!isDev && serverData?.locale) {
-		return `/build/${serverData.locale}`;
-	} else {
-		return "/build";
-	}
+  if (!isDev && serverData?.locale) {
+    return `/build/${serverData.locale}`;
+  } else {
+    return "/build";
+  }
 }
 
 /**
@@ -33,15 +33,15 @@ export function extractBase({ serverData }: RenderOptions): string {
  * - defaultLocale (= "fr") est utilisé si la locale n'est pas résolue par Qwik City.
  */
 export default function (opts: RenderToStreamOptions) {
-	return renderToStream(<Root />, {
-		base: extractBase,
-		...opts,
-		containerAttributes: {
-			lang: opts.serverData?.locale || config.defaultLocale.lang,
-			...opts.containerAttributes,
-		},
-		serverData: {
-			...opts.serverData,
-		},
-	});
+  return renderToStream(<Root />, {
+    base: extractBase,
+    ...opts,
+    containerAttributes: {
+      lang: opts.serverData?.locale || config.defaultLocale.lang,
+      ...opts.containerAttributes,
+    },
+    serverData: {
+      ...opts.serverData,
+    },
+  });
 }

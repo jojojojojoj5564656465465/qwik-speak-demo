@@ -1,8 +1,8 @@
 import {
-	component$,
-	isDev,
-	useContextProvider,
-	useSignal,
+  component$,
+  isDev,
+  useContextProvider,
+  useSignal,
 } from "@builder.io/qwik";
 import { QwikCityProvider, RouterOutlet } from "@builder.io/qwik-city";
 import { useQwikSpeak } from "qwik-speak";
@@ -37,35 +37,35 @@ import "./global.css";
  * sérialisé dans le HTML SSR puis repris côté client sans surcoût.
  */
 export default component$(() => {
-	// Initialise qwik-speak : translator + locales supportées + loader.
-	useQwikSpeak({ config, translationFn });
+  // Initialise qwik-speak : translator + locales supportées + loader.
+  useQwikSpeak({ config, translationFn });
 
-	// État global du filtre d'allergènes (partagé via contexte Qwik).
-	// Vide au démarrage = aucun allergène exclu = menu complet affiché.
-	const allergies = useSignal<Allergie[]>([]);
+  // État global du filtre d'allergènes (partagé via contexte Qwik).
+  // Vide au démarrage = aucun allergène exclu = menu complet affiché.
+  const allergies = useSignal<Allergie[]>([]);
 
-	// Rend ce signal accessible à toute l'arborescence via useContext().
-	// Création UNE seule fois ici pour conserver l'état entre navigations.
-	useContextProvider(AllergiesContext, allergies);
+  // Rend ce signal accessible à toute l'arborescence via useContext().
+  // Création UNE seule fois ici pour conserver l'état entre navigations.
+  useContextProvider(AllergiesContext, allergies);
 
-	return (
-		<QwikCityProvider>
-			<head>
-				<meta charset="utf-8" />
-				{/* Le manifest.json est auto-généré uniquement en production
+  return (
+    <QwikCityProvider>
+      <head>
+        <meta charset="utf-8" />
+        {/* Le manifest.json est auto-généré uniquement en production
 				    (isDev est false après `bun build`). */}
-				{!isDev && (
-					<link
-						rel="manifest"
-						href={`${import.meta.env.BASE_URL}manifest.json`}
-					/>
-				)}
-				<RouterHead />
-			</head>
-			<body>
-				{/* Point de sortie du routeur Qwik City (DFS dans src/routes/). */}
-				<RouterOutlet />
-			</body>
-		</QwikCityProvider>
-	);
+        {!isDev && (
+          <link
+            rel="manifest"
+            href={`${import.meta.env.BASE_URL}manifest.json`}
+          />
+        )}
+        <RouterHead />
+      </head>
+      <body>
+        {/* Point de sortie du routeur Qwik City (DFS dans src/routes/). */}
+        <RouterOutlet />
+      </body>
+    </QwikCityProvider>
+  );
 });

@@ -74,7 +74,7 @@ export default defineConfig(({ command, mode }): UserConfig => {
 /**
  * Function to identify duplicate dependencies and throw an error
  * @param {Object} devDependencies - List of development dependencies
- * @param {Object} dependencies - List of production dependencies
+ * @param {Object} dependencies - List of dependencies
  */
 function errorOnDuplicatesPkgDeps(
   devDependencies: PkgDep,
