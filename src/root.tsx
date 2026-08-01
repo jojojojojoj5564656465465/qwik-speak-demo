@@ -1,18 +1,17 @@
 import {
-  component$,
-  isDev,
-  useContextProvider,
-  useSignal,
+	component$,
+	isDev,
+	useContextProvider,
+	useStore,
 } from "@builder.io/qwik";
 import { QwikCityProvider, RouterOutlet } from "@builder.io/qwik-city";
 import { useQwikSpeak } from "qwik-speak";
 import { RouterHead } from "./components/router-head/router-head";
-import { AllergiesContext } from "./contexts/allergies-context";
-import type { Allergie } from "./data/newmenu";
+import { AllergiesContextStore } from "./contexts/allergies-context";
 import { config } from "./speak-config";
 import { translationFn } from "./speak-functions";
+import type { AllergiesStore } from "./types/allergies";
 import "./global.css";
-
 /**
  * Composant racine de l'application Qwik.
  *
@@ -37,35 +36,45 @@ import "./global.css";
  * sérialisé dans le HTML SSR puis repris côté client sans surcoût.
  */
 export default component$(() => {
-  // Initialise qwik-speak : translator + locales supportées + loader.
-  useQwikSpeak({ config, translationFn });
+	// Initialise qwik-speak : translator + locales supportées + loader.
+	useQwikSpeak({ config, translationFn });
 
-  // État global du filtre d'allergènes (partagé via contexte Qwik).
-  // Vide au démarrage = aucun allergène exclu = menu complet affiché.
-  const allergies = useSignal<Allergie[]>([]);
+	const ALLERGIE_Store = useStore<AllergiesStore>({
+		gluten: { active: false },
+		lactose: { active: false },
+		arachide: { active: false },
+		"fruits-a-coque": { active: false },
+		soja: { active: false },
+		poisson: { active: false },
+		crustaces: { active: false },
+		moutarde: { active: false },
+		sesame: { active: false },
+		sulfites: { active: false },
+	});
+	// Rend ce signal accessible à toute l'arborescence via useContext().
+	// Création UNE seule fois ici pour conserver l'état entre navigations.
 
-  // Rend ce signal accessible à toute l'arborescence via useContext().
-  // Création UNE seule fois ici pour conserver l'état entre navigations.
-  useContextProvider(AllergiesContext, allergies);
+	// useContextProvider(AllergiesContext, allergies);
+	useContextProvider(AllergiesContextStore, ALLERGIE_Store);
 
-  return (
-    <QwikCityProvider>
-      <head>
-        <meta charset="utf-8" />
-        {/* Le manifest.json est auto-généré uniquement en production
+	return (
+		<QwikCityProvider>
+			<head>
+				<meta charset="utf-8" />
+				{/* Le manifest.json est auto-généré uniquement en production
 				    (isDev est false après `bun build`). */}
-        {!isDev && (
-          <link
-            rel="manifest"
-            href={`${import.meta.env.BASE_URL}manifest.json`}
-          />
-        )}
-        <RouterHead />
-      </head>
-      <body>
-        {/* Point de sortie du routeur Qwik City (DFS dans src/routes/). */}
-        <RouterOutlet />
-      </body>
-    </QwikCityProvider>
-  );
+				{!isDev && (
+					<link
+						rel="manifest"
+						href={`${import.meta.env.BASE_URL}manifest.json`}
+					/>
+				)}
+				<RouterHead />
+			</head>
+			<body>
+				{/* Point de sortie du routeur Qwik City (DFS dans src/routes/). */}
+				<RouterOutlet />
+			</body>
+		</QwikCityProvider>
+	);
 });

@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "@arrirpc/schema": "^0.83.1",
-    "@cloudflare/vite-plugin": "^1.47.0",
+    "@cloudflare/vite-plugin": "^1.48.0",
     "openai": "^6.49.0"
   }
 }

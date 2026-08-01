@@ -2,18 +2,9 @@
  * Liste de référence des allergènes, déclarée comme source de vérité unique.
  * `Allergie` est dérivé de ce tableau : si on ajoute/retire un allergène ici,
  * le type suit automatiquement (plus besoin de maintenir deux listes en synchro).
+ *
  */
-export type Allergie =
-  | "gluten"
-  | "lactose"
-  | "arachide"
-  | "fruits à coque"
-  | "soja"
-  | "poisson"
-  | "crustacés"
-  | "moutarde"
-  | "sésame"
-  | "sulfites";
+import type { Allergie } from "~/types/allergies";
 
 // `readonly` empêche toute mutation accidentelle des objets et tableaux
 // (ex: `item.prix = 0` ou `items.push(...)` deviennent des erreurs de compilation).
@@ -146,7 +137,7 @@ export const menu = {
       nom: "Salade aux noix et roquefort",
       description: "Salade, noix, roquefort, vinaigrette au miel",
       prix: 11.5,
-      allergenes: ["fruits à coque"],
+      allergenes: ["fruits-a-coque"],
       src: "/salade-noix-roquefort.jpg",
     },
     {
@@ -154,7 +145,7 @@ export const menu = {
       nom: "Tartine avocat et amandes",
       description: "Pain complet, avocat, effiloché d'amandes",
       prix: 10.5,
-      allergenes: ["fruits à coque"],
+      allergenes: ["fruits-a-coque"],
       src: "/tartine-avocat-amandes.jpg",
     },
 
@@ -200,7 +191,7 @@ export const menu = {
       nom: "Cocktail de crevettes",
       description: "Crevettes roses, sauce cocktail, citron",
       prix: 13.0,
-      allergenes: ["crustacés"],
+      allergenes: ["crustaces"],
       src: "/cocktail-crevettes.jpg",
     },
     {
@@ -208,7 +199,7 @@ export const menu = {
       nom: "Soupe de crustacés",
       description: "Bisque de crevettes, crustacés variés, croûtons",
       prix: 14.0,
-      allergenes: ["crustacés"],
+      allergenes: ["crustaces"],
       src: "/soupe-crustaces.jpg",
     },
 
@@ -236,7 +227,7 @@ export const menu = {
       nom: "Boulettes de viande au sésame",
       description: "Bœuf haché, graines de sésame, sauce sucrée",
       prix: 11.0,
-      allergenes: ["sésame"],
+      allergenes: ["sesame"],
       src: "/boulettes-viande-sesame.jpg",
     },
     {
@@ -244,7 +235,7 @@ export const menu = {
       nom: "Salade de concombre au sésame",
       description: "Concombre, vinaigre de riz, graines de sésame",
       prix: 8.0,
-      allergenes: ["sésame"],
+      allergenes: ["sesame"],
       src: "/salade-concombre-sesame.jpg",
     },
 
@@ -272,7 +263,7 @@ export const menu = {
       nom: "Salade complète au saumon",
       description: "Saumon, avocat, noix, sauce moutarde",
       prix: 15.0,
-      allergenes: ["poisson", "fruits à coque", "moutarde"],
+      allergenes: ["poisson", "fruits-a-coque", "moutarde"],
       src: "/salade-complete-saumon.jpg",
     },
     {
@@ -280,7 +271,7 @@ export const menu = {
       nom: "Wok de poulet aux cacahuètes",
       description: "Poulet, légumes, arachide, soja, sésame",
       prix: 13.0,
-      allergenes: ["arachide", "soja", "sésame"],
+      allergenes: ["arachide", "soja", "sesame"],
       src: "/wok-poulet-cacahuetes.jpg",
     },
     {
@@ -288,7 +279,7 @@ export const menu = {
       nom: "Pâté en croûte maison",
       description: "Porc, volaille, pistaches, œufs",
       prix: 11.0,
-      allergenes: ["gluten", "fruits à coque"],
+      allergenes: ["gluten", "fruits-a-coque"],
       src: "/pate-en-croute.jpg",
     },
     {
@@ -296,7 +287,7 @@ export const menu = {
       nom: "Feuilleté aux fruits de mer",
       description: "Pâte feuilletée, crevettes, poisson, béchamel",
       prix: 16.0,
-      allergenes: ["gluten", "crustacés", "poisson", "lactose"],
+      allergenes: ["gluten", "crustaces", "poisson", "lactose"],
       src: "/feuillete-fruits-de-mer.jpg",
     },
   ],
@@ -415,7 +406,7 @@ export const menu = {
       nom: "Canard aux noix et miel",
       description: "Magret de canard, noix, miel, sauce aigre-douce",
       prix: 25.0,
-      allergenes: ["fruits à coque"],
+      allergenes: ["fruits-a-coque"],
       src: "/canard-noix-miel.jpg",
     },
     {
@@ -423,7 +414,7 @@ export const menu = {
       nom: "Saumon en croûte de pistaches",
       description: "Filet de saumon, pistaches, épinards",
       prix: 27.0,
-      allergenes: ["fruits à coque"],
+      allergenes: ["fruits-a-coque"],
       src: "/saumon-pistaches.jpg",
     },
 
@@ -469,7 +460,7 @@ export const menu = {
       nom: "Risotto aux fruits de mer",
       description: "Risotto, crevettes, moules, calamars",
       prix: 28.0,
-      allergenes: ["crustacés"],
+      allergenes: ["crustaces"],
       src: "/risotto-fruits-de-mer.jpg",
     },
     {
@@ -477,7 +468,7 @@ export const menu = {
       nom: "Homard grillé",
       description: "Homard breton, beurre à l'ail, pommes sautées",
       prix: 45.0,
-      allergenes: ["crustacés"],
+      allergenes: ["crustaces"],
       src: "/homard-grille.jpg",
     },
 
@@ -505,7 +496,7 @@ export const menu = {
       nom: "Poulet au sésame",
       description: "Poulet laqué, graines de sésame, riz cantonais",
       prix: 19.0,
-      allergenes: ["sésame"],
+      allergenes: ["sesame"],
       src: "/poulet-sesame.jpg",
     },
     {
@@ -513,7 +504,7 @@ export const menu = {
       nom: "Buddha bowl au sésame",
       description: "Quinoa, légumes, tofu, graines de sésame",
       prix: 17.0,
-      allergenes: ["sésame"],
+      allergenes: ["sesame"],
       src: "/buddha-bowl-sesame.jpg",
     },
 
@@ -541,7 +532,7 @@ export const menu = {
       nom: "Poulet aux amandes et soja",
       description: "Poulet, amandes, sauce soja, riz",
       prix: 20.0,
-      allergenes: ["fruits à coque", "soja"],
+      allergenes: ["fruits-a-coque", "soja"],
       src: "/poulet-amandes-soja.jpg",
     },
     {
@@ -549,7 +540,7 @@ export const menu = {
       nom: "Pâtes aux fruits de mer",
       description: "Linguine, crevettes, moules, sauce crème",
       prix: 27.0,
-      allergenes: ["gluten", "crustacés", "lactose"],
+      allergenes: ["gluten", "crustaces", "lactose"],
       src: "/pates-fruits-de-mer.jpg",
     },
     {
@@ -557,7 +548,7 @@ export const menu = {
       nom: "Canard laqué aux cacahuètes",
       description: "Magret de canard, sauce cacahuète, sésame",
       prix: 26.0,
-      allergenes: ["arachide", "sésame"],
+      allergenes: ["arachide", "sesame"],
       src: "/canard-laque-cacahuetes.jpg",
     },
     {
@@ -573,7 +564,7 @@ export const menu = {
       nom: "Pizza aux fruits de mer",
       description: "Pâte à pizza, crevettes, calamars, mozzarella",
       prix: 22.0,
-      allergenes: ["gluten", "crustacés", "lactose"],
+      allergenes: ["gluten", "crustaces", "lactose"],
       src: "/pizza-fruits-de-mer.jpg",
     },
   ],
@@ -692,7 +683,7 @@ export const menu = {
       nom: "Tarte aux noix de pécan",
       description: "Noix de pécan caramélisées, pâte sablée",
       prix: 8.5,
-      allergenes: ["fruits à coque"],
+      allergenes: ["fruits-a-coque"],
       src: "/tarte-noix-pecan.jpg",
     },
     {
@@ -700,7 +691,7 @@ export const menu = {
       nom: "Parfait aux amandes",
       description: "Amandes grillées, miel, yaourt",
       prix: 7.0,
-      allergenes: ["fruits à coque"],
+      allergenes: ["fruits-a-coque"],
       src: "/parfait-amandes.jpg",
     },
     {
@@ -708,7 +699,7 @@ export const menu = {
       nom: "Gâteau aux noisettes",
       description: "Gâteau moelleux aux noisettes torréfiées",
       prix: 7.5,
-      allergenes: ["fruits à coque"],
+      allergenes: ["fruits-a-coque"],
       src: "/gateau-noisettes.jpg",
     },
 
@@ -746,7 +737,7 @@ export const menu = {
       nom: "Biscuit aux crevettes",
       description: "Biscuit salé-sucré aux crevettes séchées",
       prix: 6.0,
-      allergenes: ["crustacés"],
+      allergenes: ["crustaces"],
       src: "/biscuit-crevettes.jpg",
     },
 
@@ -766,7 +757,7 @@ export const menu = {
       nom: "Halva au sésame",
       description: "Pâte de sésame, miel, pistaches",
       prix: 7.0,
-      allergenes: ["sésame"],
+      allergenes: ["sesame"],
       src: "/halva-sesame.jpg",
     },
     {
@@ -774,7 +765,7 @@ export const menu = {
       nom: "Cookie au sésame",
       description: "Cookie croustillant, graines de sésame noir",
       prix: 5.0,
-      allergenes: ["sésame"],
+      allergenes: ["sesame"],
       src: "/cookie-sesame.jpg",
     },
 
@@ -802,7 +793,7 @@ export const menu = {
       nom: "Tarte aux amandes et chocolat",
       description: "Pâte sablée, crème d'amandes, chocolat",
       prix: 9.0,
-      allergenes: ["gluten", "fruits à coque", "lactose"],
+      allergenes: ["gluten", "fruits-a-coque", "lactose"],
       src: "/tarte-amandes-chocolat.jpg",
     },
     {
@@ -818,7 +809,7 @@ export const menu = {
       nom: "Baklava",
       description: "Pâte filo, noix, miel, beurre",
       prix: 8.5,
-      allergenes: ["gluten", "fruits à coque", "lactose"],
+      allergenes: ["gluten", "fruits-a-coque", "lactose"],
       src: "/baklava.jpg",
     },
     {
@@ -826,7 +817,7 @@ export const menu = {
       nom: "Muffin aux noix et chocolat",
       description: "Muffin, noix, pépites de chocolat",
       prix: 6.5,
-      allergenes: ["gluten", "fruits à coque", "lactose"],
+      allergenes: ["gluten", "fruits-a-coque", "lactose"],
       src: "/muffin-noix-chocolat.jpg",
     },
   ],

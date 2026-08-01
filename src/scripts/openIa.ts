@@ -1,20 +1,22 @@
+//import { $ } from "@builder.io/qwik";
+//import { server$ } from "@builder.io/qwik-city";
 import OpenAI from "openai";
 
-const NVIDIA_BASE_URL = "https://integrate.api.nvidia.com/v1";
-const MODEL = "z-ai/glm-5.2";
+//const NVIDIA_BASE_URL = "https://integrate.api.nvidia.com/v1";
+const MODEL = "poolside/laguna-xs-2.1";
 
 /**
  * Crée un client OpenAI configuré pour l'inférence NVIDIA.
  * Le client est instancié à la volée, jamais au chargement d'un module,
  * afin de ne pas lire de secret dans le bundle client ou au démarrage.
  */
-export function createOpenAIClient(apiKey: string): OpenAI {
-  return new OpenAI({
-    timeout: 15000,
-    apiKey,
-    baseURL: NVIDIA_BASE_URL,
-  });
-}
+export const createOpenAIClient = (apiKey: string, baseURL: string) => {
+	return new OpenAI({
+		timeout: 15000,
+		apiKey,
+		baseURL,
+	});
+};
 
 const MENU_SYSTEM_PROMPT = `Assistant filtre menu. Requête → IDs plats correspondants, virgules.
 Règles :
@@ -24,7 +26,7 @@ Règles :
 4. Respect régimes (végétarien, sans gluten...)
 5. Priorité plats contiennent TOUS ingrédients demandés
 
-voici le menu au format Toon:
+voici le menu restaurant format Toon:
 
 entrees[30]{id,nom,description,prix,allergenes}:
   1,Salade de crudités,"Carottes râpées, betteraves, vinaigrette maison",8.5,""
@@ -210,65 +212,66 @@ Brunch[16]: 5,6,8,10,14,17,22,36,37,68,69,70,71,72,88,91
  * Le secret (apiKey) est passé explicitement par l'appelant depuis le RequestEvent, jamais lu globalement.
  */
 export async function filterMenuWithAI(
-  prompt: string,
-  apiKey: string,
+	prompt: string,
+	apiKey: string,
+	baseURL: string,
 ): Promise<string> {
-  const openai = createOpenAIClient(apiKey);
+	const openai = createOpenAIClient(apiKey, baseURL);
 
-  try {
-    console.log("🚀 Envoi de la requête déterministe à NVIDIA...");
+	try {
+		console.log("🚀 Envoi de la requête déterministe à NVIDIA...");
 
-    // ⏱️ Méthode 1 : Démarrage du console.time
-    console.time("⏱️ Durée brute (console.time)");
+		// ⏱️ Méthode 1 : Démarrage du console.time
+		console.time("⏱️ Durée brute (console.time)");
 
-    // ⏱️ Méthode 2 : Capture du timestamp précis pour le tableau
-    const completetionStart = performance.now();
+		// ⏱️ Méthode 2 : Capture du timestamp précis pour le tableau
+		const completetionStart = performance.now();
 
-    const response = await openai.chat.completions.create({
-      model: MODEL,
-      max_tokens: 100,
-      temperature: 0.3,
-      //seed: 42,
-      stream: false,
-      messages: [
-        {
-          role: "system",
-          content: MENU_SYSTEM_PROMPT,
-        },
-        {
-          role: "user",
-          content: prompt,
-        },
-      ],
-    });
+		const response = await openai.chat.completions.create({
+			model: MODEL,
+			max_tokens: 100,
+			temperature: 0.3,
+			//seed: 42,
+			stream: false,
+			messages: [
+				{
+					role: "system",
+					content: MENU_SYSTEM_PROMPT,
+				},
+				{
+					role: "user",
+					content: prompt,
+				},
+			],
+		});
 
-    // ⏱️ Fin des mesures dès que la réponse arrive
-    const completionEnd = performance.now();
-    console.log("\n");
-    console.timeEnd("⏱️ Durée brute (console.time)"); // Affiche directement ex: "⏱️ Durée brute (console.time): 450ms"
+		// ⏱️ Fin des mesures dès que la réponse arrive
+		const completionEnd = performance.now();
+		console.log("\n");
+		console.timeEnd("⏱️ Durée brute (console.time)"); // Affiche directement ex: "⏱️ Durée brute (console.time): 450ms"
 
-    const answer = response.choices[0]?.message?.content?.trim();
-    const durationInSeconds = (
-      (completionEnd - completetionStart) /
-      1000
-    ).toFixed(2);
+		const answer = response.choices[0]?.message?.content?.trim();
+		const durationInSeconds = (
+			(completionEnd - completetionStart) /
+			1000
+		).toFixed(2);
 
-    console.log("\n✨ Réponse reçue :");
-    console.log(answer);
+		console.log("\n✨ Réponse reçue :");
+		console.log(answer);
 
-    // 📊 Affichage des données d'usage ET de temps sous forme de tableau
-    if (response.usage) {
-      console.log("\n📊 Rapport de consommation & Performance :");
-      console.table({
-        "Tokens d'entrée (Prompt)": response.usage.prompt_tokens,
-        "Tokens de sortie (Completion)": response.usage.completion_tokens,
-        "Total des Tokens": response.usage.total_tokens,
-        "Temps de réponse de l'API": `${durationInSeconds} secondes`, // 🔥 Ajouté au tableau
-      });
-    }
-    return answer || "0";
-  } catch (error) {
-    console.error("❌ Une erreur est survenue :", error);
-    return "0";
-  }
+		// 📊 Affichage des données d'usage ET de temps sous forme de tableau
+		if (response.usage) {
+			console.log("\n📊 Rapport de consommation & Performance :");
+			console.table({
+				"Tokens d'entrée (Prompt)": response.usage.prompt_tokens,
+				"Tokens de sortie (Completion)": response.usage.completion_tokens,
+				"Total des Tokens": response.usage.total_tokens,
+				"Temps de réponse de l'API": `${durationInSeconds} secondes`, // 🔥 Ajouté au tableau
+			});
+		}
+		return answer || "0";
+	} catch (error) {
+		console.error("❌ Une erreur est survenue :", error);
+		return "0";
+	}
 }

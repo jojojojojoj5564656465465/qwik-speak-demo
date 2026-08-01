@@ -1,9 +1,11 @@
 {
   "search": {
-    "error": "An error occurred during the search:",
-    "excludedAllergies": "<fallback>",
+    "error": "Se produjo un error durante la búsqueda:",
+    "excludedAllergies": "Alérgenos excluidos:",
+    "activeAllergiesFilter": "Filtro activo: platos que contienen TODOS los alérgenos seleccionados",
     "loading": "Buscando...",
     "noResults": "Ningun plato coincide con tus criterios.",
+    "noResultsWithAllergies": "Ningún plato contiene TODOS los alérgenos seleccionados.",
     "placeholder": "Describe tus deseos...",
     "resultsFor": "Resultados para",
     "submit": "Encontrar mi plato"

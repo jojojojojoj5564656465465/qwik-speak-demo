@@ -1,9 +1,11 @@
 {
   "search": {
     "error": "An error occurred during the search:",
-    "excludedAllergies": "<fallback>",
+    "excludedAllergies": "Excluded allergens:",
+    "activeAllergiesFilter": "Active filter: dishes containing ALL selected allergens",
     "loading": "Searching...",
     "noResults": "No dishes match your criteria.",
+    "noResultsWithAllergies": "No dish contains ALL selected allergens.",
     "placeholder": "Describe your desires...",
     "resultsFor": "Results for",
     "submit": "Find my dish"

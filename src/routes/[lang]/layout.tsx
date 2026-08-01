@@ -27,13 +27,14 @@ import { config } from "../../speak-config";
  * Sans cette garde, /xx/ (locale non supportée) afficherait une page avec
  * aucun fichier i18n → t() retournerait les clés brutes plutôt que des
  * traductions ("app.title" au lieu de "Bienvenue").
+ * @todo https://fxapi.app/
  */
 export const onRequest: RequestHandler = async ({ params, redirect }) => {
-  if (!config.supportedLocales.find((l) => l.lang === params.lang)) {
-    // Redirige vers la locale par défaut (fr). 302 = redirect temporaire,
-    // les moteurs de recherche ne mettent pas à jour leur索引 (plus safe).
-    throw redirect(302, `/${config.defaultLocale.lang}/`);
-  }
+	if (!config.supportedLocales.find((l) => l.lang === params.lang)) {
+		// Redirige vers la locale par défaut (fr). 302 = redirect temporaire,
+		// les moteurs de recherche ne mettent pas à jour leur索引 (plus safe).
+		throw redirect(302, `/${config.defaultLocale.lang}/`);
+	}
 };
 
 /**
