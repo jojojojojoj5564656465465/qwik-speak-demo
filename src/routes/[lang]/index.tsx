@@ -14,14 +14,14 @@ import { type RequestEventBase, server$ } from "@builder.io/qwik-city";
 // inlineTranslate (alias `t`) : API principale qwik-speak ; `Translation` est
 // un type utilitaire pour typer les valeurs traduites qu'on récupère via t().
 import { inlineTranslate, type Translation } from "qwik-speak";
-import BTNOO from "~/components/ButtonClose";
+import Button_remove_allergy from "~/components/ButtonClose";
 import FoodItem from "~/components/FoodItem";
 import SearchBox from "~/components/SearchBox";
 import { Title } from "~/components/Title";
 import { AllergiesContextStore } from "~/contexts/allergies-context";
 import { type Item, menu } from "~/data/newmenu";
 import { filterMenuWithAI } from "~/scripts/openIa";
-import type { Allergie } from "~/types/allergies";
+import { type Allergie, AllergiesArray } from "~/types/allergies";
 
 // Aplatit { entrees, plats, desserts } en un seul tableau Item[]
 // pour la recherche et l'affichage. Les boissons sont exclues volontairement
@@ -120,7 +120,12 @@ export default component$(() => {
 
 	return (
 		<div style={{ padding: "2rem" }}>
-			<BTNOO label="gluten" />
+			<div class="flex flex-wrap gap-x-1 mb-1">
+
+			{AllergiesArray.map((allergie) => (
+				<Button_remove_allergy key={allergie} label={allergie} />
+			))}
+			</div>
 			{/* Titres traduits via qwik-speak. Syntax `@@` : clé i18n || fallback. */}
 			<Title text={t("home.title@@Bienvenue sur notre site")} />
 			<Title text={t("home.title@@voyage")} />

@@ -79,7 +79,6 @@ const DietaryForm = component$(() => {
 		.filter((item): item is NonNullable<typeof item> => item !== null);
 
 
-console.log("ALLERGIE_ITEMS_WITH_LABEL", ALLERGIE_ITEMS_WITH_LABEL);
 
 
 

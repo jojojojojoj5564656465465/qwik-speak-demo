@@ -13,6 +13,7 @@
  * DOIVENT exactement matcher cette union. Toute incohérence remonte en
  * erreur de compilation TypeScript.
  */
+import * as a from "@arrirpc/schema";
 
 /**
  * Union des clés d'allergènes. Maintenir cette liste synchronisée avec :
@@ -20,18 +21,23 @@
  *   - les clés de `public/i18n/<lang>/allergies.json`
  *   - `item.allergenes` dans `src/data/newmenu.ts`
  */
-export type Allergie =
-	| "gluten"
-	| "lactose"
-	| "arachide"
-	| "fruits-a-coque"
-	| "soja"
-	| "poisson"
-	| "crustaces"
-	| "moutarde"
-	| "sesame"
-	| "sulfites";
+export const AllergiesArray:string[] = [
+	"gluten",
+	"lactose",
+	"arachide",
+	"fruits-a-coque",
+	"soja",
+	"poisson",
+	"crustaces",
+	"moutarde",
+	"sesame",
+	"sulfites",
+];
+const AllergiesSchema = a.enumerator(AllergiesArray);
 
+export const $$Allergie = a.compile(AllergiesSchema);
+
+export type Allergie = a.a.infer<typeof AllergiesSchema>; // "ACTIVE" | "INACTIVE" | "UNKNOWN";
 export interface AllergenEntry {
 	active: boolean;
 }
