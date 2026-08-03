@@ -121,10 +121,9 @@ export default component$(() => {
 	return (
 		<div style={{ padding: "2rem" }}>
 			<div class="flex flex-wrap gap-x-1 mb-1">
-
-			{AllergiesArray.map((allergie) => (
-				<Button_remove_allergy key={allergie} label={allergie} />
-			))}
+				{AllergiesArray.map((allergie) => (
+					<Button_remove_allergy key={allergie} label={allergie} />
+				))}
 			</div>
 			{/* Titres traduits via qwik-speak. Syntax `@@` : clé i18n || fallback. */}
 			<Title text={t("home.title@@Bienvenue sur notre site")} />
@@ -137,6 +136,7 @@ export default component$(() => {
 					<strong>{search.inputBox}</strong>
 				</p>
 			)}
+
 			{/* Rappel du filtre actif. */}
 			{Object.values(allergiesContext).some((entry) => entry.active) && (
 				<p
@@ -184,24 +184,37 @@ export default component$(() => {
 							</p>
 						);
 					}
-
+					const activeAllergies = (
+						Object.entries(allergiesContext) as Array<
+							[Allergie, { active: boolean }]
+						>
+					)
+						.filter(([, entry]) => entry.active)
+						.map(([key]) => key);
 					return (
 						<>
-							{filteredMenu.map((item) => {
-								const result = a.parse(MenuSchema, menuTranslations[item.id]);
+							{filteredMenu
+								.filter(
+									(item) =>
+										!item.allergenes?.some((allergene) =>
+											activeAllergies.includes(allergene),
+										),
+								)
+								.map((item) => {
+									const result = a.parse(MenuSchema, menuTranslations[item.id]);
 
-								const translation = result.success ? result.value : null;
+									const translation = result.success ? result.value : null;
 
-								return (
-									<FoodItem
-										key={item.id}
-										name={translation?.nom || item.nom}
-										description={translation?.description || item.description}
-										src={item.src}
-										price={item.prix}
-									/>
-								);
-							})}
+									return (
+										<FoodItem
+											key={item.id}
+											name={translation?.nom || item.nom}
+											description={translation?.description || item.description}
+											src={item.src}
+											price={item.prix}
+										/>
+									);
+								})}
 						</>
 					);
 				}}

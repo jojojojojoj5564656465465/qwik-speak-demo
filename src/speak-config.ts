@@ -53,7 +53,7 @@ export const config: SpeakConfig = {
   // Assets chargées à chaque navigation de locale. Chaque entrée correspond à un
   // fichier JSON dans public/i18n/<lang>/<asset>.json. Les ajouter ici est
   // nécessaire MAIS il faut aussi que les fichiers existent réellement (cf. fr/).
-  assets: ["app", "home", "about", "menu", "allergies", "checkbox"],
+  assets: ["app", "home", "about", "menu", "allergies", "checkbox", "lang"],
   // runtime_assets contiennent des chaînes "runtime" (format monétaire, dates, etc.)
   // chargées séparément pour ne pas alourdir le bundle client initial.
   runtimeAssets: ["runtime"],

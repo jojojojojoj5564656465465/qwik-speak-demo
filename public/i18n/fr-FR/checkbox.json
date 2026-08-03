@@ -3,6 +3,7 @@
     "excludedTitle": "Éléments exclus de la liste",
     "none": "Aucun Element",
     "resetButton": "Effacer les filtres",
+    "selectAllButton": "Tout sélectionner",
     "title": "Filtrer par allergènes"
   }
 }

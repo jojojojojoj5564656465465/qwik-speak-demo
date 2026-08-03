@@ -19,9 +19,9 @@ import { config } from "./speak-config";
  */
 export function extractBase({ serverData }: RenderOptions): string {
   if (!isDev && serverData?.locale) {
-    return `/build/${serverData.locale}`;
+    return `/build/${serverData.locale}/`;
   } else {
-    return "/build";
+    return "/build/";
   }
 }
 
@@ -34,8 +34,8 @@ export function extractBase({ serverData }: RenderOptions): string {
  */
 export default function (opts: RenderToStreamOptions) {
   return renderToStream(<Root />, {
-    base: extractBase,
     ...opts,
+    base: extractBase,
     containerAttributes: {
       lang: opts.serverData?.locale || config.defaultLocale.lang,
       ...opts.containerAttributes,

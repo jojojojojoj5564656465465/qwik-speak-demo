@@ -21,7 +21,7 @@ import * as a from "@arrirpc/schema";
  *   - les clés de `public/i18n/<lang>/allergies.json`
  *   - `item.allergenes` dans `src/data/newmenu.ts`
  */
-export const AllergiesArray:string[] = [
+export const AllergiesSchema = a.enumerator([
 	"gluten",
 	"lactose",
 	"arachide",
@@ -32,12 +32,17 @@ export const AllergiesArray:string[] = [
 	"moutarde",
 	"sesame",
 	"sulfites",
-];
-const AllergiesSchema = a.enumerator(AllergiesArray);
+]);
+export const AllergiesArray= AllergiesSchema.enum;
+
+
+
 
 export const $$Allergie = a.compile(AllergiesSchema);
 
-export type Allergie = a.a.infer<typeof AllergiesSchema>; // "ACTIVE" | "INACTIVE" | "UNKNOWN";
+export type Allergie = a.a.infer<typeof AllergiesSchema>;
+
+
 export interface AllergenEntry {
 	active: boolean;
 }

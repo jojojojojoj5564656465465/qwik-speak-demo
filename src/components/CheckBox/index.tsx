@@ -1,4 +1,4 @@
-import { $, component$, useComputed$, useContext } from "@builder.io/qwik";
+import { $, component$,  useContext } from "@builder.io/qwik";
 import { inlineTranslate, type Translation } from "qwik-speak";
 
 import { AllergiesContextStore } from "~/contexts/allergies-context";
@@ -86,15 +86,7 @@ const DietaryForm = component$(() => {
 		allergiesStor[value].active = isChecked;
 	});
 
-	//const noneText = t("checkbox.none@@Aucun élément");
 
-	const excludedLabels = useComputed$(() => {
-		const active = ALLERGIE_ITEMS_WITH_LABEL.filter((item) => item.active);
-		if (active.length === 0) {
-			return;
-		}
-		return active.map((item) => item.label);
-	});
 
 	return (
 		<div>
@@ -116,7 +108,7 @@ const DietaryForm = component$(() => {
 							}}
 							class="h-4 w-4 rounded text-blue-600 focus:ring-blue-500"
 						/>
-						<span>{item.label} {item.active && <span class="text-green-600 bg-orange-400">x</span>}</span>
+						<span>{item.label}</span>
 					</label>
 				))}
 			</div>

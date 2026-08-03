@@ -3,6 +3,7 @@
     "excludedTitle": "Excluded items from the list",
     "none": "No Element",
     "resetButton": "Remove all filters",
+    "selectAllButton": "Select all",
     "title": "Filter by allergens"
   }
 }
