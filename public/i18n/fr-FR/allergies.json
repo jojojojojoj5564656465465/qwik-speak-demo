@@ -1,1 +1,14 @@
-{"allergies": {"gluten": "Gluten", "lactose": "Lactose", "arachide": "Arachide", "fruits-a-coque": "Fruits à coque", "soja": "Soja", "poisson": "Poisson", "crustaces": "Crustacés", "moutarde": "Moutarde", "sesame": "Sésame", "sulfites": "Sulfites"}}
+{
+  "allergies": {
+    "arachide": "Arachide",
+    "crustaces": "Crustacés",
+    "fruits-a-coque": "Fruits à coque",
+    "gluten": "Gluten",
+    "lactose": "Lactose",
+    "moutarde": "Moutarde",
+    "poisson": "Poisson",
+    "sesame": "Sésame",
+    "soja": "Soja",
+    "sulfites": "Sulfites"
+  }
+}

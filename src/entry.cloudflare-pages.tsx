@@ -7,5 +7,5 @@ import render from "./entry.ssr";
 
 const fetch = createQwikCity({ render, qwikCityPlan });
 
-export { fetch };
 export type { PlatformCloudflarePages };
+export { fetch };

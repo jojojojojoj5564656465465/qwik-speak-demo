@@ -22,29 +22,25 @@ import * as a from "@arrirpc/schema";
  *   - `item.allergenes` dans `src/data/newmenu.ts`
  */
 export const AllergiesSchema = a.enumerator([
-	"gluten",
-	"lactose",
-	"arachide",
-	"fruits-a-coque",
-	"soja",
-	"poisson",
-	"crustaces",
-	"moutarde",
-	"sesame",
-	"sulfites",
+  "gluten",
+  "lactose",
+  "arachide",
+  "fruits-a-coque",
+  "soja",
+  "poisson",
+  "crustaces",
+  "moutarde",
+  "sesame",
+  "sulfites",
 ]);
-export const AllergiesArray= AllergiesSchema.enum;
-
-
-
+export const AllergiesArray = AllergiesSchema.enum;
 
 export const $$Allergie = a.compile(AllergiesSchema);
 
 export type Allergie = a.a.infer<typeof AllergiesSchema>;
 
-
 export interface AllergenEntry {
-	active: boolean;
+  active: boolean;
 }
 
 export type AllergiesStore = Record<Allergie, AllergenEntry>;

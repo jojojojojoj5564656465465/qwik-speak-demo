@@ -1,1 +1,14 @@
-{"allergies": {"gluten": "Gluten", "lactose": "Lactosa", "arachide": "Cacahuete", "fruits-a-coque": "Frutos secos", "soja": "Soja", "poisson": "Pescado", "crustaces": "Mariscos", "moutarde": "Mostaza", "sesame": "Sésamo", "sulfites": "Sulfitos"}}
+{
+  "allergies": {
+    "arachide": "Cacahuete",
+    "crustaces": "Mariscos",
+    "fruits-a-coque": "Frutos secos",
+    "gluten": "Gluten",
+    "lactose": "Lactosa",
+    "moutarde": "Mostaza",
+    "poisson": "Pescado",
+    "sesame": "Sésamo",
+    "soja": "Soja",
+    "sulfites": "Sulfitos"
+  }
+}

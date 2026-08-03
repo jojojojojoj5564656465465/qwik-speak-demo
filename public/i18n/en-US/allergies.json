@@ -1,1 +1,14 @@
-{"allergies": {"gluten": "Gluten", "lactose": "Lactose", "arachide": "Peanut", "fruits-a-coque": "Nuts", "soja": "Soy", "poisson": "Fish", "crustaces": "Shellfish", "moutarde": "Mustard", "sesame": "Sesame", "sulfites": "Sulfites"}}
+{
+  "allergies": {
+    "arachide": "Peanut",
+    "crustaces": "Shellfish",
+    "fruits-a-coque": "Nuts",
+    "gluten": "Gluten",
+    "lactose": "Lactose",
+    "moutarde": "Mustard",
+    "poisson": "Fish",
+    "sesame": "Sesame",
+    "soja": "Soy",
+    "sulfites": "Sulfites"
+  }
+}

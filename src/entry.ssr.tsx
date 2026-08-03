@@ -1,9 +1,9 @@
-import {
-  renderToStream,
-  type RenderToStreamOptions,
-  type RenderOptions,
-} from "@builder.io/qwik/server";
 import { isDev } from "@builder.io/qwik/build";
+import {
+  type RenderOptions,
+  type RenderToStreamOptions,
+  renderToStream,
+} from "@builder.io/qwik/server";
 import Root from "./root";
 import { config } from "./speak-config";
 
