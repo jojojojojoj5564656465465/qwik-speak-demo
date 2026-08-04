@@ -15,6 +15,7 @@ import { type RequestEventBase, server$ } from "@builder.io/qwik-city";
 // un type utilitaire pour typer les valeurs traduites qu'on récupère via t().
 import { inlineTranslate, type Translation } from "qwik-speak";
 import Button_remove_allergy from "~/components/ButtonClose";
+import ButtonCopy from "~/components/ButtonCopy";
 import FoodItem from "~/components/FoodItem";
 import SearchBox from "~/components/SearchBox";
 import { Title } from "~/components/Title";
@@ -138,7 +139,7 @@ export default component$(() => {
       </div>
       {/* Titres traduits via qwik-speak. Syntax `@@` : clé i18n || fallback. */}
       <Title text={t("home.title@@Bienvenue sur notre site")} />
-     
+      <ButtonCopy />
       <SearchBox onSearch={handleSearch} isLoading={menuResource.loading} />
       {/* Affiché seulement si l'utilisateur a tapé qqch. Évite le bruit au 1er rendu. */}
       {search.inputBox && (
@@ -147,7 +148,6 @@ export default component$(() => {
           <strong>{search.inputBox}</strong>
         </p>
       )}
-
       {/* Rappel du filtre actif. */}
       {Object.values(allergiesContext).some((entry) => entry.active) && (
         <p

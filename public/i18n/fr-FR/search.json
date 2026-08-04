@@ -1,13 +1,13 @@
 {
   "search": {
+    "activeAllergiesFilter": "Filtre actif : plats sans les allergènes sélectionnés",
     "error": "Une erreur est survenue lors de la recherche :",
     "excludedAllergies": "Allergènes exclus :",
     "loading": "Recherche...",
     "noResults": "Aucun plat ne correspond à vos critères.",
+    "noResultsWithAllergies": "Aucun plat ne correspond après exclusion des allergènes sélectionnés.",
     "placeholder": "Décrivez vos envies...",
     "resultsFor": "Résultats pour",
-    "submit": "Trouver mon plat",
-    "activeAllergiesFilter": "Filtre actif : plats sans les allergènes sélectionnés",
-    "noResultsWithAllergies": "Aucun plat ne correspond après exclusion des allergènes sélectionnés."
+    "submit": "Trouver mon plat"
   }
 }
