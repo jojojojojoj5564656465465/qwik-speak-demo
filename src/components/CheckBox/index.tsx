@@ -87,7 +87,7 @@ const DietaryForm = component$(() => {
       <h2 class="mb-4 text-xl font-bold">
         {t("checkbox.title@@Filtrer par allergènes")}
       </h2>
-      <div class="space-y-2">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
         {ALLERGIE_ITEMS_WITH_LABEL.map((item) => (
           <label
             key={`checkbox-${item.id}`}

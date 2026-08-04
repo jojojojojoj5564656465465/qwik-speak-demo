@@ -21,7 +21,11 @@ import { Title } from "~/components/Title";
 import { AllergiesContextStore } from "~/contexts/allergies-context";
 import { type Item, menu } from "~/data/newmenu";
 import { filterMenuWithAI } from "~/scripts/openIa";
-import { type Allergie, AllergiesArray } from "~/types/allergies";
+import {
+  type Allergie,
+  AllergiesArray,
+  type AllergiesStore,
+} from "~/types/allergies";
 
 // Aplatit { entrees, plats, desserts } en un seul tableau Item[]
 // pour la recherche et l'affichage. Les boissons sont exclues volontairement
@@ -47,7 +51,14 @@ const serverIa = server$(async function (
     console.error("NVIDIA_API_KEY manquante dans l'environnement serveur");
     return [];
   }
+
   const responseIa = await filterMenuWithAI(prompt, apiKey, baseURL);
+
+  // SÉCURITÉ : Si l'IA ne retourne pas une chaîne, on évite le crash
+  if (typeof responseIa !== "string") {
+    return [];
+  }
+
   const matchedIds: string[] = responseIa.match(/\b\d+\b/g) ?? [];
   return flatMenu.filter((item) => matchedIds.includes(item.id.toString()));
 });
@@ -74,7 +85,7 @@ export default component$(() => {
 
   const search = useStore({ inputBox: "" });
 
-  const allergiesContext = useContext(AllergiesContextStore);
+  const allergiesContext: AllergiesStore = useContext(AllergiesContextStore);
   const lastQuery = useSignal<string>("");
 
   const menuResource = useResource$<Item[]>(async ({ track }) => {
@@ -127,7 +138,7 @@ export default component$(() => {
       </div>
       {/* Titres traduits via qwik-speak. Syntax `@@` : clé i18n || fallback. */}
       <Title text={t("home.title@@Bienvenue sur notre site")} />
-      <Title text={t("home.title@@voyage")} />
+     
       <SearchBox onSearch={handleSearch} isLoading={menuResource.loading} />
       {/* Affiché seulement si l'utilisateur a tapé qqch. Évite le bruit au 1er rendu. */}
       {search.inputBox && (

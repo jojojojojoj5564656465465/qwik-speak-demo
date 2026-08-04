@@ -1,12 +1,6 @@
 // scripts/generate-i18n.js
 import { execSync } from "node:child_process";
-import {
-  existsSync,
-  mkdirSync,
-  readdirSync,
-  readFileSync,
-  writeFileSync,
-} from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const LANGS = ["en-US", "fr-FR", "it-IT"];

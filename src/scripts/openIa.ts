@@ -5,16 +5,37 @@ const $$string = a.compile(a.string());
 
 const MODEL = "z-ai/glm-5.2";
 
-/**
- * Crée un client OpenAI configuré pour l'inférence NVIDIA.
- */
 export const createOpenAIClient = (apiKey: string, baseURL: string) => {
   return new OpenAI({
-    timeout: 15000,
     apiKey,
     baseURL,
+    timeout: 60_000,
+    maxRetries: 1,
   });
 };
+
+function serializeAiError(error: unknown) {
+  if (!(error instanceof Error)) {
+    return { value: String(error) };
+  }
+
+  const providerError = error as Error & {
+    status?: number;
+    request_id?: string;
+    code?: string;
+    type?: string;
+  };
+
+  return {
+    name: providerError.name,
+    message: providerError.message,
+    status: providerError.status,
+    code: providerError.code,
+    type: providerError.type,
+    requestId: providerError.request_id,
+    stack: providerError.stack,
+  };
+}
 
 const MENU_SYSTEM_PROMPT = `Assistant filtre menu. Requête → IDs plats correspondants, virgules.
 Règles :
@@ -208,6 +229,7 @@ Brunch[16]: 5,6,8,10,14,17,22,36,37,68,69,70,71,72,88,91
 /**
  * Appelle le modèle NVIDIA pour obtenir les IDs des plats correspondant à la requête utilisateur.
  */
+
 export async function filterMenuWithAI(
   prompt: string,
   apiKey: string,
@@ -216,16 +238,13 @@ export async function filterMenuWithAI(
   const openai = createOpenAIClient(apiKey, baseURL);
 
   try {
-    console.log("🚀 Envoi de la requête déterministe à NVIDIA...");
-
-    const completetionStart = performance.now();
+    const startedAt = performance.now();
 
     const completion = await openai.chat.completions.create({
       model: MODEL,
       max_tokens: 100,
-      temperature: 0.3,
-      seed: 42,
-      stream: true, // <-- IMPORTANT : On garde le stream true comme la doc NVIDIA
+      temperature: 0,
+      stream: false,
       messages: [
         {
           role: "system",
@@ -233,36 +252,37 @@ export async function filterMenuWithAI(
         },
         {
           role: "user",
-          content: prompt,
+          content: prompt.slice(0, 500),
         },
       ],
     });
 
-    // ⏱️ Comme on est en stream, on doit accumuler les morceaux de la réponse
-    let answer = "";
-    for await (const chunk of completion) {
-      // chunk.choices[0]?.delta?.content contient le morceau de texte actuel
-      answer += chunk.choices[0]?.delta?.content || "";
-    }
+    const answer =
+      completion.choices[0]?.message?.content?.trim().replace(/\s+/g, "") ?? "";
 
-    const completionEnd = performance.now();
-    const durationInSeconds = (
-      (completionEnd - completetionStart) /
-      1000
-    ).toFixed(2);
+    const durationMs = Math.round(performance.now() - startedAt);
 
-    console.log("\n✨ Réponse reçue :");
-    console.log(answer);
-
-    console.log("\n📊 Performance :");
-    console.table({
-      "Temps de réponse de l'API": `${durationInSeconds} secondes`,
+    console.log({
+      event: "nvidia_ai_success",
+      model: MODEL,
+      durationMs,
+      answerLength: answer.length,
     });
 
-    // On retourne la chaîne complète reconstruite, ou "0" si vide
-    return answer.trim() || "0";
+    if (!/^(?:0|\d+(?:,\d+)*)$/.test(answer)) {
+      throw new Error(
+        `Format de réponse IA invalide : ${answer.slice(0, 200)}`,
+      );
+    }
+
+    return $$string.parseUnsafe(answer);
   } catch (error) {
-    console.error("❌ Une erreur est survenue :", error);
-    return "0";
+    console.error({
+      event: "nvidia_ai_failure",
+      model: MODEL,
+      error: serializeAiError(error),
+    });
+
+    throw error;
   }
-} 
+}

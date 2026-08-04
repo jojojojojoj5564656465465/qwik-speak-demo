@@ -1,5 +1,5 @@
 import type { RequestHandler } from "@builder.io/qwik-city";
 
 export const onGet: RequestHandler = async ({ redirect }) => {
-  throw redirect(302, "/fr/");
+  throw redirect(302, "/fr-FR/");
 };

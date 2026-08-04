@@ -39,7 +39,7 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
+      "preset": "recommended",
       "correctness": {
         "noQwikUseVisibleTask": "off"
       },
@@ -47,7 +47,8 @@
         "noExplicitAny": "off"
       },
       "style": {
-        "useExportType": "error"
+        "useExportType": "error",
+        "useArrayLiterals": "off"
       }
     }
   },

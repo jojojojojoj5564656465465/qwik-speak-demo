@@ -10,6 +10,7 @@ node_modules
 .env.*.local
 *.local
 
+
 # Cache
 .cache
 .mf
@@ -26,6 +27,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # Editor
+.grepai/*
 .vscode/*
 !.vscode/launch.json
 !.vscode/*.code-snippets
