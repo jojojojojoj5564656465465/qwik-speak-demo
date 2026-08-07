@@ -13,7 +13,7 @@
  * DOIVENT exactement matcher cette union. Toute incohérence remonte en
  * erreur de compilation TypeScript.
  */
-import * as a from "@arrirpc/schema";
+import * as v from "valibot";
 
 
 
@@ -25,7 +25,7 @@ import * as a from "@arrirpc/schema";
  *   - les clés de `public/i18n/<lang>/allergies.json`
  *   - `item.allergenes` dans `src/data/newmenu.ts`
  */
-export const AllergiesSchema = a.enumerator([
+export const AllergiesSchema = v.picklist([
   "gluten",
   "lactose",
   "arachide",
@@ -37,11 +37,11 @@ export const AllergiesSchema = a.enumerator([
   "sesame",
   "sulfites",
 ]);
-export const AllergiesArray = AllergiesSchema.enum;
+export const AllergiesArray = AllergiesSchema.options;
 
-export const $$Allergie = a.compile(AllergiesSchema);
+export const $$Allergie = AllergiesSchema;
 
-export type Allergie = a.a.infer<typeof AllergiesSchema>;
+export type Allergie = v.InferOutput<typeof AllergiesSchema>;
 
 export interface AllergenEntry {
   active: boolean;

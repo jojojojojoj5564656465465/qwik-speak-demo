@@ -2,6 +2,7 @@ import { $, component$, useComputed$, useContext } from "@builder.io/qwik";
 import { inlineTranslate, type Translation } from "qwik-speak";
 import { AllergiesContextStore } from "~/contexts/allergies-context";
 import { $$Allergie, type Allergie } from "~/types/allergies";
+import * as v from "valibot";
 
 type Props = {
   label: Allergie;
@@ -17,7 +18,7 @@ export default component$((props: Props) => {
   const allergiesStor = useContext(AllergiesContextStore);
 
   const toggleAllergie = $((label: Allergie) => {
-    if ($$Allergie.parseUnsafe(label)) {
+    if (v.parse($$Allergie, label)) {
       allergiesStor[label].active = false;
     }
   });

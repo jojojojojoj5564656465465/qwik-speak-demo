@@ -26,7 +26,7 @@
     "qwik": "qwik"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.6",
+    "@biomejs/biome": "^2.5.7",
     "@builder.io/qwik": "^1.20.0",
     "@builder.io/qwik-city": "^1.20.0",
     "@playwright/test": "^1.62.1",
@@ -45,8 +45,8 @@
     "wrangler": "^3.114.17"
   },
   "dependencies": {
-    "@arrirpc/schema": "^0.83.1",
-    "@cloudflare/vite-plugin": "^1.50.0",
-    "openai": "^6.49.0"
+    "@cloudflare/vite-plugin": "^1.51.0",
+    "openai": "^6.49.0",
+    "valibot": "^1.4.2"
   }
 }

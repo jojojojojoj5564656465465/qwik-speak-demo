@@ -1,4 +1,3 @@
-import { a } from "@arrirpc/schema";
 import {
   $,
   component$,
@@ -14,6 +13,7 @@ import { type RequestEventBase, server$ } from "@builder.io/qwik-city";
 // inlineTranslate (alias `t`) : API principale qwik-speak ; `Translation` est
 // un type utilitaire pour typer les valeurs traduites qu'on récupère via t().
 import { inlineTranslate, type Translation } from "qwik-speak";
+import * as v from "valibot";
 import Button_remove_allergy from "~/components/ButtonClose";
 import ButtonCopy from "~/components/ButtonCopy";
 import FoodItem from "~/components/FoodItem";
@@ -36,9 +36,9 @@ const flatMenu: Item[] = [
   ...(menu.plats ?? []),
   ...(menu.desserts ?? []),
 ];
-const MenuSchema = a.object({
-  nom: a.string(),
-  description: a.string(),
+const MenuSchema = v.object({
+  nom: v.string(),
+  description: v.string(),
 });
 
 const serverIa = server$(async function (
@@ -53,15 +53,9 @@ const serverIa = server$(async function (
     return [];
   }
 
-  const responseIa = await filterMenuWithAI(prompt, apiKey, baseURL);
+  const responseIa:string[] = await filterMenuWithAI(prompt, apiKey, baseURL);
 
-  // SÉCURITÉ : Si l'IA ne retourne pas une chaîne, on évite le crash
-  if (typeof responseIa !== "string") {
-    return [];
-  }
-
-  const matchedIds: string[] = responseIa.match(/\b\d+\b/g) ?? [];
-  return flatMenu.filter((item) => matchedIds.includes(item.id.toString()));
+  return flatMenu.filter((item) => responseIa.includes(item.id.toString()));
 });
 
 function filterByAllergies(
@@ -212,9 +206,9 @@ export default component$(() => {
                     ),
                 )
                 .map((item) => {
-                  const result = a.parse(MenuSchema, menuTranslations[item.id]);
+                  const result = v.safeParse(MenuSchema, menuTranslations[item.id]);
 
-                  const translation = result.success ? result.value : null;
+                  const translation = result.success ? result.output : null;
 
                   return (
                     <FoodItem

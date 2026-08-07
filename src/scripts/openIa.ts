@@ -1,9 +1,20 @@
-import { a } from "@arrirpc/schema"; // <-- CORRIGÉ : on importe 'a' directement
 import OpenAI from "openai";
+import * as v from "valibot";
 
-const $$string = a.compile(a.string());
 
-const MODEL = "z-ai/glm-5.2";
+const Schema = v.pipe(
+  v.string(),
+  v.minLength(1),
+  v.maxLength(300, "trop long"),
+  v.regex(/^\s*\d+(\s*,\s*\d+)*\s*$/, "Format attendu : 1,2,3"),
+  v.transform((value) => value.split(",").map((item) => item.trim())),
+  v.checkItems(
+    (item) => /^\d+$/.test(item),
+    "doit contenir uniquement des entiers",
+  ),
+);
+
+const MODEL = "thinkingmachines/inkling";
 
 export const createOpenAIClient = (apiKey: string, baseURL: string) => {
   return new OpenAI({
@@ -234,7 +245,7 @@ export async function filterMenuWithAI(
   prompt: string,
   apiKey: string,
   baseURL: string,
-): Promise<string> {
+): Promise<string[]> {
   const openai = createOpenAIClient(apiKey, baseURL);
 
   try {
@@ -242,8 +253,9 @@ export async function filterMenuWithAI(
 
     const completion = await openai.chat.completions.create({
       model: MODEL,
-      max_tokens: 100,
-      temperature: 0,
+      temperature: 1,
+      top_p: 0.95,
+      max_tokens: 8192,
       stream: false,
       messages: [
         {
@@ -257,8 +269,7 @@ export async function filterMenuWithAI(
       ],
     });
 
-    const answer =
-      completion.choices[0]?.message?.content?.trim().replace(/\s+/g, "") ?? "";
+    const answer = v.parse(Schema, completion.choices[0]?.message?.content);
 
     const durationMs = Math.round(performance.now() - startedAt);
 
@@ -267,21 +278,26 @@ export async function filterMenuWithAI(
       model: MODEL,
       durationMs,
       answerLength: answer.length,
+      result: answer,
     });
 
-    if (!/^(?:0|\d+(?:,\d+)*)$/.test(answer)) {
-      throw new Error(
-        `Format de réponse IA invalide : ${answer.slice(0, 200)}`,
-      );
-    }
-
-    return $$string.parseUnsafe(answer);
+    return answer;
   } catch (error) {
     console.error({
       event: "nvidia_ai_failure",
       model: MODEL,
       error: serializeAiError(error),
     });
+
+    if (error instanceof v.ValiError) {
+      console.dir(error.issues, { depth: null });
+
+      for (const issue of error.issues) {
+        console.log(issue.message);
+        console.log(issue.path);
+        console.log(issue.input);
+      }
+    }
 
     throw error;
   }
