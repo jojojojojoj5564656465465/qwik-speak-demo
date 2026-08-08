@@ -22,6 +22,7 @@ import { Title } from "~/components/Title";
 import { AllergiesContextStore } from "~/contexts/allergies-context";
 import { type Item, menu } from "~/data/newmenu";
 import { filterMenuWithAI } from "~/scripts/openIa";
+import Currency from "~/components/currency-converter";
 import {
   type Allergie,
   AllergiesArray,
@@ -163,6 +164,7 @@ export default component$(() => {
           </strong>
         </p>
       )}
+     
       <Resource
         value={menuResource}
         onPending={() => (
@@ -206,7 +208,10 @@ export default component$(() => {
                     ),
                 )
                 .map((item) => {
-                  const result = v.safeParse(MenuSchema, menuTranslations[item.id]);
+                  const result = v.safeParse(
+                    MenuSchema,
+                    menuTranslations[item.id],
+                  );
 
                   const translation = result.success ? result.output : null;
 
